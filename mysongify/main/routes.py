@@ -1,5 +1,6 @@
 from flask import (Blueprint, render_template)
 
+from mysongify.users.models import User 
 
 main = Blueprint('main', __name__)
 
