@@ -17,4 +17,10 @@ def login():
 def logout():
     return render_template('users/logout.html')
 
+@users.route('/register')
+def register():
+    return render_template('users/register.html')
+
+
+
 
