@@ -9,14 +9,15 @@
 - [ ] setup Flask with routes
 - [x] setup bootstrap 
 - [x] setup heroku server for flask
-- [ ] implement functionality
+- [ ] implement functionality - json files for everything
     - [ ] make songs, 
     - [ ] playlist, 
-    - [x] users
+    - [ ] users
 - [x] make a folder for tests 
 
 ### Kaniskan 
 - work in the test folder, use `pytest` in that folder to run the tests.
+- [ ] make virtual env
 - [ ] read `http://flask.pocoo.org/docs/1.0/testing/`
 - [ ] writing proposals for test (30 tests?) 
     - [ ] creating tests for databases 
@@ -26,13 +27,16 @@
 - [ ] create a report on which tests passsed and which failed
 
 ### Hafeez 
+- [ ] make virtual env
 - [ ] writing proposals for test (10 tests)
     - [ ] write tests for selenium (if we have JS)
 
 ### Harun 
+- [ ] make virtual env
 - [ ] design core layout of settings (Bootstrap)
 
 ### Avneet
+- [ ] make virtual env
 - [ ] writing proposals for test (10 tests)
 - [ ] make a logo 
 - [ ] make a favicon for the website 
