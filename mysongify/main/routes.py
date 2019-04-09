@@ -10,4 +10,4 @@ def home():
 
 @main.route('/')
 def search():
-    return '<h1>search</h1>'
+    return '<h1>search</h1> '
