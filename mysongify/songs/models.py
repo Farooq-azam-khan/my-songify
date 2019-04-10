@@ -36,7 +36,18 @@ class Song():
         return songs
 
     def get_length(self):
-        return f'{self.minutes}:{self.seconds}'
+        minutes = self.minutes
+        secs = self.seconds
+        if self.minutes <= 9:
+            minutes = f'0{minutes}'
+        else:
+            minutes = f'{minutes}'
+        if self.seconds <= 9:
+            secs = f'0{secs}'
+        else:
+            secs = f'{secs}'
+
+        return f'{minutes}:{secs}'
     
     def __repr__(self):
         return f'<Song {self.title}>'
