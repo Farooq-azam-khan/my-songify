@@ -1,6 +1,10 @@
 from flask import (Blueprint, 
+                    redirect,
                     render_template, 
-                    flash)
+                    request,
+                    flash,
+                    url_for
+                    )
 from flask_login import (login_user, 
                         current_user, 
                         logout_user, 
@@ -18,22 +22,45 @@ def account():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-    login_user(User(0, 'admin', 'admin'))
+    
     if current_user.is_authenticated:
+        flash('you are already logged in.', 'warning')
+        return redirect(url_for('main.home'))
+    if request.method == 'POST':
+        email = request.form.get("email")
+        print(email)
+        password = request.form.get("password")
+        print(password)
+        login_user(User(0, 'admin', 'admin'))
         flash('logged in user', 'success')
+        return redirect(url_for('main.home'))
+
     return render_template('users/login.html')
 
 
 @users.route('/logout')
-@login_required
 def logout():
-    logout_user()
+    if current_user.is_authenticated:
+        logout_user()
+        flash("you are logged out", 'danger')
+        return redirect(url_for('main.home'))
     if not current_user.is_authenticated:
-        flash('logged out', 'success')
+        flash('would you like to login?', 'primary')
+        return redirect(url_for('users.login'))
     return render_template('users/logout.html')
 
-@users.route('/register')
+@users.route('/register', methods=['GET','POST'])
 def register():
+    if request.method == 'POST':
+        username=request.form.get("username")
+        print(username)
+        email=request.form.get("email")
+        print(email)
+        password=request.form.get("password")
+        print(password)
+        flash("registed successfully", "primary")
+        return redirect(url_for("users.login"))
+        
     return render_template('users/register.html')
 
 
