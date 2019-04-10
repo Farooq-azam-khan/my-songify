@@ -44,7 +44,6 @@
 
 
 ## Setup (for local version)
-- git clone this repo 
 - install python 
 - install virtualenv with `pip install virtualenv`
 - make a virtual environment for this project 
