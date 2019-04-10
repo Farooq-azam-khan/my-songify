@@ -1,5 +1,6 @@
 import json 
 import os 
+import random 
 class Song():
     def __init__(self, id, title, artist):
         self.id = id
@@ -11,19 +12,15 @@ class Song():
     # https://gist.github.com/giorgiofellipe/7d9113a8129d641578c1
     @staticmethod
     def get_songlist(): 
+        my_imgs = ['default.png','default2.jpg']
         songslist = []
         # mysongify
         with open('mysongify/data/songs.json') as f: 
             data = json.load(f)
             songslist.extend(data[0]['songs'])
             songslist.extend(data[1]['songs'])
-        indx = 0
         for song in songslist:
-            if indx % 2 == 0:
-                song['img_file'] = 'default2.jpg'
-            else: 
-                song['img_file'] = 'default.png'
-            indx+=1
+            song['img_file'] = random.choice(my_imgs)
         return songslist
     
     def __repr__(self):
