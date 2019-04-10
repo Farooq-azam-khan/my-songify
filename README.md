@@ -38,8 +38,8 @@
 ### Avneet
 - [X] make virtual env
 - [ ] writing proposals for test (10 tests)
-- [ ] make a logo 
-- [ ] make a favicon for the website 
+- [X] make a logo 
+- [X] make a favicon for the website 
 - [ ] think of design layout 
 
 
