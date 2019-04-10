@@ -15,10 +15,10 @@ login_manager = LoginManager(app)
  
 from mysongify.main.routes import main 
 from mysongify.users.routes import users
-# from mysongify.songs.routes import songs
+from mysongify.songs.routes import songs
 from mysongify.playlists.routes import playlists
 
 app.register_blueprint(main)
 app.register_blueprint(users)
-# app.register_blueprint(songs)
+app.register_blueprint(songs)
 app.register_blueprint(playlists)

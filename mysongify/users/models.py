@@ -2,9 +2,11 @@ from flask_login import UserMixin, current_user
 import json
 from mysongify import login_manager
 
+USER_LIMIT = 10
 class User(UserMixin):
     def __init__(self, id, email, password):
         self.id = id
+        self.username = 'generic username'
         self.email = email
         self.password = password
         self.playlists = []
