@@ -1,5 +1,8 @@
-from flask import (Blueprint, render_template)
-
+from flask import (Blueprint, 
+                    render_template, 
+                    flash)
+from flask_login import login_user, current_user, logout_user, login_required
+from mysongify.users.models import User 
 
 users = Blueprint('users', __name__)
 
@@ -10,11 +13,15 @@ def account():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
+    login_user(User(0, 'admin', 'admin'))
+    if current_user.is_authenticated:
+        flash('loggedin user', 'success')
     return render_template('users/login.html')
 
 
 @users.route('/logout')
 def logout():
+    logout_user()
     return render_template('users/logout.html')
 
 @users.route('/register')

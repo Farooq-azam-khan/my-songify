@@ -11,7 +11,7 @@ app = Flask(__name__)
 '''
 app.config['SECRET_KEY'] = 'cb9a1a435513a10cd7a231d697edd7d1'
 
-login_manager = LoginManager()
+login_manager = LoginManager(app)
  
 from mysongify.main.routes import main 
 from mysongify.users.routes import users
