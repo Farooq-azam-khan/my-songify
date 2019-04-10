@@ -44,8 +44,8 @@
 
 
 ## Setup (for local version)
-- install python 
-- install virtualenv with `pip install virtualenv`
+- install python3.6
+- install virtualenv with `pip3 install virtualenv`
 - make a virtual environment for this project 
     - `virtualenv iteration2and3`
 - `cd iteration2and3`
@@ -53,7 +53,7 @@
 - `mkdir src`
 - `cd src`
 - `git clone [repo link] .`
-- now you need to install all the requirements for this project. `pip install -r requirements.txt`
+- now you need to install all the requirements for this project. `pip3 install -r requirements.txt`
 - `python application.py`(will start local server)
 - if you want to turn debug on or off got the if condition and set debug to True/False, or simply run the bash script provided to you 
 
