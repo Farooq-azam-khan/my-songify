@@ -9,6 +9,6 @@ main = Blueprint('main', __name__)
 def home():
     return render_template('home.html') 
 
-@main.route('/')
+@main.route('/search')
 def search():
     return '<h1>search</h1> '
