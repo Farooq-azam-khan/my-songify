@@ -1,13 +1,60 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1> MySongify </h1>
 
-<ol>
-{% for song in html_songs %}
-<li>{{ song.title }}</li>
-<li>{{ song.get_length()  }}</li>
-<img src="{{ url_for( 'static', filename=song.image_file)}}"
+    <div id="firstbg" class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row" style="padding: 1em">
+                    <div class="col-4">
+                            <center>
+                        <div class="card" style="width: 100%;">
+                                <img class="card-img-top" src="{{ url_for( 'static', filename='default3.jpg')}}" alt="Card image cap">
+                                <div class="card-body">
+                                  <h5 class="card-title">Some \country Ass MUSISISISISI</h5>
+                                </div>
+                              </div>
+                        </center>
+                            </div>
+                    <div class="col-8">
+                        <p id="sickfont">
+                            MOST STREAMED SONG
+                        </p>
+                        <br><br>
+                        <p style="color: white">
+                            Songify is an amazing audio streaming platform that provides protected 
+                            music from many different record labels and media companies from artists 
+                            all over the world. Songify is available across a range of devices, including 
+                            computers, phones, tablets, cars, speakers, and TVs.
+                        </p>
 
-{% endfor %}
-</ol>
+                        </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container-fluid">
+        <div class="row" style="padding: 1em">
+            <div class="col-9">
+            {% for song in html_songs%}
+                <div id="rc">
+                    <div class="row">
+                    <div class="col-4" style="padding: 0% ;">        
+                           <img style="height:10em; width:100%; padding: 1em ;" src="{{ url_for( 'static', filename= song.image_file)}}" >
+                    </div>
+                    <div class="col-8" style="padding: 0% ;">        
+                           <h1 id="sickfont" style="font-size: 3em">{{song.title}}</h1>
+                           <br>
+                           <h1 id="sickfont" style="font-size: 1.5em">{{song.get_length()}}</h1>
+                     </div>
+                </div>
+                </div>
+            <br>
+            {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+  
+
 {% endblock content %}
