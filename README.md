@@ -27,7 +27,7 @@
 - [ ] create a report on which tests passsed and which failed
 
 ### Hafeez 
-- [ ] make virtual env
+- [X] make virtual env
 - [ ] writing proposals for test (10 tests)
     - [ ] write tests for selenium (if we have JS)
 

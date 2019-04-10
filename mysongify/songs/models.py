@@ -22,7 +22,17 @@ class Song():
             songslist.extend(data[0]['songs'])
             songslist.extend(data[1]['songs'])
         return songslist
-    
+
+    @staticmethod
+    def get_song(id):
+        songslist = Song.get_songlist()
+        for song in songslist:
+            if id == song.id:
+                return song
+        return None
+        
+
+
     @staticmethod
     def get_songlist(): 
         my_imgs = ['default.png','default2.jpg']
