@@ -36,7 +36,7 @@
 - [ ] design core layout of settings (Bootstrap)
 - [ ] parse `songs.jong` and display them on home page
 ### Avneet
-- [ ] make virtual env
+- [X] make virtual env
 - [ ] writing proposals for test (10 tests)
 - [ ] make a logo 
 - [ ] make a favicon for the website 
