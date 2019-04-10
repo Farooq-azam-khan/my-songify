@@ -53,7 +53,7 @@
 - `mkdir src`
 - `cd src`
 - `git clone [repo link] .`
-- now you need to install all the requirements for this project. `pip freeze -r requirements.txt`
+- now you need to install all the requirements for this project. `pip install -r requirements.txt`
 - `python application.py`(will start local server)
 - if you want to turn debug on or off got the if condition and set debug to True/False, or simply run the bash script provided to you 
 
