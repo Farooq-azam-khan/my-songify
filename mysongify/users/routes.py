@@ -49,8 +49,18 @@ def logout():
         return redirect(url_for('users.login'))
     return render_template('users/logout.html')
 
-@users.route('/register')
+@users.route('/register', methods=['GET','POST'])
 def register():
+    if request.method == 'POST':
+        username=request.form.get("username")
+        print(username)
+        email=request.form.get("email")
+        print(email)
+        password=request.form.get("password")
+        print(password)
+        flash("registed successfully", "primary")
+        return redirect(url_for("users.login"))
+        
     return render_template('users/register.html')
 
 
