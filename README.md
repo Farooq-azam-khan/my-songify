@@ -45,7 +45,7 @@
 
 ## Setup (for local version)
 - install python3.6
-- install virtualenv with `pip install virtualenv`
+- install virtualenv with `pip3 install virtualenv`
 - make a virtual environment for this project 
     - `virtualenv iteration2and3`
 - `cd iteration2and3`
