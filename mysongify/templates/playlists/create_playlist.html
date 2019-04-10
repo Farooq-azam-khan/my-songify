@@ -8,6 +8,21 @@
       <label for="playlist_title">Title</label>
       <input type="text" class="form-control" id="playlist_title" placeholder="Title">
     </div>
+    <div class="form-gorup">
+        {% for song in songs %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input">
+              </div>
+            </div>
+            <input type="text" class="form-control" disabled value="
+            {{ song.title }}" aria-label="Text input with checkbox">
+            
+          </div>
+        {% endfor %}
+          
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 {% endblock content %}
