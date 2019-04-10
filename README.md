@@ -32,9 +32,9 @@
     - [ ] write tests for selenium (if we have JS)
 
 ### Harun 
-- [ ] make virtual env
+- [x] make virtual env
 - [ ] design core layout of settings (Bootstrap)
-
+- [ ] parse `songs.jong` and display them on home page
 ### Avneet
 - [ ] make virtual env
 - [ ] writing proposals for test (10 tests)
