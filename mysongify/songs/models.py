@@ -1,5 +1,5 @@
 import json 
-
+import os 
 class Song():
     def __init__(self, id, title, artist):
         self.id = id
@@ -12,10 +12,17 @@ class Song():
     @staticmethod
     def get_songlist(): 
         songslist = []
-        with open('../data/songs.json') as f: 
+        with open('mysongify/data/songs.json') as f: 
             data = json.load(f)
             songslist.extend(data[0]['songs'])
             songslist.extend(data[1]['songs'])
+        indx = 0
+        for song in songslist:
+            if indx % 2 == 0:
+                song['img_file'] = 'default2.jpg'
+            else: 
+                song['img_file'] = 'default.png'
+            indx+=1
         return songslist
     
     def __repr__(self):
