@@ -12,6 +12,7 @@ class Song():
     @staticmethod
     def get_songlist(): 
         songslist = []
+        # mysongify
         with open('mysongify/data/songs.json') as f: 
             data = json.load(f)
             songslist.extend(data[0]['songs'])
