@@ -6,11 +6,11 @@
 ### Farooq 
 - [x] Make a virtual environment for python 
 - [x] install Flask 
-- [ ] setup Flask with routes
+- [x] setup Flask with routes
 - [x] setup bootstrap 
 - [x] setup heroku server for flask
 - [ ] implement functionality - json files for everything
-    - [ ] make songs, 
+    - [x] make songs, 
     - [ ] playlist, 
     - [ ] users
 - [x] make a folder for tests 
