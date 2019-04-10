@@ -1,5 +1,5 @@
 from mysongify import app
 
-# run in debug mode 
 if __name__ == '__main__':
+    # run in debug mode 
     app.run(debug=True)
