@@ -8,14 +8,21 @@ class Song():
         self.artist = artist
         self.playlists = []
         self.minutes = 0
+        self.genere = 'hip-hop'
         self.views = 0
         self.is_allowed = True
         self.seconds = 0
         self.image_file = 'default.png'
 
-    @staticmethod
-    def sort_fx(song):
-        return song.views
+
+    def __eq__(self, other):
+        return self.views == other.views
+
+    def __lt__(self, other):
+        return self.views < other.views
+    
+    def __gt__(self, other):
+        return self.views > other.views
 
     # https://gist.github.com/giorgiofellipe/7d9113a8129d641578c1
     @staticmethod
@@ -36,6 +43,7 @@ class Song():
             if id == song.id:
                 return song
         return None
+
         
 
 
@@ -47,6 +55,7 @@ class Song():
         for indx, song in enumerate(songslist):
             song_obj = Song(indx, song['title'], 'Farooq')
             song_obj.image_file = random.choice(my_imgs)
+            song_obj.views = random.randint(0, 100)
             song_obj.minutes, song_obj.seconds = get_minutes_seconds(song['length'])
             if song_obj.is_allowed:
                 songs.append(song_obj)
