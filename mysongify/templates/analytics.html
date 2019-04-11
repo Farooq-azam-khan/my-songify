@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Analytics</h2>
+<div class="row">
+    <div class="col-sm">
+        <h3>Top Songs</h3>
+        <ol>
+        {% for song in songs %}
+        <li><a href="{{ url_for('songs.song_detail', id=song.id) }}">{{ song.title }} - {{ song.views }}</a></li>
+
+
+        {% endfor %}
+        </ol>
+    </div>
+    <div class="col-sm">
+        <h3>Top Playlist</h3>
+        {% for playlist in playlists %}
+        <li><a href="{{ url_for('playlists.playlist_detail', id=playlist.id) }}">{{ playlist.title }} - {{ playlist.views }}</a></li>
+
+        {% endfor %}
+    </div>
+    <div class="col-sm">
+        <h3>Top Users</h3>
+        {% for user in users %}
+        <li>{{ user.email }} - {{ user.followers }}</li>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
