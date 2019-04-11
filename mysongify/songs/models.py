@@ -8,7 +8,6 @@ class Song():
         self.artist = artist
         self.playlists = []
         self.minutes = 0
-        self.genere = 'hip-hop'
         self.views = 0
         self.is_allowed = True
         self.seconds = 0
