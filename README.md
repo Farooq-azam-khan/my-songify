@@ -17,30 +17,27 @@
 
 ### Kaniskan 
 - work in the test folder, use `pytest` in that folder to run the tests.
-- [ ] make virtual env
-- [ ] read `http://flask.pocoo.org/docs/1.0/testing/`
-- [ ] writing proposals for test (30 tests?) 
-    - [ ] creating tests for databases 
-    - [ ] help *Hafeez* with selenium testing 
+- [x] make virtual env
+- [x] read `http://flask.pocoo.org/docs/1.0/testing/`
+- [x] writing proposals for test (20 tests?) 
+    - [ ] creating tests for databases  
     - [ ] help *Farooq* with routes testing 
-- [ ] implement tests into python unittesting
-- [ ] create a report on which tests passsed and which failed
+- [x] implement tests into python unittesting
+- [x] create a report on which tests passsed and which failed
 
 ### Hafeez 
 - [X] make virtual env
-- [ ] writing proposals for test (10 tests)
-    - [ ] write tests for selenium (if we have JS)
+- [x] writing proposals for test (10 tests)
 
 ### Harun 
-- [x] make virtual env
+- [x] make virtual env 
 - [ ] design core layout of settings (Bootstrap)
 - [ ] parse `songs.jong` and display them on home page
 ### Avneet
 - [X] make virtual env
-- [ ] writing proposals for test (10 tests)
+- [x] writing proposals for test (10 tests)
 - [X] make a logo 
 - [X] make a favicon for the website 
-- [ ] think of design layout 
 
 
 ## Setup (for local version)
@@ -64,4 +61,3 @@
 - `git add .`
 - `git commit -m "[your-message]"`
 - `git push`
-          
