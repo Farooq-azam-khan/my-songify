@@ -10,9 +10,28 @@ class User(UserMixin):
         self.email = email
         self.password = password
         self.playlists = []
+        self.followers = 0
         self.image_file = 'default.png'
         self.is_admin = False
         self.is_dj = False
+
+    def __eq__(self, other):
+        return self.followers == other.followers
+
+    def __lt__(self, other):
+        return self.followers < other.followers
+    
+    def __gt__(self, other):
+        return self.followers > other.followers
+
+    @staticmethod
+    def get_users():
+        users = []
+        for i in range(10):
+            user = User(i, f'user{i}@mysongify.com', 'pwd')
+            user.followers = i * 10
+            users.append(user)
+        return users
 
     @staticmethod
     def json_to_obj(json):

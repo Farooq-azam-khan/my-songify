@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Analytics</h2>
+<div class="row">
+    <div class="col-sm">
+        <h3>Top Songs</h3>
+        <ol>
+        {% for song in songs %}
+        <li>{{ song.title }} - {{ song.views }}</li>
+
+        {% endfor %}
+        </ol>
+    </div>
+    <div class="col-sm">
+        <h3>Top Playlist</h3>
+        {% for playlist in playlists %}
+        <li>{{ playlist.title }} - {{ playlist.views }}</li>
+
+        {% endfor %}
+    </div>
+    <div class="col-sm">
+        <h3>Top Users</h3>
+        {% for user in users %}
+        <li>{{ user.email }} - {{ user.followers }}</li>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
