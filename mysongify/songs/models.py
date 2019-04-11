@@ -96,7 +96,11 @@ class Song():
 
     @staticmethod
     def get_songlist():
-        return SONGS_DB
+        ret_songs = []
+        for song in SONGS_DB:
+            if song.is_allowed:
+                ret_songs.append(song)
+        return ret_songs
 
     def get_length(self):
         minutes = self.minutes
