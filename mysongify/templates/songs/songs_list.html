@@ -4,6 +4,11 @@
 <ul>
 {% for song in songs %}
 <li><a href="{{ url_for('songs.song_detail', id=song.id) }}">{{ song.title }}</a></li>
+{% if current_user.is_admin %}
+<form action="{{ url_for('songs.remove_song', id=song.id) }}" method="post">
+    <input type="submit" value="remove" class="btn btn-danger" >
+</form>
+{% endif %}
 {% endfor %}
 </ul>
 {% endblock content %}

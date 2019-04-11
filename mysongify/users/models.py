@@ -14,7 +14,7 @@ class User(UserMixin):
         self.playlists = []
         self.followers = 0
         self.image_file = 'default.png'
-        self.is_admin = False
+        self.is_admin = True
         self.is_dj = False
 
     @staticmethod
