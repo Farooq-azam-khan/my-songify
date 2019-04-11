@@ -32,7 +32,7 @@ class Song():
 
     @staticmethod
     def sort_by_length(song):
-        length = song.minutes * song.seconds/60
+        length = song.minutes + song.seconds/60
         return length
 
     @staticmethod
