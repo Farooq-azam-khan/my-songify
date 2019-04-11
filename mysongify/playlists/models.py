@@ -14,7 +14,16 @@ class Playlist():
         self.total_hours = 3
         self.image_file = 'default.png'
         self.next_song_queue = Queue(maxsize=MAX_NUMBER_OF_SONGS)
-    
+
+
+    def empty_queue(self):
+        return self.next_song_queue.empty()
+
+    def queue_size(self):
+        return self.next_song_queue.qsize()
+
+    def get_queue(self):
+        return self.next_song_queue
 
     def __eq__(self, other):
         return self.views == other.views
