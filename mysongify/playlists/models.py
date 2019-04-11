@@ -19,6 +19,7 @@ class Playlist():
     def __repr__(self):
         return f'<Playlist {self.title}'
 
+    @staticmethod
     def get_playlists():
         # TODO: do actual json playlists
         playlists = []
@@ -30,6 +31,14 @@ class Playlist():
 
     def calculate_hours_in_songs():
         return 0
+
+    def get_playlist(id):
+        playlists = Playlist.get_playlists()
+        for playlist in playlists:
+            if playlist.id == id:
+                return playlist
+        return None
+
 
     def set_songs(self, songs):
         self.songs = songs
