@@ -24,6 +24,16 @@ def song_detail(id):
     if not song:
         flash('Error, no song found with that id', 'danger')
         return redirect(url_for('main.home'))
+
+    if current_user.is_authenticated:
+        print("-===============")
+        print('user is authenticated')
+        print(f'song: {song}')
+        current_user.add_viewed_song(song)
+        print(f'viewed songs: {current_user.viewed_songs}')
+        print('=========================')
+        
+        
     return render_template('songs/song_detail.html', song=song)
 
 @songs.route('/song/<int:id>/delete', methods=['POST', 'GET'])
@@ -33,6 +43,7 @@ def remove_song(id):
         if not song:
             flash('song already does not exist', 'warning')
             return redirect(url_for('main.home'))
+
         if current_user.is_admin:
             song.is_allowed = False
             flash('song was removed form db', 'danger')

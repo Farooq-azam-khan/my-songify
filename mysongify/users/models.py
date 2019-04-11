@@ -12,10 +12,14 @@ class User(UserMixin):
         self.email = email
         self.password = password
         self.playlists = []
+        self.viewed_songs = []#set()
         self.followers = 0
         self.image_file = 'default.png'
         self.is_admin = True
         self.is_dj = False
+
+    def add_viewed_song(self, song):
+        self.viewed_songs.append(song)
 
     @staticmethod
     def get_top_10():
@@ -24,13 +28,16 @@ class User(UserMixin):
         return users
 
     def __eq__(self, other):
-        return self.followers == other.followers
+        return self.id == other.id
 
     def __lt__(self, other):
         return self.followers < other.followers
     
     def __gt__(self, other):
         return self.followers > other.followers
+
+    def __hash__(self):
+        return hash(self.id)
 
     @staticmethod
     def get_users():
