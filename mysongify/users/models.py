@@ -3,6 +3,8 @@ import json
 from mysongify import login_manager
 
 USER_LIMIT = 10
+
+
 class User(UserMixin):
     def __init__(self, id, email, password):
         self.id = id
@@ -10,9 +12,34 @@ class User(UserMixin):
         self.email = email
         self.password = password
         self.playlists = []
+        self.followers = 0
         self.image_file = 'default.png'
         self.is_admin = False
         self.is_dj = False
+
+    @staticmethod
+    def get_top_10():
+        users = User.get_users()
+        users.sort(reverse=True)
+        return users
+
+    def __eq__(self, other):
+        return self.followers == other.followers
+
+    def __lt__(self, other):
+        return self.followers < other.followers
+    
+    def __gt__(self, other):
+        return self.followers > other.followers
+
+    @staticmethod
+    def get_users():
+        users = []
+        for i in range(10):
+            user = User(i, f'user{i}@mysongify.com', 'pwd')
+            user.followers = i * 10
+            users.append(user)
+        return users
 
     @staticmethod
     def json_to_obj(json):

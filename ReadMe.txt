@@ -1,5 +1,14 @@
 # cps406-iteration2and3
-- This project with help people get to class 
+Group 1
+Members:
+Harun Abdi
+Avneet Jaswal
+Hafeez M Khan
+Farooq Khan
+Kanishkan Kukarajah
+
+Files required by assignment are in /"Required Files"
+
 - _visit here_:http://my-songify.herokuapp.com/
 
 ## TODO 
@@ -41,27 +50,4 @@
 - [X] make a logo 
 - [X] make a favicon for the website 
 - [ ] think of design layout 
-
-
-## Setup (for local version)
-- install python3.6
-- install virtualenv with `pip3 install virtualenv`
-- make a virtual environment for this project 
-    - `virtualenv iteration2and3`
-- `cd iteration2and3`
-- `. Scripts/activate` (for git bash/windows) `source bin/activate` (for mac)
-- `mkdir src`
-- `cd src`
-- `git clone [repo link] .`
-- now you need to install all the requirements for this project. `pip3 install -r requirements.txt`
-- `python application.py`(will start local server)
-- if you want to turn debug on or off got the if condition and set debug to True/False, or simply run the bash script provided to you 
-
-# Development (_For Grounp Members Only_)
-- `git branch [your-branch-name]`
-- `git checkout [your-branch-name]`
-- work on your branch
-- `git add .`
-- `git commit -m "[your-message]"`
-- `git push`
           
