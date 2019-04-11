@@ -1,8 +1,124 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<body>
+        <br><br>
+        <h1 style="text-align:center">Meet the Team</h1>
+        <br><br>
+        <div class="row">
+          <div class="column">
+            <div class="card">
+              <img src="/static/farooq.jpg" alt="Farooq" style="width:100%">
+              <div class="container">
+                <h2>Farooq Khan</h2>
+                <p class="title">Full Stack Developer & COO</p>
+                <p>BANG BANG BANG</p>
+                <p>MORE SHIT</p>
+              </div>
+            </div>
+          </div>
+        
+          <div class="column">
+            <div class="card">
+              <img src="/static/kanishkan.jpg" alt="Kanishkan" style="width:100%">
+              <div class="container">
+                <h2>Kanishkan Kukarajah</h2>
+                <p class="title">QA Analyst</p>
+                <p>BANG BANG BANG</p>
+                <p>MORE SHIT</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <img src="/static/hafeez.png" alt="Harun" style="width:100%">
+              <div class="container">
+                <h2>Harun Abdi</h2>
+                <p class="title">Lead Front End Developer</p>
+                <p>BANG BANG BANG</p>
+                <p>MORE SHIT</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+                <div class="card">
+                  <img src="/static/avneet.png" alt="Avneet" style="width:100%" style="text-align:center">
+                  <div class="container">
+                    <h2>Avneet Jaswal</h2>
+                    <p class="title">Content Developer & Testing</p>
+                    <p>BANG BANG BANG</p>
+                    <p>MORE SHIT</p>
+                  </div>
+                </div>
+            </div>
+            <div class="column">
+                    <div class="card">
+                      <img src="/static/hafeez.png" alt="Hafeez" style="width:100%" style="text-align:center">
+                      <div class="container">
+                        <h2>Hafeez Khan</h2>
+                        <p class="title">Developer</p>
+                        <p>BANG BANG BANG</p>
+                        <p>MORE SHIT</p>
+                      </div>
+                    </div>
+                </div>
+            <div class="column">
+                <div class="card">
+                    <img src="/static/voji.jpg" alt="Vojislav" style="width:83%" style="text-align:center">
+                    <div class="container">
+                        <h2>Vojislav Misic</h2>
+                        <p class="title">CEO</p>
+                        <p>BANG BANG BANG</p>
+                        <p>MORE SHIT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
 
-
-
+<style>
+        html {
+          box-sizing: border-box;
+        }
+        
+        *, *:before, *:after {
+          box-sizing: inherit;
+        }
+        
+        .column {
+          float: left;
+          width: 33.3%;
+          margin-bottom: 16px;
+          padding: 0 8px;
+        }
+        
+        @media screen and (max-width: 650px) {
+          .column {
+            width: 100%;
+            display: block;
+          }
+        }
+        
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+          padding: 0 16px;
+        }
+        
+        .container::after, .row::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+        
+        .title {
+          color: grey;
+        }
+        
+</style>
 
 {% endblock content%}
