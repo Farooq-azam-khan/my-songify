@@ -12,7 +12,7 @@ def test_new_song():
     
 def test_delete_song():
     song = Song(1, 'software sensation', 'misic')
-    user = User(1, 'test1@gmail.com', 'test1') 
+    user = User('test1@gmail.com', 'test1') 
     user.is_admin = True
     Song.delete_song(user, song)
     assert song.is_allowed == False
