@@ -21,6 +21,14 @@ class Playlist():
         return f'<Playlist {self.title}'
 
     @staticmethod
+    def get_top_10():
+        playlists = Playlist.get_playlists()
+        playlists.sort(reverse=True)
+        playlists[:10]
+        return playlists
+
+
+    @staticmethod
     def get_playlists():
         # TODO: do actual json playlists
         playlists = []

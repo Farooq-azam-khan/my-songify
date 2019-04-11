@@ -15,6 +15,12 @@ class User(UserMixin):
         self.is_admin = False
         self.is_dj = False
 
+    @staticmethod
+    def get_top_10():
+        users = User.get_users()
+        users.sort(reverse=True)
+        return users
+
     def __eq__(self, other):
         return self.followers == other.followers
 

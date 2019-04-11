@@ -14,6 +14,13 @@ class Song():
         self.genre = ''
         self.image_file = 'default.png'
 
+    @staticmethod
+    def get_top_10():
+        songs = Song.get_songlist()
+        songs.sort(reverse=True)
+        songs = songs[:10]
+        return songs
+
 
     def __eq__(self, other):
         return self.views == other.views
