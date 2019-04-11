@@ -12,6 +12,7 @@ class Song():
         self.views = 0
         self.is_allowed = True
         self.seconds = 0
+        self.genre = ''
         self.image_file = 'default.png'
 
 
@@ -44,18 +45,18 @@ class Song():
                 return song
         return None
 
-        
-
 
     @staticmethod
     def get_songlist(): 
-        my_imgs = ['default.png','default2.jpg']
+        my_imgs = ['default.png','default2.jpg','default6.jpg','default7.jpg','default8.jpg','default9.jpg','default10.jpg','default11.jpg','default12.jpg']
+        my_genre = ['Hip Hop', 'Pop', 'R&B', 'Country', 'Rock', 'Heavy Metal']
         songslist = Song.get_json_songlist()
         songs = []
         for indx, song in enumerate(songslist):
             song_obj = Song(indx, song['title'], 'Farooq')
             song_obj.image_file = random.choice(my_imgs)
-            song_obj.views = random.randint(0, 100)
+            song_obj.views = random.randint(100, 10000)
+            song_obj.genre = random.choice(my_genre)
             song_obj.minutes, song_obj.seconds = get_minutes_seconds(song['length'])
             if song_obj.is_allowed:
                 songs.append(song_obj)
