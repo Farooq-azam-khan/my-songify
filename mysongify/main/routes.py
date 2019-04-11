@@ -14,3 +14,8 @@ def home():
 @main.route('/search')
 def search():
     return '<h1>search</h1> '
+
+@main.route('/credits')
+def credits():
+    return render_template('credits.html', title='Credits')
+
