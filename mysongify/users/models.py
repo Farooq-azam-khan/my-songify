@@ -6,8 +6,8 @@ USER_LIMIT = 10
 
 
 class User(UserMixin):
-    def __init__(self, id, email, password):
-        self.id = id
+    def __init__(self, email, password):
+        self.id = 0
         self.username = 'generic username'
         self.email = email
         self.password = password
@@ -18,6 +18,19 @@ class User(UserMixin):
         self.is_admin = True
         self.is_dj = False
 
+
+    def save(self):
+        users_dict = {}
+        with open('mysongify/data/users.json') as f:
+            users_dict = json.load(f)
+            users = users_dict['users']
+            self.id = len(users) + 1
+            users.append(self.obj_to_json())
+            print(f'users: {users_dict}')
+        with open('mysongify/data/users.json', 'w') as f:
+            json.dump(json.dumps(users_dict), f)
+
+
     def add_viewed_song(self, song):
         self.viewed_songs.append(song)
         print(self.viewed_songs)
@@ -26,7 +39,7 @@ class User(UserMixin):
     def make_users():
         users = []
         for i in range(10):
-            user = User(i, f'email{i}@mysongify.com', f'psswd{i}')
+            user = User(f'email{i}@mysongify.com', f'psswd{i}')
             users.append(user)
             user.is_admin = False
         return users
@@ -61,17 +74,24 @@ class User(UserMixin):
     def get_users():
         users = []
         for i in range(10):
-            user = User(i, f'user{i}@mysongify.com', 'pwd')
+            user = User(f'user{i}@mysongify.com', 'pwd')
             user.followers = i * 10
             users.append(user)
         return users
 
-    @staticmethod
-    def json_to_obj(json):
-        return User(0, 'admin', 'admin@admin.com')
+    # @staticmethod
+    # def json_to_obj(json):
+    #     return User('admin', 'admin@admin.com')
     
-    def obj_to_json(obj):
-        return ''
+    def obj_to_json(self):
+        user = {
+            "id":self.id, 
+            "username":self.username, 
+            "email":self.email, 
+            "password":self.password, 
+            "is_admin":self.is_admin
+        }
+        return json.dumps(user)
 
     @staticmethod
     def get(user_id):
@@ -81,7 +101,7 @@ class User(UserMixin):
         #         if user_json['id'] == user_id:
         #             return user_json
         # return None
-        return User(0, 'admin', 'admin')
+        return User('admin', 'admin')
 
     
     def __repr__(self):

@@ -30,7 +30,7 @@
 - [x] writing proposals for test (10 tests)
 
 ### Harun 
-- [x] make virtual env
+- [x] make virtual env 
 - [ ] design core layout of settings (Bootstrap)
 - [ ] parse `songs.jong` and display them on home page
 ### Avneet
@@ -61,4 +61,3 @@
 - `git add .`
 - `git commit -m "[your-message]"`
 - `git push`
-          
