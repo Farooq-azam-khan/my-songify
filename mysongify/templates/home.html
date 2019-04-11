@@ -10,7 +10,7 @@
                         <div class="card" style="width: 100%;">
                                 <img class="card-img-top" src="{{ url_for( 'static', filename='default3.jpg')}}" alt="Card image cap">
                                 <div class="card-body" style="background-color:#FFEFDB">
-                                  <h5 class="card-title">Some \country Ass MUSISISISISI</h5>
+                                  <h5 class="card-title">#1 STREAMED SONG</h5>
                                 </div>
                               </div>
                         </center>
@@ -60,6 +60,15 @@
                         </div>
                         <br>
                     <div id="rc" style="height: 50em; width: 100%">
+                            <p id="font2" style="font-size:1.2em; padding: 10px;">Top Playlists</p>
+                            <ul>
+                        {% for p in playlists%}
+                        <br>
+                                <li>
+                                    <p id="font2" style="font-size:1.2em">{{p}}</p>
+                                </li>
+                        {% endfor %}
+                    </ul>
                     </div>
 
             </div>
