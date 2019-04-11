@@ -1,3 +1,7 @@
+from queue import Queue
+
+MAX_NUMBER_OF_SONGS = 10
+
 class Playlist():
     def __init__(self, id, title): 
         self.id = id
@@ -5,8 +9,10 @@ class Playlist():
         self.songs = []
         self.user = -1
         self.views = 0 
-        self.total_hours = 0
+        self.total_hours = 3
         self.image_file = 'default.png'
+        self.next_song_queue = Queue(maxsize=MAX_NUMBER_OF_SONGS)
+    
 
     def __eq__(self, other):
         return self.views == other.views
@@ -51,6 +57,8 @@ class Playlist():
 
     def set_songs(self, songs):
         self.songs = songs
+        for song in songs: 
+            self.next_song_queue.put(song)
 
     @staticmethod
     def save(playlist):

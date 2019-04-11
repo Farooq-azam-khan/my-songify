@@ -1,18 +1,34 @@
 import json 
 import os 
 import random 
+
 class Song():
     def __init__(self, id, title, artist):
         self.id = id
         self.title = title
         self.artist = artist
-        self.playlists = []
         self.minutes = 0
         self.views = 0
         self.is_allowed = True
         self.seconds = 0
         self.genre = ''
         self.image_file = 'default.png'
+
+    @staticmethod
+    def delete_song(user, song):
+        if user.is_admin:
+            # delete the song
+            song.is_allowed = False
+
+
+    @staticmethod
+    def sort_by_length(song):
+        length = song.minutes * song.seconds/60
+        return length
+
+    @staticmethod
+    def sort_by_genre(song):
+        return self.genre
 
     @staticmethod
     def get_top_10():
@@ -47,7 +63,7 @@ class Song():
     def get_song(id):
         songslist = Song.get_songlist()
         for song in songslist:
-            if id == song.id:
+            if id == song.id and song.is_allowed:
                 return song
         return None
 
