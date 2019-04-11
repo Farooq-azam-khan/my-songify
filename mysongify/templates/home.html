@@ -36,23 +36,30 @@
         <div class="row" style="padding: 1em">
             <div class="col-9">
             {% for song in html_songs%}
+            <center>
                 <div id="rc">
                     <div class="row">
                     <div class="col-4" style="padding: 0% ;">        
-                           <img style="height:10em; width:100%; padding: 1em ;" src="{{ url_for( 'static', filename= song.image_file)}}" >
+                           <img style="height:8em; width:10em; padding: 1em ;" src="{{ url_for( 'static', filename= song.image_file)}}" >
                     </div>
                     <div class="col-8" style="padding: 0% ;">        
-                           <h1 id="sickfont" style="font-size: 3em">{{song.title}}</h1>
+                           <h1 id="font2" style="font-size: 2.5em">{{song.title}}</h1>
                            <br>
-                           <h1 id="sickfont" style="font-size: 1.5em">{{song.get_length()}}</h1>
+                           <h1 id="font2" style="font-size: 2em">{{song.genre}}</h1>
+                           <h1 id="font2" style="font-size: 1em">Duration: {{song.get_length()}}</h1>
                      </div>
                 </div>
                 </div>
-            <br>
+           <br>
+        </center>
             {% endfor %}
             </div>
             <div class="col-3">
-                    <div id="rc" style="height: 50em;">
+                    <div style="height: 12em;">
+                            <img style="height:100%; width:100% ;" src="{{ url_for( 'static', filename='logo.png')}}" >
+                        </div>
+                        <br>
+                    <div id="rc" style="height: 50em; width: 100%">
                     </div>
 
             </div>
