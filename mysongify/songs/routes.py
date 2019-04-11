@@ -12,8 +12,11 @@ from mysongify.songs.models import Song
 songs = Blueprint('songs', __name__)
 @songs.route('/songs_list')
 def songs_list():
-    songs = Song.get_songlist()
-    return render_template('songs/songs_list.html', songs=songs)
+    songs_views = Song.get_songlist()
+    songs_genre = Song.get_songlist()
+    songs_views.sort(key=Song.sort_by_views, reverse=True)
+    songs_genre.sort(key=Song.sort_by_genre)
+    return render_template('songs/songs_list.html', songs_views=songs_views, songs_genre=songs_genre)
 
 @songs.route('/song/<int:id>')
 def song_detail(id):

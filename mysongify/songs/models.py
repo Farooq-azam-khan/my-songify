@@ -37,7 +37,15 @@ class Song():
 
     @staticmethod
     def sort_by_genre(song):
-        return self.genre
+        return song.genre
+
+    @staticmethod
+    def sort_by_views(song):
+        return song.views
+
+    @staticmethod
+    def sort_by_title(song):
+        return song.title
 
     @staticmethod
     def get_top_10():
