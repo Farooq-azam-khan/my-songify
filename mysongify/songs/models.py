@@ -22,6 +22,12 @@ class Song():
 
 
     @staticmethod
+    def get_random_song():
+        songs = Song.get_songlist()
+        return random.choice(songs)
+
+
+    @staticmethod
     def sort_by_length(song):
         length = song.minutes * song.seconds/60
         return length

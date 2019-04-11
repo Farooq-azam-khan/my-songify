@@ -1,4 +1,5 @@
 from queue import Queue
+from mysongify.songs.models import Song 
 
 MAX_NUMBER_OF_SONGS = 10
 
@@ -41,6 +42,8 @@ class Playlist():
         for i in range(10):
             playlist = Playlist(i, f'Playlists {i}')
             playlist.views = i * 10
+            playlist.add_song(Song.get_random_song())
+            playlist.add_song(Song.get_random_song())
             playlists.append(playlist)
         return playlists
 
@@ -53,12 +56,19 @@ class Playlist():
             if playlist.id == id:
                 return playlist
         return None
+        
 
+    def add_song(self, song):
+        self.songs.append(song)
+        self.next_song_queue.put(song)
 
+    # successful only if length is less or equal
     def set_songs(self, songs):
-        self.songs = songs
-        for song in songs: 
-            self.next_song_queue.put(song)
+        if len(songs) <= MAX_NUMBER_OF_SONGS:
+            for song in songs: 
+                self.add_song(song)
+            return True
+        return False
 
     @staticmethod
     def save(playlist):
