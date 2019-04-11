@@ -29,6 +29,7 @@ def song_detail(id):
         print("-===============")
         print('user is authenticated')
         print(f'song: {song}')
+        print(f'current user: {current_user}')
         current_user.add_viewed_song(song)
         print(f'viewed songs: {current_user.viewed_songs}')
         print('=========================')

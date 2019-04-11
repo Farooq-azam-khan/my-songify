@@ -20,6 +20,7 @@ class User(UserMixin):
 
     def add_viewed_song(self, song):
         self.viewed_songs.append(song)
+        print(self.viewed_songs)
 
     @staticmethod
     def get_top_10():
