@@ -28,10 +28,9 @@ def login():
         return redirect(url_for('main.home'))
     if request.method == 'POST':
         email = request.form.get("email")
-        print(email)
         password = request.form.get("password")
-        print(password)
-        login_user(User(0, 'admin', 'admin'))
+        user = User(0, 'admin', 'admin')
+        login_user(user)
         flash('logged in user', 'success')
         return redirect(url_for('main.home'))
 

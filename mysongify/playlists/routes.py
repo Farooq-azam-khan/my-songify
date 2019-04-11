@@ -7,6 +7,7 @@ from flask import (Blueprint,
                     )
 from flask_login import login_required
 from mysongify.playlists.models import Playlist
+from mysongify.playlists.models import MAX_NUMBER_OF_SONGS
 from mysongify.songs.models import Song
 playlists = Blueprint('playlists', __name__)
 
@@ -34,8 +35,13 @@ def playlist_detail(id):
     playlist = Playlist.get_playlist(id)
     if not playlist:
         flash('playlist does not exists', 'danger')
-        return render_template(url_for('main.home'))
-    return render_template('playlists/detail_playlist.html', playlist=playlist)
+        return redirect(url_for('main.home'))
+
+    next_song = 'empty queue'
+    if not playlist.empty_queue():
+        next_song = playlist.next_song_queue.get()
+
+    return render_template('playlists/detail_playlist.html', playlist=playlist, next_song=next_song)
 
 @playlists.route('/playlist/<int:id>/update', methods=['POST', 'GET'])
 @login_required

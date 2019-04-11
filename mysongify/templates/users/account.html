@@ -1,5 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h2>{{ current_user.email }}</h2>
-<img src="{{ url_for('static', filename=current_user.image_file) }}"
+{% if current_user.is_admin %}
+<h3>Congrats you are admin</h3>
+{% endif %}
+<img style="height: 25%; width:25%" src="{{ url_for('static', filename=current_user.image_file) }}">
+ 
+{% if current_user.viewed_songs %}
+<h3>Viewed Songs</h3>
+<ul>
+{% for viewed_song in current_user.viewed_songs %}
+<li>{{ viewed_song.title }}</li>
+{% endfor %}
+</ul>
+{% endif %}
 {% endblock content %}

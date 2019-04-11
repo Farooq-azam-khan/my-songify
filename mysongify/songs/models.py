@@ -1,18 +1,51 @@
 import json 
 import os 
 import random 
+
+
+
+
 class Song():
     def __init__(self, id, title, artist):
         self.id = id
         self.title = title
         self.artist = artist
-        self.playlists = []
         self.minutes = 0
         self.views = 0
         self.is_allowed = True
         self.seconds = 0
         self.genre = ''
         self.image_file = 'default.png'
+
+    @staticmethod
+    def delete_song(user, song):
+        if user.is_admin:
+            # delete the song
+            song.is_allowed = False
+
+
+    @staticmethod
+    def get_random_song():
+        songs = Song.get_songlist()
+        return random.choice(songs)
+
+
+    @staticmethod
+    def sort_by_length(song):
+        length = song.minutes * song.seconds/60
+        return length
+
+    @staticmethod
+    def sort_by_genre(song):
+        return song.genre
+
+    @staticmethod
+    def sort_by_views(song):
+        return song.views
+
+    @staticmethod
+    def sort_by_title(song):
+        return song.title
 
     @staticmethod
     def get_top_10():
@@ -47,13 +80,13 @@ class Song():
     def get_song(id):
         songslist = Song.get_songlist()
         for song in songslist:
-            if id == song.id:
+            if id == song.id and song.is_allowed:
                 return song
         return None
 
 
     @staticmethod
-    def get_songlist(): 
+    def make_songlist():
         my_imgs = ['default.png','default2.jpg','default6.jpg','default7.jpg','default8.jpg','default9.jpg','default10.jpg','default11.jpg','default12.jpg']
         my_genre = ['Hip Hop', 'Pop', 'R&B', 'Country', 'Rock', 'Heavy Metal']
         songslist = Song.get_json_songlist()
@@ -67,6 +100,15 @@ class Song():
             if song_obj.is_allowed:
                 songs.append(song_obj)
         return songs
+
+
+    @staticmethod
+    def get_songlist():
+        ret_songs = []
+        for song in SONGS_DB:
+            if song.is_allowed:
+                ret_songs.append(song)
+        return ret_songs
 
     def get_length(self):
         minutes = self.minutes
@@ -88,3 +130,8 @@ class Song():
 def get_minutes_seconds(length_str):
     minutes, seconds = length_str.split(':')
     return int(minutes), int(seconds)
+
+
+
+
+SONGS_DB = Song.make_songlist()
