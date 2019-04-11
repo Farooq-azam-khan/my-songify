@@ -27,8 +27,7 @@
 
 ### Hafeez 
 - [X] make virtual env
-- [ ] writing proposals for test (10 tests)
-    - [ ] write tests for selenium (if we have JS)
+- [x] writing proposals for test (10 tests)
 
 ### Harun 
 - [x] make virtual env
