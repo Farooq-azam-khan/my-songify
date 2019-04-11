@@ -17,6 +17,12 @@ def home():
 def search():
     return '<h1>search</h1> '
 
+
+@main.route('/credits')
+def credits():
+    return render_template('credits.html', title='Credits')
+
+
 @main.route('/analytics')
 def analytics():
 	title = 'analytics'
@@ -24,3 +30,4 @@ def analytics():
 	playlists = Playlist.get_top_10()
 	users = User.get_top_10()
 	return render_template('analytics.html', songs=songs, playlists=playlists, users=users, title=title)
+
