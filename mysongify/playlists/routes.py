@@ -27,10 +27,15 @@ def create_playlist():
 
         flash('post sending data', 'primary')
         return redirect(url_for('main.home'))
-    elif request.method == 'GET':
-        flash('get request', 'success')
     return render_template('playlists/create_playlist.html', songs=songs)
 
+@playlists.route('/playlist/<int:id>')
+def playlist_detail(id):
+    playlist = Playlist.get_playlist(id)
+    if not playlist:
+        flash('playlist does not exists', 'danger')
+        return render_template(url_for('main.home'))
+    return render_template('playlists/detail_playlist.html', playlist=playlist)
 
 @playlists.route('/playlist/<int:id>/update', methods=['POST', 'GET'])
 @login_required
@@ -54,6 +59,4 @@ def update_playlist(id):
         flash('Playlist Updated', 'success')
         # TODO: send them to playlist view page 
         return redirect(url_for('main.home'))
-    elif request.method == 'GET':
-        flash('would you like to update your playlsit?', 'primary')
     return render_template('playlists/update_playlist.html', songs=songs, playlist=playlist)

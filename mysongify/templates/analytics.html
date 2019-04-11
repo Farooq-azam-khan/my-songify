@@ -6,7 +6,8 @@
         <h3>Top Songs</h3>
         <ol>
         {% for song in songs %}
-        <li>{{ song.title }} - {{ song.views }}</li>
+        <li><a href="{{ url_for('songs.song_detail', id=song.id) }}">{{ song.title }} - {{ song.views }}</a></li>
+
 
         {% endfor %}
         </ol>
@@ -14,7 +15,7 @@
     <div class="col-sm">
         <h3>Top Playlist</h3>
         {% for playlist in playlists %}
-        <li>{{ playlist.title }} - {{ playlist.views }}</li>
+        <li><a href="{{ url_for('playlists.playlist_detail', id=playlist.id) }}">{{ playlist.title }} - {{ playlist.views }}</a></li>
 
         {% endfor %}
     </div>

@@ -18,6 +18,7 @@ def search():
 
 @main.route('/analytics')
 def analytics():
+	title = 'analytics'
 	songs = Song.get_songlist()
 	songs.sort(reverse=True)
 	songs = songs[:10]
@@ -27,4 +28,4 @@ def analytics():
 
 	users = User.get_users()
 	users.sort(reverse=True)
-	return render_template('analytics.html', songs=songs, playlists=playlists, users=users)
+	return render_template('analytics.html', songs=songs, playlists=playlists, users=users, title=title)

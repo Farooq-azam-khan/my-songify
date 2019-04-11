@@ -3,6 +3,7 @@ class Playlist():
         self.id = id
         self.title = title
         self.songs = []
+        self.user = -1
         self.views = 0 
         self.total_hours = 0
         self.image_file = 'default.png'
