@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h2>{{ playlist.title }}</h2>
-<h2>{{ next_song.title }}</h2>
+<h2>next song: {{ next_song.title }}</h2>
+<button><a href="{{ url_for('playlists.playlist_detail', id=playlist.id) }}">next song</a></button>
 {% endblock content %}

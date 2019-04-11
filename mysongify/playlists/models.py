@@ -3,6 +3,7 @@ from mysongify.songs.models import Song
 
 MAX_NUMBER_OF_SONGS = 10
 
+
 class Playlist():
     def __init__(self, id, title): 
         self.id = id
@@ -36,7 +37,7 @@ class Playlist():
 
 
     @staticmethod
-    def get_playlists():
+    def make_playlsits():
         # TODO: do actual json playlists
         playlists = []
         for i in range(10):
@@ -46,6 +47,12 @@ class Playlist():
             playlist.add_song(Song.get_random_song())
             playlists.append(playlist)
         return playlists
+
+
+
+    @staticmethod
+    def get_playlists():
+       return Playlist_DB
 
     def calculate_hours_in_songs():
         return 0
@@ -77,3 +84,4 @@ class Playlist():
         
 
 
+Playlist_DB = Playlist.make_playlsits()

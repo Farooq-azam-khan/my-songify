@@ -35,6 +35,7 @@ def playlist_detail(id):
     if not playlist:
         flash('playlist does not exists', 'danger')
         return redirect(url_for('main.home'))
+
     next_song = 'next song'
     if playlist.next_song_queue.empty():
         next_song = 'empty queue'

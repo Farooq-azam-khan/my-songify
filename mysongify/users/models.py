@@ -3,6 +3,8 @@ import json
 from mysongify import login_manager
 
 USER_LIMIT = 10
+
+
 class User(UserMixin):
     def __init__(self, id, email, password):
         self.id = id

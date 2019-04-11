@@ -2,6 +2,9 @@ import json
 import os 
 import random 
 
+
+
+
 class Song():
     def __init__(self, id, title, artist):
         self.id = id
@@ -75,7 +78,7 @@ class Song():
 
 
     @staticmethod
-    def get_songlist(): 
+    def make_songlist():
         my_imgs = ['default.png','default2.jpg','default6.jpg','default7.jpg','default8.jpg','default9.jpg','default10.jpg','default11.jpg','default12.jpg']
         my_genre = ['Hip Hop', 'Pop', 'R&B', 'Country', 'Rock', 'Heavy Metal']
         songslist = Song.get_json_songlist()
@@ -89,6 +92,11 @@ class Song():
             if song_obj.is_allowed:
                 songs.append(song_obj)
         return songs
+
+
+    @staticmethod
+    def get_songlist():
+        return SONGS_DB
 
     def get_length(self):
         minutes = self.minutes
@@ -110,3 +118,8 @@ class Song():
 def get_minutes_seconds(length_str):
     minutes, seconds = length_str.split(':')
     return int(minutes), int(seconds)
+
+
+
+
+SONGS_DB = Song.make_songlist()
