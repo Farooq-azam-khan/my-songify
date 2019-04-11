@@ -3,6 +3,7 @@ from flask import (Blueprint, render_template)
 from mysongify.users.models import User 
 from mysongify.songs.models import Song 
 
+
 main = Blueprint('main', __name__)
 
 
@@ -14,3 +15,8 @@ def home():
 @main.route('/search')
 def search():
     return '<h1>search</h1> '
+
+@main.route('/analytics')
+def analytics():
+	songs = Song.get_songlist().sort(key=Song.sort_fx, reverse=True)
+	return render_template('analytics.html')
