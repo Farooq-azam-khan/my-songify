@@ -35,7 +35,7 @@ class Song():
 
     @staticmethod
     def get_songlist(): 
-        my_imgs = ['default.png','default2.jpg']
+        my_imgs = ['default.png','default2.jpg','default6.jpg','default7.jpg','default8.jpg','default9.jpg','default10.jpg','default11.jpg','default12.jpg']
         songslist = Song.get_json_songlist()
         songs = []
         for indx, song in enumerate(songslist):
