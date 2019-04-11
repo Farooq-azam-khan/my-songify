@@ -34,8 +34,14 @@ def playlist_detail(id):
     playlist = Playlist.get_playlist(id)
     if not playlist:
         flash('playlist does not exists', 'danger')
-        return render_template(url_for('main.home'))
-    return render_template('playlists/detail_playlist.html', playlist=playlist)
+        return redirect(url_for('main.home'))
+    next_song = 'next song'
+    if playlist.next_song_queue.empty():
+        next_song = 'empty queue'
+    else:
+        next_song = playlist.next_song_queue.get()
+
+    return render_template('playlists/detail_playlist.html', playlist=playlist, next_song=next_song)
 
 @playlists.route('/playlist/<int:id>/update', methods=['POST', 'GET'])
 @login_required
