@@ -37,6 +37,9 @@ def playlist_detail(id):
         return redirect(url_for('main.home'))
 
     next_song = 'next song'
+    print('======================')
+    print(playlist.next_song_queue.qsize())
+    print('======================')
     if playlist.next_song_queue.empty():
         next_song = 'empty queue'
     else:
