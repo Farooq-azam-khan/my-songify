@@ -35,6 +35,7 @@ def create_playlist():
 
         if length_hour >= 1 and length_hour <= 3:
             playlist = Playlist(34,playlist_title)
+            playlist.total_hours = length_hour
             playlist.set_songs(playlist_songs) # setting songs in playlist
             playlist = playlist.save()
             flash('playlist created', 'success')   

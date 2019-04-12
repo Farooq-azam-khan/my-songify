@@ -12,7 +12,7 @@ class Playlist():
         self.songs = []
         self.user = -1
         self.views = 0 
-        self.total_hours = 3
+        self.total_hours = 0
         self.image_file = 'default.png'
         self.next_song_queue = Queue(maxsize=MAX_NUMBER_OF_SONGS)
 
