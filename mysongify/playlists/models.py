@@ -50,6 +50,8 @@ class Playlist():
         with open('mysongify/data/playlists.json', 'w') as f:
             json.dump(playlsits_dict, f)
 
+        return self
+
 
     def empty_queue(self):
         return self.next_song_queue.empty()
@@ -79,8 +81,8 @@ class Playlist():
             playlist_list = json.load(f)['playlists']
         # playlists = Playlist.get_playlists()
         # playlists.sort(reverse=True)
-        playlists[:10]
-        return playlists
+        # playlists[:10]
+        return playlist_list
 
 
     @staticmethod

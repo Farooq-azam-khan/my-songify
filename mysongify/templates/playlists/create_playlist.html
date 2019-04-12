@@ -3,11 +3,18 @@
 {% block content %}
 <h2>Create Playlist</h2>
 <form action="" method='post'>
-
     <div class="form-group">
       <label for="playlist_title">Title</label>
       <input type="text" class="form-control" id="playlist_title" placeholder="Title" name="title">
     </div>
+<!--     
+    <div class="form-group">
+        <label for="length_hour">Length (H)</label>
+        <input type="text" disabled class="form-control" id="length_hour" placeholder="Length" name="length" value="1">
+    </div> -->
+
+
+
     <div class="form-gorup">
         {% for song in songs %}
         <div class="input-group mb-3" >
@@ -21,14 +28,18 @@
             
           </div>
         {% endfor %}
+
+        
           
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button  type="submit" class="btn btn-primary">Submit</button>
   </form>
 
     <!-- TODO: make counter -->
-
+<!-- 
   <script>
+    let length = document.getElementById('length')
+    length.value = 2
     
-  </script>
+  </script> -->
 {% endblock content %}

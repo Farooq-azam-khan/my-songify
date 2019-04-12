@@ -58,8 +58,11 @@ class Song():
 
     @staticmethod
     def sort_by_length(song):
-        length = song.minutes * song.seconds/60
+        length = song.minutes + song.seconds/60
         return length
+        
+    def get_hour(self):
+        return self.seconds / 3600 + self.minutes / 60
 
     @staticmethod
     def sort_by_genre(song):
