@@ -21,7 +21,7 @@ def playlist_list():
 @playlists.route('/create_playlist', methods=['POST', 'GET'])
 @login_required
 def create_playlist():
-    songs = Song.get_songlist()[:10]
+    songs = Song.get_songlist()#[:10]
     if request.method == 'POST':
         playlist_title = request.form.get("title")
         playlist_songs = []
