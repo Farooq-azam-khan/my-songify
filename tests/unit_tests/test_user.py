@@ -7,8 +7,7 @@ def test_s():
     assert user.password == 'test1'
     assert user.playlists == []
     assert user.followers == 0
-    assert user.is_admin == True    
-    assert user.is_dj == False
+    assert user.is_admin == True
 
 def test_get_users():
     assert len(User.get_users()) == 10
