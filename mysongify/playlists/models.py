@@ -1,5 +1,6 @@
 from queue import Queue
 from mysongify.songs.models import Song 
+import json 
 
 MAX_NUMBER_OF_SONGS = 10
 
@@ -11,9 +12,45 @@ class Playlist():
         self.songs = []
         self.user = -1
         self.views = 0 
-        self.total_hours = 3
+        self.total_hours = 0
         self.image_file = 'default.png'
         self.next_song_queue = Queue(maxsize=MAX_NUMBER_OF_SONGS)
+
+    @staticmethod
+    def json_to_obj(obj):
+        playlist = Playlist(obj['id'], obj['title'])
+        playlist.views = obj['views']
+        if obj.get('song'):
+            playlist.songs = [ Song.json_to_obj(song) for song in obj.get('songs')]
+        playlist.total_hours = obj['total_hours']
+        playlist.user = obj['user']
+        playlist.image_file = obj['image_file']
+        return playlist
+
+    def to_json(self):
+        playlist = {
+            "id":self.id, 
+            "title":self.title, 
+            "songs":[song.to_json() for song in self.songs], 
+            "user":self.user, 
+            "views":self.views, 
+            "total_hours":self.total_hours, 
+            "image_file":self.image_file, 
+        }
+        return playlist
+
+
+    def save(self):
+        playlsits_dict = {}
+        with open('mysongify/data/playlists.json') as f:
+            playlsits_dict = json.load(f)
+            playlists = playlsits_dict['playlists']
+            self.id = len(playlists) + 1
+            playlists.append(self.to_json())
+        with open('mysongify/data/playlists.json', 'w') as f:
+            json.dump(playlsits_dict, f)
+
+        return self
 
 
     def empty_queue(self):
@@ -35,14 +72,17 @@ class Playlist():
         return self.views > other.views
 
     def __repr__(self):
-        return f'<Playlist {self.title}'
+        return f'<Playlist {self.title}>'
 
     @staticmethod
     def get_top_10():
-        playlists = Playlist.get_playlists()
-        playlists.sort(reverse=True)
-        playlists[:10]
-        return playlists
+        playlist_list = []
+        with open('mysongify/data/playlists.json') as f:
+            playlist_list = json.load(f)['playlists']
+        # playlists = Playlist.get_playlists()
+        # playlists.sort(reverse=True)
+        # playlists[:10]
+        return playlist_list
 
 
     @staticmethod
@@ -57,11 +97,22 @@ class Playlist():
             playlists.append(playlist)
         return playlists
 
+    
+
+    @staticmethod
+    def read_playilst():
+        playlist_list = []
+        with open('mysongify/data/playlists.json') as f:
+            playlists_json = json.load(f)['playlists']
+            for playlist_json in playlists_json:
+                playlist_obj = Playlist.json_to_obj(playlist_json)
+                playlist_list.append(playlist_obj)
+        return playlist_list
 
 
     @staticmethod
     def get_playlists():
-       return Playlist_DB
+        return Playlist.read_playilst()
 
     def calculate_hours_in_songs():
         return 0
@@ -86,11 +137,7 @@ class Playlist():
             return True
         return False
 
-    @staticmethod
-    def save(playlist):
-        pass
-
-        
+    
 
 
 Playlist_DB = Playlist.make_playlsits()

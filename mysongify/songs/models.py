@@ -17,6 +17,31 @@ class Song():
         self.genre = ''
         self.image_file = 'default.png'
 
+    @staticmethod
+    def json_to_obj(obj):
+        song = Song(obj['id'], obj['title'], obj['artist'])
+        song.minutes = obj['minutes']
+        song.views = obj['views']
+        song.is_allowed = obj['is_allowed']
+        song.seconds = obj['seconds']
+        song.genre = obj['genre']
+        song.image_file = obj['image_file']
+        return song
+
+    def to_json(self):
+        song = {
+            "id":self.id, 
+            "title":self.title, 
+            "artist":self.artist, 
+            "minutes":self.minutes, 
+            "views":self.views, 
+            "is_allowed":self.is_allowed, 
+            "seconds":self.seconds, 
+            "genre":self.genre, 
+            "image_file":self.image_file
+        }
+        return song
+
 
     @staticmethod
     def delete_song(user, song):
@@ -35,6 +60,9 @@ class Song():
     def sort_by_length(song):
         length = song.minutes + song.seconds/60
         return length
+        
+    def get_hour(self):
+        return self.seconds / 3600 + self.minutes / 60
 
     @staticmethod
     def sort_by_genre(song):
@@ -52,7 +80,7 @@ class Song():
     def get_top_10():
         songs = Song.get_songlist()
         songs.sort(reverse=True)
-        songs = songs[:10]
+        # songs = songs[:10]
         return songs
 
 

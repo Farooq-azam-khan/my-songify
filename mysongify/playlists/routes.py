@@ -11,23 +11,39 @@ from mysongify.playlists.models import MAX_NUMBER_OF_SONGS
 from mysongify.songs.models import Song
 playlists = Blueprint('playlists', __name__)
 
+
+@playlists.route('/playlist_list')
+def playlist_list():
+    playlists = Playlist.get_playlists()
+    return render_template("playlists/playlist_list.html", playlists=playlists)
+
+
 @playlists.route('/create_playlist', methods=['POST', 'GET'])
 @login_required
 def create_playlist():
-    songs = Song.get_songlist()[:10]
+    songs = Song.get_songlist()#[:10]
     if request.method == 'POST':
         playlist_title = request.form.get("title")
         playlist_songs = []
+        length_hour = 0
         for id in range(len(songs)):
             if request.form.get(f"song-{ id }"):
+                song = Song.get_song(id)
+                song_length_hour = song.get_hour()
+                length_hour += song_length_hour
                 playlist_songs.append(Song.get_song(id))
 
-        playlist = Playlist(34,playlist_title)
-        playlist.set_songs(playlist_songs) # setting songs in playlist
-        Playlist.save(playlist)
+        if length_hour >= 1 and length_hour <= 3:
+            playlist = Playlist(34,playlist_title)
+            playlist.total_hours = length_hour
+            playlist.set_songs(playlist_songs) # setting songs in playlist
+            playlist = playlist.save()
+            flash('playlist created', 'success')   
+            return redirect(url_for('playlists.playlist_detail', id=playlist.id))
+        else:
+            flash('Error: Please make your songs between 1 to 3 hours', 'danger')
+            return redirect(url_for('playlists.create_playlist'))
 
-        flash('post sending data', 'primary')
-        return redirect(url_for('main.home'))
     return render_template('playlists/create_playlist.html', songs=songs)
 
 @playlists.route('/playlist/<int:id>')
