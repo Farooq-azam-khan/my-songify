@@ -17,6 +17,7 @@ class Song():
         self.genre = ''
         self.image_file = 'default.png'
 
+
     @staticmethod
     def delete_song(user, song):
         if user.is_admin:
