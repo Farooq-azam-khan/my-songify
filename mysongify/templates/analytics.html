@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div>
-<h2>Analytics</h2>
 <div class="row">
     <div class="col-sm">
         <h3>All Songs</h3>
@@ -15,10 +14,15 @@
     </div>
     <div class="col-sm">
         <h3>Top Playlist</h3>
+        {% if playlists %}
         {% for playlist in playlists %}
         <li><a id="font2" style="font-size: 1.5em; color: black" href="{{ url_for('playlists.playlist_detail', id=playlist.id) }}">{{ playlist.title }} - {{ playlist.views }}</a></li>
-
+      
+        
         {% endfor %}
+        {% else %}
+        <h3 id="font2" style="font-size: 1.5em; color: black">There are no playlists to display</h3>
+        {% endif %}
     </div>
     <div class="col-sm">
         <h3>Top Users</h3>

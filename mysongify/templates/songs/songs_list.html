@@ -5,7 +5,7 @@
         <h3>Sorted by views</h3>
 <ul>
 {% for song in songs_views %}
-<li><a href="{{ url_for('songs.song_detail', id=song.id) }}">{{ song.title }}</a> {{ song.views }}</li>
+<li><a id="font2" style="font-size: 1.5em; color: black" href="{{ url_for('songs.song_detail', id=song.id) }}">{{ song.title }}</a> views: {{ song.views }}</li>
 {% if current_user.is_admin %}
 <form action="{{ url_for('songs.remove_song', id=song.id) }}" method="post">
     <input type="submit" value="remove" class="btn btn-danger" >
@@ -18,7 +18,7 @@
     <h3>Sorted by Genere</h3>
     <ul>
     {% for song in songs_genre %}
-        <li><a href="{{ url_for('songs.song_detail', id=song.id) }}">{{ song.title }} </a>{{ song.genre }}</li>
+        <li><a id="font2" style="font-size: 1.5em; color: black" href="{{ url_for('songs.song_detail', id=song.id) }}">{{ song.title }} </a>{{ song.genre }}</li>
         {% if current_user.is_admin %}
         <form action="{{ url_for('songs.remove_song', id=song.id) }}" method="post">
             <input type="submit" value="remove" class="btn btn-danger" >

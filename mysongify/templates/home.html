@@ -68,12 +68,18 @@
                     <div id="rc" style="height: 50em; width: 100%">
                             <p id="font2" style="font-size:1.2em; padding: 10px;">Top Playlists</p>
                             <ul>
+
+                        {% if playlists %}
+
                         {% for p in playlists%}
                         <br>
                                 <li>
                                     <p id="font2" style="font-size:1.2em">{{p}}</p>
                                 </li>
                         {% endfor %}
+                        {% else %}
+                        <h3 id="font2" style="font-size: 1.5em; color: black">There are no playlists to display</h3>
+                        {% endif %}
                     </ul>
                     </div>
 
