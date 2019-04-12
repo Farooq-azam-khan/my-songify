@@ -65,3 +65,18 @@ def register():
 
 
 
+@users.route('/user/<int:id>/make_admin', methods=['GET', 'POST'])
+@login_required
+def make_admin(id):
+    if not current_user.is_admin:
+        flash('you do not have permission to do that', 'success')
+        return redirect(url_for('main.home'))
+
+    if request.method == 'POST':
+        user = User.get_user(id)
+        user.is_admin = True
+        flash('success, this user is now admin', 'success')
+        return redirect(url_for('main.home'))
+        
+    users = User.get_all_users()
+    return render_template('users/make_admin.html', users=users)

@@ -23,6 +23,10 @@ class User(UserMixin):
         print(self.viewed_songs)
 
     @staticmethod
+    def get_all_users():
+        return []
+
+    @staticmethod
     def get_top_10():
         users = User.get_users()
         users.sort(reverse=True)
