@@ -28,7 +28,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get("email")
         password = request.form.get("password")
-        user = User(0, 'admin', 'admin')
+        user = User('admin', 'admin')
         login_user(user)
         flash('logged in user', 'success')
         return redirect(url_for('main.home'))
@@ -49,11 +49,18 @@ def logout():
 
 @users.route('/register', methods=['GET','POST'])
 def register():
+    if current_user.is_authenticated:
+        flash('you are logged in', 'warning')
+        return redirect(url_for('main.home'))
     if request.method == 'POST':
         username=request.form.get("username")
         print(username)
         email=request.form.get("email")
         password=request.form.get("password")
+        user = User(email=email, password=password)
+        user.username = username 
+        user.save()
+
         flash("registed successfully", "primary")
         return redirect(url_for("users.login"))
         
