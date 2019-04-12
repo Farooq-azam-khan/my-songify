@@ -26,9 +26,8 @@ class User(UserMixin):
             users = users_dict['users']
             self.id = len(users) + 1
             users.append(self.obj_to_json())
-            print(f'users: {users_dict}')
         with open('mysongify/data/users.json', 'w') as f:
-            json.dump(json.dumps(users_dict), f)
+            json.dump(users_dict, f)
 
 
     def add_viewed_song(self, song):
@@ -91,7 +90,7 @@ class User(UserMixin):
             "password":self.password, 
             "is_admin":self.is_admin
         }
-        return json.dumps(user)
+        return user
 
     @staticmethod
     def get(user_id):

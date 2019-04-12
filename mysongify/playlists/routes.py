@@ -11,6 +11,13 @@ from mysongify.playlists.models import MAX_NUMBER_OF_SONGS
 from mysongify.songs.models import Song
 playlists = Blueprint('playlists', __name__)
 
+
+@playlists.route('/playlist_list')
+def playlist_list():
+    playlists = Playlist.get_playlists()
+    return render_template("playlists/playlist_list.html", playlists=playlists)
+
+
 @playlists.route('/create_playlist', methods=['POST', 'GET'])
 @login_required
 def create_playlist():
@@ -24,7 +31,7 @@ def create_playlist():
 
         playlist = Playlist(34,playlist_title)
         playlist.set_songs(playlist_songs) # setting songs in playlist
-        Playlist.save(playlist)
+        playlist.save()
 
         flash('post sending data', 'primary')
         return redirect(url_for('main.home'))

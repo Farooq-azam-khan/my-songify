@@ -1,0 +1,12 @@
+{
+    "playlists": [
+        {
+            "id": 1, 
+            "title": "first save playlist", 
+            "user": -1, 
+            "views": 0, 
+            "total_hours": 3, 
+            "image_file": "default.png"
+        }, 
+        {
+            "id": 2, "title": "test2", "user": -1, "views": 0, "total_hours": 3, "image_file": "default.png"}, {"id": 3, "title": "asdf", "songs": [{"id": 0, "title": "Bloom", "artist": "Farooq", "minutes": 5, "views": 4242, "is_allowed": true, "seconds": 15, "genre": "Rock", "image_file": "default2.jpg"}, {"id": 1, "title": "Morning Mr Magpie", "artist": "Farooq", "minutes": 4, "views": 8297, "is_allowed": true, "seconds": 41, "genre": "Hip Hop", "image_file": "default9.jpg"}], "user": -1, "views": 0, "total_hours": 3, "image_file": "default.png"}]}
