@@ -21,8 +21,7 @@ def account():
 
 
 @users.route('/login', methods=['GET', 'POST'])
-def login():
-    
+def login():    
     if current_user.is_authenticated:
         flash('you are already logged in.', 'warning')
         return redirect(url_for('main.home'))
@@ -54,9 +53,7 @@ def register():
         username=request.form.get("username")
         print(username)
         email=request.form.get("email")
-        print(email)
         password=request.form.get("password")
-        print(password)
         flash("registed successfully", "primary")
         return redirect(url_for("users.login"))
         
