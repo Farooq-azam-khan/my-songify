@@ -23,8 +23,21 @@ class User(UserMixin):
         print(self.viewed_songs)
 
     @staticmethod
+    def make_users():
+        users = []
+        for i in range(10):
+            user = User(i, f'email{i}@mysongify.com', f'psswd{i}')
+            users.append(user)
+            user.is_admin = False
+        return users
+
+    @staticmethod
     def get_all_users():
-        return []
+        return USERS_DB
+
+    @staticmethod
+    def get_user(id):
+        return None
 
     @staticmethod
     def get_top_10():
@@ -78,3 +91,6 @@ class User(UserMixin):
 @login_manager.user_loader
 def load_user(user_id):
     return User.get(user_id)
+
+
+USERS_DB = User.make_users()

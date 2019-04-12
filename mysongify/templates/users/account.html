@@ -14,4 +14,8 @@
 {% endfor %}
 </ul>
 {% endif %}
+
+{% if current_user.is_admin %}
+<a class="btn btn-info" href="{{ url_for('users.make_admin') }}">Create Admins</a>
+{% endif %}
 {% endblock content %}
