@@ -10,6 +10,8 @@ from flask_login import (login_user,
                         logout_user, 
                         login_required)
 from mysongify.users.models import User 
+import json 
+
 
 users = Blueprint('users', __name__)
 
@@ -17,7 +19,13 @@ users = Blueprint('users', __name__)
 @users.route('/account')
 @login_required
 def account():
-    return render_template('users/account.html')
+    viewed_songs = current_user.viewed_songs
+    with open('mysongify/data/users.json') as f:
+        users = json.load(f)
+        for user in users['users']:
+            if user['id'] == current_user.id: 
+                viewed_songs = user['viewed_songs']
+    return render_template('users/account.html',viewed_songs=viewed_songs)
 
 
 @users.route('/login', methods=['GET', 'POST'])
@@ -28,8 +36,18 @@ def login():
     if request.method == 'POST':
         email = request.form.get("email")
         password = request.form.get("password")
-        user = User('admin', 'admin')
+        user = None
+
+        with open('mysongify/data/users.json') as f:
+            users_dict = json.load(f)
+            for user_i in users_dict['users']:
+                    user = User.json_to_obj(user_i)
+        if not user:
+            flash('please register', 'primary')
+            return redirect(url_for('users.register'))
+
         login_user(user)
+        
         flash('logged in user', 'success')
         return redirect(url_for('main.home'))
 
@@ -54,7 +72,6 @@ def register():
         return redirect(url_for('main.home'))
     if request.method == 'POST':
         username=request.form.get("username")
-        print(username)
         email=request.form.get("email")
         password=request.form.get("password")
         user = User(email=email, password=password)

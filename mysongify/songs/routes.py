@@ -25,14 +25,11 @@ def song_detail(id):
         flash('Error, no song found with that id', 'danger')
         return redirect(url_for('main.home'))
 
+    print('==================================')
     if current_user.is_authenticated:
-        print("-===============")
-        print('user is authenticated')
-        print(f'song: {song}')
-        print(f'current user: {current_user}')
-        current_user.add_viewed_song(song)
-        print(f'viewed songs: {current_user.viewed_songs}')
-        print('=========================')
+        print("user is autheticated")
+        current_user.save_viewed(song)
+        # print(f'===============\n{current_user.viewed_songs}\n==============')
         
         
     return render_template('songs/song_detail.html', song=song)

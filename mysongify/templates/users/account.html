@@ -6,13 +6,15 @@
 {% endif %}
 <img style="height: 25%; width:25%" src="{{ url_for('static', filename=current_user.image_file) }}">
  
-{% if current_user.viewed_songs %}
+{% if viewed_songs %}
 <h3>Viewed Songs</h3>
 <ul>
-{% for viewed_song in current_user.viewed_songs %}
+{% for viewed_song in viewed_songs %}
 <li>{{ viewed_song.title }}</li>
 {% endfor %}
 </ul>
+{% else %}
+<h5>You have not viewd any songs yet</h5>
 {% endif %}
 
 {% if current_user.is_admin %}

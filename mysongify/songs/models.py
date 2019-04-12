@@ -80,7 +80,7 @@ class Song():
     def get_top_10():
         songs = Song.get_songlist()
         songs.sort(reverse=True)
-        # songs = songs[:10]
+        songs = songs[:10]
         return songs
 
 

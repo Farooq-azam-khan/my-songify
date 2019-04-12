@@ -12,18 +12,65 @@ class User(UserMixin):
         self.email = email
         self.password = password
         self.playlists = []
-        self.viewed_songs = []#set()
+        self.viewed_songs = []
         self.followers = 0
         self.image_file = 'default.png'
         self.is_admin = True
-        self.is_dj = False
+
+    @staticmethod
+    def json_to_obj(json):
+        user = User(json['email'], json['password'])
+        user.id = json['id']
+        if json.get('playlists'):
+            user.playlists = json.get('playlists')
+        user.viewed_songs =  json['viewed_songs']
+        if json.get('followers'):
+            user.followers = json['followers']
+        if json.get('image_file'):
+            user.image_file = json['image_file']
+        
+        user.is_admin = json['is_admin']
+
+        return user
+
+
+    def obj_to_json(self):
+        user = {
+            "id":self.id, 
+            "username":self.username, 
+            "email":self.email, 
+            "playlists":self.playlists,
+            "viewed_songs":[viewed_song.to_json() for viewed_song in self.viewed_songs],
+            "password":self.password, 
+            "is_admin":self.is_admin
+        }
+        return user
+
+    def save_viewed(self, song):
+        print("saved views")
+        user = None 
+        users_dict = {}
+        with open('mysongify/data/users.json') as f:
+            users_dict = json.load(f)
+            for user_i in users_dict['users']:
+                print(f"i user id: {user_i['email']} {self.email}")
+                if self.id == user_i['id']:
+                    print("found user")
+                    user = User.json_to_obj(user_i)
+
+        print(f"user: {user}")
+        if user:
+            print(f'append song: {song}')
+            user.viewed_song.append(song)
+        with open('mysongify/data/users.json', 'w') as f:
+            json.dump(users_dict, f)
+            
 
 
     def save(self):
         users_dict = {}
         with open('mysongify/data/users.json') as f:
             users_dict = json.load(f)
-    
             users = users_dict['users']
             self.id = len(users) + 1
             users.append(self.obj_to_json())
@@ -33,7 +80,6 @@ class User(UserMixin):
 
     def add_viewed_song(self, song):
         self.viewed_songs.append(song)
-        print(self.viewed_songs)
 
     @staticmethod
     def make_users():
@@ -83,15 +129,7 @@ class User(UserMixin):
     # def json_to_obj(json):
     #     return User('admin', 'admin@admin.com')
     
-    def obj_to_json(self):
-        user = {
-            "id":self.id, 
-            "username":self.username, 
-            "email":self.email, 
-            "password":self.password, 
-            "is_admin":self.is_admin
-        }
-        return user
+    
 
     @staticmethod
     def get(user_id):

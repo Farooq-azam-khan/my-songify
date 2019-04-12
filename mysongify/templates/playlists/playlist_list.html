@@ -1,8 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
+{% if playlists %}
 <ul>
     {% for playlist in playlists %}
     <li>{{ playlist.title }} {{ playlist.total_hours }}</li>
     {% endfor %}
 </ul>
+{% else %}
+<h5>There are no playlists to show</h5>
+{% endif %}
 {% endblock content %}

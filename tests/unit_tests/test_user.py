@@ -24,7 +24,6 @@ def test_save_new_user():
     with open('mysongify/data/users.json') as f:
             users_dict = json.load(f)
             users = users_dict['users'] #list
-    print(users)
     # assert False
     for i_user in users:
         if i_user['id'] == user.id:
