@@ -9,10 +9,10 @@
 - [x] setup Flask with routes
 - [x] setup bootstrap 
 - [x] setup heroku server for flask
-- [ ] implement functionality - json files for everything
+- [x] implement functionality - json files for everything
     - [x] make songs, 
-    - [ ] playlist, 
-    - [ ] users
+    - [x] playlist, 
+    - [x] users
 - [x] make a folder for tests 
 
 ### Kaniskan 
@@ -20,8 +20,8 @@
 - [x] make virtual env
 - [x] read `http://flask.pocoo.org/docs/1.0/testing/`
 - [x] writing proposals for test (20 tests?) 
-    - [ ] creating tests for databases  
-    - [ ] help *Farooq* with routes testing 
+    - [x] creating tests for databases  
+    - [x] help *Farooq* with routes testing 
 - [x] implement tests into python unittesting
 - [x] create a report on which tests passsed and which failed
 
@@ -31,8 +31,8 @@
 
 ### Harun 
 - [x] make virtual env 
-- [ ] design core layout of settings (Bootstrap)
-- [ ] parse `songs.jong` and display them on home page
+- [x] design core layout of settings (Bootstrap)
+- [x] parse `songs.jong` and display them on home page
 ### Avneet
 - [X] make virtual env
 - [x] writing proposals for test (10 tests)
