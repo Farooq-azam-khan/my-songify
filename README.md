@@ -14,10 +14,10 @@
 - [ ] install/setup pytest
 
 ### Database Desing
-- [ ] Artist table
-- [ ] User table 
-- [ ] Song table
-- [ ] Playlist table
+- [ ] Artist table (user, pen name, description)
+- [ ] User table (first name, middle name, last name, email address)
+- [ ] Song table (name, artist, description, length, mp3/mp4 link)
+- [ ] Playlist table 
 
 ## Setup (for local version)
 - install python3.?
