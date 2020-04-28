@@ -13,6 +13,11 @@
 - [ ] setup postgres for heroku
 - [ ] install/setup pytest
 
+### Database Desing
+- [ ] Artist table
+- [ ] User table 
+- [ ] Song table
+- [ ] Playlist table
 
 ## Setup (for local version)
 - install python3.?
