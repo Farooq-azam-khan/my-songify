@@ -8,3 +8,10 @@
   - testing: pytest with flask
 - frontend: reactjs
   - testing: jest
+
+ ## Database
+
+ - to migrate a table: `flask db migrate -m "message"`
+ - to update migration: `flask db upgrade`
+
+ - look into elasticsearch for python
