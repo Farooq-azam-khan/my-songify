@@ -1,13 +1,20 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
 
-function App() {
+import Navbar from "./components/Navbar";
+import TopAlbums from "./components/TopAlbums";
+
+const App = () => {
   return (
     <div className="App">
       <CssBaseline />
-      <h1>Test</h1>
+      <Navbar />
+      <Container maxWidth="sm">
+        <TopAlbums />
+      </Container>
     </div>
   );
-}
+};
 
 export default App;
