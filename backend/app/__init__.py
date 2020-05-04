@@ -6,8 +6,6 @@ from flask_migrate import Migrate
 
 from config import Config
 
-#app = Flask(__name__)
-
 # configuration
 db = SQLAlchemy()
 migrate = Migrate()
@@ -35,13 +33,3 @@ def register_blueprints(app):
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(main_blueprint)
-
-'''app.config.from_object(Config)
-# database connection
-db = SQLAlchemy(app)
-# migration connection
-migrate = Migrate(app, db)
-# login manager
-login = LoginManager(app)
-'''
-#from app import routes, models 
