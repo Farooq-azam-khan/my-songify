@@ -20,7 +20,7 @@ class Song(db.Model):
 
 class Genre(db.Model):
     pk = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100), nullable=False, unique=True)
 
     @staticmethod 
     def add_default_genres():
