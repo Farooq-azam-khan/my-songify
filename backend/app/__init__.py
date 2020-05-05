@@ -31,7 +31,9 @@ def register_blueprints(app):
     from app.users import users_blueprint
     from app.main import main_blueprint 
     from app.songs import songs_blueprint
+    from app.song_collection import song_collection_blueprint
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(main_blueprint)
     app.register_blueprint(songs_blueprint)
+    app.register_blueprint(song_collection_blueprint)
