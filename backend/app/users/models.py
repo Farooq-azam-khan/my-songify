@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login
 
 class User(UserMixin, db.Model):
-    pk = db.Column(db.Integer, primary_key=True)
+    pk = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname = db.Column(db.String(64), nullable=False)
     middlename = db.Column(db.String(64), nullable=True)
     lastname = db.Column(db.String(64), nullable=False)

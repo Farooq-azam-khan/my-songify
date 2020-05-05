@@ -30,6 +30,8 @@ def initalize_extensions(app):
 def register_blueprints(app):
     from app.users import users_blueprint
     from app.main import main_blueprint 
+    from app.songs import songs_blueprint
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(songs_blueprint)
