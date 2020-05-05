@@ -30,10 +30,10 @@ const TopAlbums = () => {
   };
   return (
     <Grid container className={classes.root}>
-      <Grid xs={12}>
+      <Grid item xs={12}>
         <h2>Albums</h2>
       </Grid>
-      <Grid xs={6}>
+      <Grid container xs={6}>
         <h2>Keep Track of the Best Music in the Industry</h2>
       </Grid>
       <Grid xs={6} container justify="left">
