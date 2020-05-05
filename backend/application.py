@@ -24,10 +24,6 @@ def make_shell_context():
     # db.session.add(sample_song)
     # db.session.commit()
 
-
-
-    # playlist = Playlist.create_playlist(user_pk=1, name="playlist 1", cover_image='hi', display_status=1)
-
     return {'db': db, 'User': User,
     'Song': Song, 'Genre': Genre, 
     'SongCollection':SongCollection, 'Playlist':Playlist, 'Album':Album, 
