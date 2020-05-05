@@ -22,5 +22,17 @@ class Genre(db.Model):
     pk = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
 
+    @staticmethod 
+    def add_default_genres():
+        # https://www.musicgenreslist.com/
+        genere_list = ['alternative', 'anime', 'blues', 'classical', 
+        'children\'s music', 'comedy', 'contry', 'dance', 'disney', 'easy listening', 'electronic', 
+        'Enka', 'French Pop', 'Hip-Hop/Rap', 'German Pop','German Folk', 'Holiday', 'Indie Pop', 'Industrial', 'Jazz', 'J-Pop', 
+        'K-Pop', 'Latin', 'Opera', 'Pop', 'R&B/Soul', 'Reggae', 'Rock', 'Soundtrack', 'Vocal']
+
+        for genre in genere_list:
+            db.session.add(Genre(name=genre))
+        db.session.commit()
+
     def __repr__(self):
         return f'<Genre {self.name} - {self.pk}>'
