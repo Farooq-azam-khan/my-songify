@@ -4,18 +4,17 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
-import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
+  },
+  bgr: {
+    background: "red",
   },
 }));
 
@@ -23,16 +22,17 @@ const Navbar = () => {
   const classes = useStyles();
 
   return (
-    <Grid item className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            MY-SONGIFY
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </Grid>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          MY-SONGIFY
+        </Typography>
+        <Button href="#about" color="inherit">
+          About
+        </Button>
+        <Button color="inherit">Login</Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 
