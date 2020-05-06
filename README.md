@@ -9,9 +9,10 @@
 - frontend: reactjs
   - testing: jest
 
- ## Database
+## Database
 
- - to migrate a table: `flask db migrate -m "message"`
- - to update migration: `flask db upgrade`
+- to migrate a table: `flask db migrate -m "message"`
+- to update migration: `flask db upgrade`
 
- - look into elasticsearch for python
+- look into elasticsearch for python
+- (react router with material ui)[https://medium.com/@unionproject88/react-material-ui-drawer-with-routes-8e27c91b6119]
