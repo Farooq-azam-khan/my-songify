@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import Button from "@material-ui/core/Button";
 
+import { Link } from "react-router-dom";
+
 import AlbumCard from "./AlbumCard";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,9 +58,9 @@ const TopAlbums = () => {
             </Typography>
           </Grid>
           <Grid item className={classes.marginTopContent}>
-            <Button href="#" variant="contained">
-              CHECK OUT THE CONETENT
-            </Button>
+            <Link to="/songs" style={{ textDecoration: "none" }}>
+              <Button variant="contained">CHECK OUT THE CONETENT</Button>
+            </Link>
           </Grid>
         </Grid>
         <Grid

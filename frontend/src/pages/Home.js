@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import TopAlbums from "../components/TopAlbums";
 import RegisterSection from "../components/RegisterSection";
 import About from "../components/About";
+
 const Home = () => {
   return (
     <Grid container direction="column">

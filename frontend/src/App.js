@@ -3,20 +3,41 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Navbar from "./components/Navbar";
 import Grid from "@material-ui/core/Grid";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Songs from "./pages/Songs";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
     <div className="App">
       <CssBaseline />
-      <Grid container direction="column">
-        <Grid item>
-          <Navbar />
+      <Router>
+        <Grid container direction="column">
+          <Grid item>
+            <Navbar />
+          </Grid>
+          <Grid item>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/songs">
+                <Songs />
+              </Route>
+
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/register">
+                <Register />
+              </Route>
+            </Switch>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Home />
-        </Grid>
-      </Grid>
+      </Router>
     </div>
   );
 };
