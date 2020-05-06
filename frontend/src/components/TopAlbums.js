@@ -1,53 +1,96 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import deepPurple from "@material-ui/core/colors/deepPurple";
+import Button from "@material-ui/core/Button";
+
+import AlbumCard from "./AlbumCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-
-    marginTop: "4rem",
+    marginTop: "1rem",
   },
-  paper: {
-    height: "10rem",
-    width: "8rem",
+  paddingContent: {
+    padding: "2rem",
   },
-  control: {
-    padding: theme.spacing(2),
+  marginTopContent: {
+    marginTop: "2rem",
+  },
+  whiteFont: {
+    color: "white",
+  },
+  albumList: {
+    padding: "1rem",
+  },
+  albumSection: {
+    marginTop: "2rem",
+    padding: "2rem",
+    backgroundColor: deepPurple[700],
+    color: "white",
   },
 }));
 
 const TopAlbums = () => {
-  const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
-  const handleChange = (event) => {
-    setSpacing(Number(event.target.value));
-  };
+  const preventDefault = (e) => e.preventDefault();
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={12}>
-        <h2>Albums</h2>
-      </Grid>
-      <Grid container xs={6}>
-        <h2>Keep Track of the Best Music in the Industry</h2>
-      </Grid>
-      <Grid xs={6} container justify="left">
-        <Grid xs={4}>
-          <Paper className={classes.paper} />
+    <div className={classes.root}>
+      <Typography variant="h3" align="center">
+        Top Albumns
+      </Typography>
+      <Grid container direction="row" className={classes.albumSection}>
+        <Grid
+          item
+          xs={12}
+          sm={5}
+          container
+          direction="column"
+          justify="center"
+          alignItems="stretch"
+        >
+          <Grid item>
+            <Typography variant="h4">
+              Keep Track of the Best Music in the Industry
+            </Typography>
+          </Grid>
+          <Grid item className={classes.marginTopContent}>
+            <Button href="#" variant="contained">
+              CHECK OUT THE CONETENT
+            </Button>
+          </Grid>
         </Grid>
-        <Grid xs={4} item>
-          <Paper className={classes.paper} />
-        </Grid>
-        <Grid xs={4} item>
-          <Paper className={classes.paper} />
+        <Grid
+          item
+          xs={12}
+          sm={7}
+          container
+          direction="row"
+          spacing={2}
+          className={classes.albumList}
+        >
+          <Grid item xs={6} sm={4}>
+            <AlbumCard />
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <AlbumCard />
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <AlbumCard />
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <AlbumCard />
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <AlbumCard />
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <AlbumCard />
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 
