@@ -16,7 +16,7 @@ const App = () => {
       <CssBaseline />
       <Router>
         <Grid container direction="column">
-          <Grid item>
+          <Grid item style={{ margin: 0 }}>
             <Navbar />
           </Grid>
           <Grid item>
