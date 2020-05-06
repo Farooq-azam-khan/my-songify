@@ -1,13 +1,17 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Navbar from "./components/Navbar";
+import Grid from "@material-ui/core/Grid";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <CssBaseline />
-      <h1>Test</h1>
+      <Grid container>
+        <Navbar />
+      </Grid>
     </div>
   );
-}
+};
 
 export default App;
