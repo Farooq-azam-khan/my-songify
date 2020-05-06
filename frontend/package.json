@@ -16,10 +16,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:flask": "cd ../backend && flask run --no-debugger",
+    "start:flask": "cd ../backend && pipenv shell && flask run --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:flask": "cd ../backend && flask test",
+    "test:flask": "cd ../backend && pipenv shell && flask test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
