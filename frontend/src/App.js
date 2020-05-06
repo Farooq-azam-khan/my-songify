@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Songs from "./pages/Songs";
 import Register from "./pages/Register";
 
+import "./App.css";
+
 const App = () => {
   return (
     <div className="App">
