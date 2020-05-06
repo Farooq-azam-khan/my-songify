@@ -1,18 +1,15 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Container from "@material-ui/core/Container";
-
 import Navbar from "./components/Navbar";
-import TopAlbums from "./components/TopAlbums";
+import Grid from "@material-ui/core/Grid";
 
 const App = () => {
   return (
     <div className="App">
       <CssBaseline />
-      <Navbar />
-      <Container maxWidth="sm">
-        <TopAlbums />
-      </Container>
+      <Grid container>
+        <Navbar />
+      </Grid>
     </div>
   );
 };
