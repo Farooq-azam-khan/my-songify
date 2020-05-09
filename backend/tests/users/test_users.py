@@ -2,7 +2,6 @@ from app.users.models import User
 from app import db 
 import json
 from flask_login import current_user
-from app.users.forms.login_form import LoginForm 
 
 def test_user_id(app):
     user = User(email='testing@id.com', firstname='fn', lastname='ln')
@@ -101,3 +100,5 @@ def test_users_route(app):
     client = app.test_client()
     resp = client.get('/users/')
     assert resp.status_code == 200
+
+# TODO: implement tests for register route 

@@ -59,4 +59,3 @@ def register():
 
         return jsonify({'success': True, 'message': 'Congradulation! You have successfully registered'})
     return jsonify({'success': False, 'message': 'You have not filled out a form filed properly', 'errors': form.errors})
-        # add to database 
