@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Songs from "./pages/Songs";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+
 import store from "./store";
 
 const App = () => {
@@ -36,6 +38,9 @@ const App = () => {
                 </Route>
                 <Route exact path="/register">
                   <Register />
+                </Route>
+                <Route exact path="/profile">
+                  <Profile />
                 </Route>
               </Switch>
             </Grid>

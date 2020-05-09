@@ -5,6 +5,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
+import Button from "@material-ui/core/Button";
+
+import { connect } from "react-redux";
 
 import RenderNavbarLink from "./RenderNavbarLink";
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = (props) => {
   const classes = useStyles();
 
   return (
@@ -41,15 +44,30 @@ const Navbar = () => {
             <RenderNavbarLink to="/" name="About" exact={true} />
           </Grid>
           <Grid item>
-            <RenderNavbarLink to="/login" name="Login" exact={false} />
+            {props.user.logged_in ? (
+              <Button variant={"outlined"} color="inherit">
+                Logout
+              </Button>
+            ) : (
+              <RenderNavbarLink to="/login" name="Login" exact={false} />
+            )}
           </Grid>
           <Grid item>
-            <RenderNavbarLink
-              buttonVariant="outlined"
-              to="/register"
-              name="Register"
-              exact={true}
-            />
+            {props.user.logged_in ? (
+              <RenderNavbarLink
+                buttonVariant="outlined"
+                to="/profile"
+                name="Profile"
+                exact={true}
+              />
+            ) : (
+              <RenderNavbarLink
+                buttonVariant="outlined"
+                to="/register"
+                name="Register"
+                exact={true}
+              />
+            )}
           </Grid>
         </Grid>
       </Toolbar>
@@ -57,4 +75,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = ({ user }) => ({ user });
+export default connect(mapStateToProps, {})(Navbar);
