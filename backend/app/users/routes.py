@@ -26,12 +26,14 @@ def login():
     
     email = request.form.get('email')
     password = request.form.get('password')
+    form = LoginForm(email=email, password=password)
 
     remember = request.form.get('remember')
     user = User.query.filter_by(email=email).first()
     
-    if user is None or not user.check_password(password):
-        return jsonify({'success': False, 'message': 'Could not login','errors': ['Invalid email or password']})
-    
-    login_user(user, remember=remember)
-    return jsonify({'success': True, 'message': 'Logged in successfully.', 'errors': [], 'todo': 'implement login'})
+    if form.validate():
+        if user is None or not user.check_password(password):
+            return jsonify({'success': False, 'message': 'Could not login','errors': ['Invalid email or password']})
+        login_user(user, remember=remember)
+        return jsonify({'success': True, 'message': 'Logged in successfully.', 'errors': [], 'todo': 'implement login'})
+    return jsonify({'success': False, 'message': 'Invalid form input','errors': []} )

@@ -49,6 +49,27 @@ def test_user_login_correct_email_and_password(app):
         assert current_user.email == 'testing@id.com'
         assert current_user.pk == 1
 
+def test_user_login_route_has_valid_input_but_does_not_exists_in_db(app):
+    with app.test_client() as client:
+        resp = client.post('/users/login', data=dict(
+                                                email='test@gmail.com',
+                                                password='asdfasldkfja'
+            ))
+        json_resp = json.loads(resp.data)
+        assert json_resp['success'] == False         
+        assert json_resp['message'] == 'Could not login'
+        assert len(json_resp['errors']) == 1
+        assert json_resp['errors'][0] == 'Invalid email or password'
+
+        
+
+def test_user_login_route_has_invalid_input(app):
+    with app.test_client() as client: 
+        resp = client.post('/users/login', data=dict())
+        json_resp = json.loads(resp.data)
+        assert json_resp['success'] == False
+        assert json_resp['message'] == 'Invalid form input'
+        assert len(json_resp['errors']) == 0
 
 
 def test_user_logout_if_user_is_logged_in(app):
@@ -59,7 +80,7 @@ def test_user_logout_if_user_is_logged_in(app):
             email='testing@id.com', password='password')
         )
         resp = client.post('/users/logout', data=dict())
-        print('>>>>>>>>rest', resp, resp.data, resp.status_code)
+        # print('>>>>>>>>rest', resp, resp.data, resp.status_code)
         assert resp.status_code == 200 
         resp_json = json.loads(resp.data)
         assert resp_json['success'] == True 
