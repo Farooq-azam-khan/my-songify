@@ -45,17 +45,25 @@ def register():
     if current_user.is_authenticated:
         return jsonify({'success': False, 'message': 'You are logged already'})
 
-    rf = registerForm(request.form)
-    if form.validate():
-        firstname = request.form.get('firstname')
-        lastname = request.form.get('lastname')
-        middlename = request.form.get('middlename')
-        password = request.form.get('password')
-        email = request.form.get('email')
-        new_user = User(firstname=firstname, middlename=middlename, lastname=lastname, email=email)
-        new_user.set_password(password)
-        db.session.add(new_user)
-        sb.session.commit() 
+    data = {'firstname': request.form.get('firstname'),
+        'lastname': request.form.get('lastname'),
+        'middlename': request.form.get('middlename'),
+        'password': request.form.get('password'),
+        'confirm_password': request.form.get('confirm_password'),
+        'email': request.form.get('email'),
+        'confirm_email': request.form.get('confirm_email')
+    }
+    form = RegisterForm(data=data)
 
+    if form.validate():
+        # check if user exists
+        user = User.query.filter_by(email=data['email']).first()
+        if user is not None:
+            return jsonify({'data': data, 'success': False, 'message': 'User already exits', 'user': user.email}) 
+
+        new_user = User(firstname=data['firstname'], middlename=data['middlename'], lastname=data['lastname'], email=data['email'])
+        new_user.set_password(data['password'])
+        db.session.add(new_user)
+        db.session.commit() 
         return jsonify({'success': True, 'message': 'Congradulation! You have successfully registered'})
-    return jsonify({'success': False, 'message': 'You have not filled out a form filed properly', 'errors': form.errors})
+    return jsonify({'success': False, 'message': 'You have not filled out a form filed properly', 'errors': form.errors, 'data': data})
