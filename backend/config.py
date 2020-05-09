@@ -7,3 +7,5 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'not a good key'
+    WTF_CSRF_SECRET_KEY = 'a random string'
+    WTF_SCRF_ENABLED=True
