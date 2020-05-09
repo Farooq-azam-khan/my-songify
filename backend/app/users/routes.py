@@ -18,12 +18,28 @@ def logout():
     logout_user()
     return jsonify({'success':True, 'message': 'You were logged out successfully'})
 
-
+@users_blueprint.route('/users/current_user', methods=['POST'])
+def is_user_logged_in():
+    if current_user.is_authenticated:
+        return jsonify({'success': True, 'user': {
+            'firstname': current_user.firstname, 
+            'middlename': current_user.middlename,
+            'lastname': current_user.lastname, 
+            'email': current_user.email, 
+            'is_admin': current_user.is_admin
+        }})
+    return jsonify({'success': False})
 
 @users_blueprint.route('/users/login', methods=['POST'])
 def login():
     if current_user.is_authenticated:
-        return jsonify({'success': False, 'message': 'already autheticated'})
+        return jsonify({'success': True, 'message': 'already autheticated', 'user': {
+            'firstname': current_user.firstname, 
+            'middlename': current_user.middlename,
+            'lastname': current_user.lastname, 
+            'email': current_user.email, 
+            'is_admin': current_user.is_admin
+        }})
 
     
     email = request.form.get('email')
@@ -31,14 +47,20 @@ def login():
     form = LoginForm(email=email, password=password)
 
     remember = request.form.get('remember')
-    user = User.query.filter_by(email=email).first()
     
     if form.validate():
+        user = User.query.filter_by(email=email).first()
         if user is None or not user.check_password(password):
             return jsonify({'success': False, 'message': 'Could not login','errors': ['Invalid email or password']})
         login_user(user, remember=remember)
-        return jsonify({'success': True, 'message': 'Logged in successfully.', 'errors': [], 'todo': 'implement login'})
-    return jsonify({'success': False, 'message': 'Invalid form input','errors': []} )
+        return jsonify({'success': True, 'message': 'Logged in successfully.', 'errors': [], 'user': {
+            'firstname': current_user.firstname, 
+            'middlename': current_user.middlename,
+            'lastname': current_user.lastname, 
+            'email': current_user.email, 
+            'is_admin': current_user.is_admin
+        }})
+    return jsonify({'success': False, 'message': 'Invalid form input','errors': form.errors} )
 
 @users_blueprint.route('/users/register', methods=['POST'])
 def register():
