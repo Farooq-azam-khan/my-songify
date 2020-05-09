@@ -39,11 +39,9 @@ const Login = (props) => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    console.log("fetching login");
     props.login_user(email, password);
   };
 
-  console.log({ props });
   if (props.user.logged_in) {
     return <Typography variant="h2">You are Already Logged in</Typography>;
   }
