@@ -101,23 +101,3 @@ def test_users_route(app):
     client = app.test_client()
     resp = client.get('/users/')
     assert resp.status_code == 200
-
-def test_login_form_as_invalid_email_and_password(app):
-    with app.test_client() as client:
-        f = LoginForm(email='', password='')
-        assert f.validate() == False
-
-def test_login_form_as_invalid_email(app):
-    with app.test_client() as client:
-        f = LoginForm(email='tst@gmail', password='asdfsadfa')
-        assert f.validate() == False
-
-def test_login_form_as_invalid_password(app):
-    with app.test_client() as client:
-        f = LoginForm(email='test@gmail.com')
-        assert f.validate() == False
-
-def test_login_form_as_valid(app):
-    with app.test_client() as client:
-        f = LoginForm(email='test@gmail.com', password="abcdef")
-        assert f.validate() == True
