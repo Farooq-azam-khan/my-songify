@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -7,7 +7,13 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 
+import { connect } from "react-redux";
+
+import PropTypes from "prop-types";
+
 import { useHistory } from "react-router-dom";
+
+import getFormData from "../getFormData";
 // TODO: hide and show passwords
 // import Visibility from "@material-ui/icons/Visibility";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
@@ -22,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = (props) => {
   const classes = useStyles();
   const [firstname, setFirstName] = useState("");
   const [fn_errors, setFNErrors] = useState([]);
@@ -66,11 +72,6 @@ const Register = () => {
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handlePasswordConfirmChange = (e) => setConfirmPassword(e.target.value);
 
-  function getFormData(object) {
-    const formData = new FormData();
-    Object.keys(object).forEach((key) => formData.append(key, object[key]));
-    return formData;
-  }
   const history = useHistory();
 
   const handleSubmitForm = (e) => {
@@ -84,11 +85,9 @@ const Register = () => {
       password,
       confirm_password,
     };
-    // console.log(data);
     fetch("/users/register", { method: "POST", body: getFormData(data) })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
         if (!data.success) {
           setRenderFeedback(true);
           setFeedbackMessage(data.message);
@@ -125,6 +124,10 @@ const Register = () => {
         }
       });
   };
+
+  if (props.user.logged_in) {
+    return <Typography variant="h2">You are logged in</Typography>;
+  }
 
   return (
     <Grid
@@ -291,4 +294,8 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+const mapStatesToProps = ({ user }) => ({ user });
+export default connect(mapStatesToProps, {})(Register);
