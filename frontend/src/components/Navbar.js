@@ -7,7 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import Button from "@material-ui/core/Button";
 
+import PropType from "prop-types";
 import { connect } from "react-redux";
+
+import { logout_user } from "../store/actions/userActions";
 
 import RenderNavbarLink from "./RenderNavbarLink";
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +48,14 @@ const Navbar = (props) => {
           </Grid>
           <Grid item>
             {props.user.logged_in ? (
-              <Button variant={"outlined"} color="inherit">
+              <Button
+                onClick={() => {
+                  console.log("logout click");
+                  props.logout_user();
+                }}
+                variant={"outlined"}
+                color="inherit"
+              >
                 Logout
               </Button>
             ) : (
@@ -75,5 +85,9 @@ const Navbar = (props) => {
   );
 };
 
+Navbar.propTypes = {
+  logout_user: PropType.func.isRequired,
+  user: PropType.object.isRequired,
+};
 const mapStateToProps = ({ user }) => ({ user });
-export default connect(mapStateToProps, {})(Navbar);
+export default connect(mapStateToProps, { logout_user })(Navbar);

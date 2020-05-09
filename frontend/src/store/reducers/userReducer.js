@@ -1,4 +1,4 @@
-import { LOGIN_FAILURE, LOGIN_SUCCESS } from "../actions/types";
+import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../actions/types";
 
 const initial_state = {
   logged_in: false,
@@ -15,6 +15,12 @@ const userReducer = (state = initial_state, action) => {
       };
     case LOGIN_FAILURE:
       return initial_state;
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        logged_in: false,
+        user_data: {},
+      };
 
     default:
       return state;
