@@ -8,4 +8,4 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'not a good key'
     WTF_CSRF_SECRET_KEY = 'a random string'
-    WTF_SCRF_ENABLED=True
+    WTF_CSRF_ENABLED = False # TODO: check if neede
