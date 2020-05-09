@@ -1,9 +1,9 @@
 # My-Songify
 
 - This is a spotify like app with the aim of look at key featured need for a full stack application
-- the frontend design has been created with (figma)[https://www.figma.com/file/vF4gHRFNkWgm7omPB28KiC/my-songify?node-id=0%3A1]
-- the database relationship has been created with (lucid charts)[https://www.lucidchart.com/documents/edit/69a13cda-0404-4bc9-97b4-cb54c51648e4/0_0?beaconFlowId=A7414A00E528135C#?folder_id=home&browser=icon] 
-- (trello board)[https://trello.com/b/2fcmBsSB/my-songify] is used to keep track of new feature to be added
+- the frontend design has been created with [figma](https://www.figma.com/file/vF4gHRFNkWgm7omPB28KiC/my-songify?node-id=0%3A1)
+- the database relationship has been created with [lucid charts](https://www.lucidchart.com/invitations/accept/6d2a65f2-4727-43d7-926f-83f41a4d722b)
+- [trello board](https://trello.com/b/2fcmBsSB/my-songify) is used to keep track of new feature to be added
 
 ## Software
 
@@ -27,4 +27,4 @@
 ## Points of Reserach and external articles
 
 - look into elasticsearch for python
-- (react router with material ui)[https://medium.com/@unionproject88/react-material-ui-drawer-with-routes-8e27c91b6119]
+- [react router with material ui](https://medium.com/@unionproject88/react-material-ui-drawer-with-routes-8e27c91b6119)
