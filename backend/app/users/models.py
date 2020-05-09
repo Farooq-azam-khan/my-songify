@@ -27,5 +27,5 @@ class User(UserMixin, db.Model):
 # tells flask what the user 
 # information is for the logged in user
 @login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+def load_user(pk):
+    return User.query.get(int(pk))
