@@ -15,6 +15,9 @@ class User(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean, default=False)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def get_id(self):
+        return str(self.pk)
+
     def __repr__(self):
         return f'<User {self.pk} - {self.email}>'
     
