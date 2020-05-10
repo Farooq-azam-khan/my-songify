@@ -1,7 +1,10 @@
-from app.songs.models import Song, Genre 
+import pytest
+
+from app.songs.models import Song, Genre, UserSongRelationship
 from app.users.models import User
 
 from app import db
+    
 
 def get_sample_data():
     user = User(email='testing@id.com', firstname='fn', lastname='ln')
