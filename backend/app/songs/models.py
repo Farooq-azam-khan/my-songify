@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import PrimaryKeyConstraint
 
 from app import db
-
+from app.users.models import User
 
 class Song(db.Model):
     pk = db.Column(db.Integer, primary_key=True)
@@ -14,6 +14,20 @@ class Song(db.Model):
     mp3_file = db.Column(db.String(200), nullable=False)
     genre = db.Column(db.Integer, db.ForeignKey('genre.pk'), nullable=True)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def get_song_dict(self):
+        q =  User.query.get(self.user)
+        artist =  f'{q.firstname} {q.lastname}'
+        return {'name': self.name, 
+                'artist':artist , 
+                'conver_image': self.cover_image, 
+                'genre': Genre.query.get(self.genre).name, 
+                'added_at': self.added_at, 
+                'mp3_file': self.mp3_file,
+                'pk': self.pk
+        }
+
+
 
     def __repr__(self):
         return f'<Song {self.name} - {self.pk}>'
