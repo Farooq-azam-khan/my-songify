@@ -54,3 +54,4 @@ yarn-error.log*
 app.db
 app_test.db
 migrations
+migrations/*
