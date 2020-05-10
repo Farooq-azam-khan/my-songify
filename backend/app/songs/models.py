@@ -31,15 +31,18 @@ class UserSongRelationship(db.Model):
     @staticmethod
     def add_entry(user, song, is_like):
         usr = UserSongRelationship.query.filter_by(user=user, song=song).all()
-        print(usr)
+        # print(usr)
         # if there are no user then add them  
         if len(usr) == 0:
             db.session.add(UserSongRelationship(user=user, song=song, is_like=is_like))
-        elif len(usr) == 1 and usr.is_like != is_like:
+        elif len(usr) == 1 and usr[0].is_like != is_like:
             # update like to dislike or viceverca
-            usr.is_like = is_like
+            usr[0].is_like = is_like
             db.session.add(usr)
+            db.session.commit()
         else:
+            print('checking is_like is not the same')
+
             raise Exception('Cannot add multiple rows with the same primary key')
 
 
