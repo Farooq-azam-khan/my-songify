@@ -3,7 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db, login
+from app import db, login, admin
 
 class User(UserMixin, db.Model):
     pk = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 
     def get_id(self):
         return str(self.pk)
@@ -32,3 +33,9 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(pk):
     return User.query.get(int(pk))
+
+
+# from app.users.admin_views import UserModelView
+# from flask_admin.contrib.sqla import ModelView
+
+# admin.add_view(ModelView(ModelView, db.session))
