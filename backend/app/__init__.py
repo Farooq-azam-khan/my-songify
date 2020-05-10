@@ -3,6 +3,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_admin import Admin
 
 from config import Config
 
@@ -10,6 +11,7 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
+admin = Admin(name='my-songify', template_mode='bootstrap3')
 
 # application factory
 def create_app(config_class=Config):
@@ -26,6 +28,8 @@ def initalize_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    admin.init_app(app)
+
 
 def register_blueprints(app):
     from app.users import users_blueprint
