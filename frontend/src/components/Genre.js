@@ -9,6 +9,10 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -31,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GenreList = ({ title, data }) => {
+const GenreList = ({ title, data, user }) => {
   const handleLikeClick = (e) => {
     // console.log(e.currentTarget.name);
     // TODO: if user is logged in then send request to update like
@@ -70,17 +74,21 @@ const GenreList = ({ title, data }) => {
               subtitle={`by: ${tile.artist}`}
               actionIcon={
                 <div>
-                  <IconButton
-                    name={`like-${tile.pk}`}
-                    type="button"
-                    onClick={(e) => handleLikeClick(e)}
-                    aria-label={`star ${tile.name}`}
-                  >
-                    <ThumbUpIcon className={classes.title} />
-                  </IconButton>
-                  <IconButton aria-label={`star ${tile.name}`}>
-                    <ThumbDownIcon className={classes.title} />
-                  </IconButton>
+                  {user.logged_in ? (
+                    <div>
+                      <IconButton
+                        name={`like-${tile.pk}`}
+                        type="button"
+                        onClick={(e) => handleLikeClick(e)}
+                        aria-label={`star ${tile.name}`}
+                      >
+                        <ThumbUpIcon className={classes.title} />
+                      </IconButton>
+                      <IconButton aria-label={`star ${tile.name}`}>
+                        <ThumbDownIcon className={classes.title} />
+                      </IconButton>
+                    </div>
+                  ) : null}
                 </div>
               }
             />
@@ -91,4 +99,10 @@ const GenreList = ({ title, data }) => {
   );
 };
 
-export default GenreList;
+GenreList.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps, {})(GenreList);
