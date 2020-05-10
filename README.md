@@ -28,3 +28,5 @@
 - look into elasticsearch for python
 - [react router with material ui](https://medium.com/@unionproject88/react-material-ui-drawer-with-routes-8e27c91b6119)
 - [portable version of sqlite view](https://sqlitebrowser.org/dl/)
+- [restful flask api](https://flask-restful.readthedocs.io/en/latest/quickstart.html)
+- [flask marshmallow for object serialization](https://flask-marshmallow.readthedocs.io/en/latest/)
