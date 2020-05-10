@@ -2,9 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 const Profile = (props) => {
-  console.log("profiel");
-
-  console.log({ props });
   if (!props.user.logged_in) {
     return <div>You must login to view your profile</div>;
   }

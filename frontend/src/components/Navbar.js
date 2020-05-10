@@ -50,7 +50,6 @@ const Navbar = (props) => {
             {props.user.logged_in ? (
               <Button
                 onClick={() => {
-                  console.log("logout click");
                   props.logout_user();
                 }}
                 variant={"outlined"}
