@@ -13,10 +13,12 @@ def index():
 
 # logout
 @users_blueprint.route('/users/logout', methods=['POST'])
-@login_required
+# @login_required
 def logout():
-    logout_user()
-    return jsonify({'success':True, 'message': 'You were logged out successfully'})
+    if current_user.is_authenticated:
+        logout_user()
+        return jsonify({'success':True, 'message': 'You were logged out successfully'})
+    return jsonify({'success': False, 'message': 'You were never logged in'})
 
 @users_blueprint.route('/users/current_user', methods=['POST'])
 def is_user_logged_in():

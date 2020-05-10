@@ -30,7 +30,30 @@ def make_shell_context():
     # db.session.commit()
 
     return {'db': db, 'User': User, 'UserSongRelationship': UserSongRelationship,
+    'create_songs_and_genres':create_songs_and_genres,
     'Song': Song, 'Genre': Genre, 
     'SongCollection':SongCollection, 'Playlist':Playlist, 'Album':Album, 
     'DisplayStatus': DisplayStatus, 'SongList': SongList}
 
+
+
+# will use to add dummy data to database
+def create_songs_and_genres(user_id): # run function with flask shell
+    # Genre.add_default_genres()
+    # https://www.soundhelix.com/audio-examples
+    mp3_files = ['https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3']
+    # https://bestlifeonline.com/cover-songs-better-than-original/
+    cover_images = ['https://i2.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/all-along-watchtower.jpg?w=1024&ssl=1', 'https://i2.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/american-woman.jpg?w=1024&ssl=1', 'https://i1.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/angel-mont-1.jpg?w=1024&ssl=1', 'https://i0.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/becausethenight.jpg?w=1024&ssl=1']
+
+    if len(Genre.query.all()) < 4:
+        raise Exception('Make the genres before running this')
+    if len(Genre.query.all()) == 0:
+        raise Exception('make a user first')
+    for i in range(4):
+        for j in range(5):
+            song = Song(name=f'song{i}{j}', user=user_id, 
+                        cover_image=random.choice(cover_images), 
+                        mp3_file=random.choice(mp3_files), 
+                        genre=i)
+            db.session.add(song)
+    db.session.commit()

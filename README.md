@@ -10,7 +10,7 @@
 - backend with _Flask_,
   - ORM used is _flask-sqlalchmey_
     - postgresql for production database
-    - mysqlite3 database for testing 
+    - mysqlite3 database for testing
   - testing backend code with _pytest_
 - frontend is designed with _ReactJS_
   - _MaterialUi_ is used for design components
@@ -23,8 +23,8 @@
 2. create the migration tables: `flask db migrate -m "message"`
 3. update the migration tables: `flask db upgrade`
 
-
 ## Points of Reserach and external articles
 
 - look into elasticsearch for python
 - [react router with material ui](https://medium.com/@unionproject88/react-material-ui-drawer-with-routes-8e27c91b6119)
+- [portable version of sqlite view](https://sqlitebrowser.org/dl/)

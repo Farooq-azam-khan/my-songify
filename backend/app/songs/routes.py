@@ -14,7 +14,9 @@ def songs():
     data = {}
     for genre in genres:
         genre_name = str(genre.name)
-        data[genre_name] = [song.get_song_dict() for song in Song.query.filter_by(genre=genre.pk).all()]
+        songs = Song.query.filter_by(genre=genre.pk).all()
+        if len(songs) >= 1:
+            data[genre_name] = [song.get_song_dict() for song in songs]
 
     return jsonify({'success': True, 'message': 'List of songs grouped by genre', 'data': data})
 

@@ -7,46 +7,8 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
-const tileData = [
-  {
-    img:
-      "https://res-3.cloudinary.com/ybmedia/image/upload/c_crop,h_1117,w_1985,x_0,y_252/c_fill,f_auto,h_495,q_auto,w_880/v1/m/b/8/b8601cf5a1ce6be0421f710c8cdf89f05db3dd97/GettyImages-74290244.jpg",
-    title: "song 1",
-    author: "author 1",
-  },
-  {
-    img:
-      "https://res-3.cloudinary.com/ybmedia/image/upload/c_crop,h_1117,w_1985,x_0,y_252/c_fill,f_auto,h_495,q_auto,w_880/v1/m/b/8/b8601cf5a1ce6be0421f710c8cdf89f05db3dd97/GettyImages-74290244.jpg",
-    title: "song 1",
-    author: "author 1",
-  },
-  {
-    img:
-      "https://res-3.cloudinary.com/ybmedia/image/upload/c_crop,h_1117,w_1985,x_0,y_252/c_fill,f_auto,h_495,q_auto,w_880/v1/m/b/8/b8601cf5a1ce6be0421f710c8cdf89f05db3dd97/GettyImages-74290244.jpg",
-    title: "song 1",
-    author: "author 1",
-  },
-  {
-    img:
-      "https://res-3.cloudinary.com/ybmedia/image/upload/c_crop,h_1117,w_1985,x_0,y_252/c_fill,f_auto,h_495,q_auto,w_880/v1/m/b/8/b8601cf5a1ce6be0421f710c8cdf89f05db3dd97/GettyImages-74290244.jpg",
-    title: "song 1",
-    author: "author 1",
-  },
-  {
-    img:
-      "https://res-3.cloudinary.com/ybmedia/image/upload/c_crop,h_1117,w_1985,x_0,y_252/c_fill,f_auto,h_495,q_auto,w_880/v1/m/b/8/b8601cf5a1ce6be0421f710c8cdf89f05db3dd97/GettyImages-74290244.jpg",
-    title: "song 1",
-    author: "author 1",
-  },
-  {
-    img:
-      "https://res-3.cloudinary.com/ybmedia/image/upload/c_crop,h_1117,w_1985,x_0,y_252/c_fill,f_auto,h_495,q_auto,w_880/v1/m/b/8/b8601cf5a1ce6be0421f710c8cdf89f05db3dd97/GettyImages-74290244.jpg",
-    title: "song 1",
-    author: "author 1",
-  },
-];
-
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -65,11 +27,15 @@ const useStyles = makeStyles((theme) => ({
   },
   titleBar: {
     background:
-      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+      "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0) 100%)",
   },
 }));
 
 const GenreList = ({ title, data }) => {
+  const handleLikeClick = (e) => {
+    // console.log(e.currentTarget.name);
+    // TODO: if user is logged in then send request to update like
+  };
   const classes = useStyles();
   return (
     <div className={classes.root} style={{ marginBottom: "2rem" }}>
@@ -91,19 +57,31 @@ const GenreList = ({ title, data }) => {
         </Grid>
       </Grid>
       <GridList className={classes.gridList} cols={2.5}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+        {data.map((tile) => (
+          <GridListTile key={tile.pk}>
+            <img src={tile.cover_image} alt={tile.name} />
             <GridListTileBar
-              title={tile.title}
+              title={tile.name}
+              className={classes.lightBackgroundColor}
               classes={{
                 root: classes.titleBar,
                 title: classes.title,
               }}
+              subtitle={`by: ${tile.artist}`}
               actionIcon={
-                <IconButton aria-label={`star ${tile.title}`}>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
+                <div>
+                  <IconButton
+                    name={`like-${tile.pk}`}
+                    type="button"
+                    onClick={(e) => handleLikeClick(e)}
+                    aria-label={`star ${tile.name}`}
+                  >
+                    <ThumbUpIcon className={classes.title} />
+                  </IconButton>
+                  <IconButton aria-label={`star ${tile.name}`}>
+                    <ThumbDownIcon className={classes.title} />
+                  </IconButton>
+                </div>
               }
             />
           </GridListTile>

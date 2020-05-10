@@ -20,7 +20,7 @@ class Song(db.Model):
         artist =  f'{q.firstname} {q.lastname}'
         return {'name': self.name, 
                 'artist':artist , 
-                'conver_image': self.cover_image, 
+                'cover_image': self.cover_image, 
                 'genre': Genre.query.get(self.genre).name, 
                 'added_at': self.added_at, 
                 'mp3_file': self.mp3_file,
