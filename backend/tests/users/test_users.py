@@ -68,7 +68,7 @@ def test_user_login_route_has_invalid_input(app):
         json_resp = json.loads(resp.data)
         assert json_resp['success'] == False
         assert json_resp['message'] == 'Invalid form input'
-        assert len(json_resp['errors']) == 0
+        assert len(json_resp['errors']) == 2
 
 
 def test_user_logout_if_user_is_logged_in(app):
