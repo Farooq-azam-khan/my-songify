@@ -15,6 +15,7 @@ flask-migrate = "*"
 flask-login = "*"
 flask-wtf = "*"
 email-validator = "*"
+flask-admin = "*"
 
 [requires]
 python_version = "3.8"
