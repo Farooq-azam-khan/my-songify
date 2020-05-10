@@ -1,21 +1,52 @@
 from datetime import datetime 
 
+from sqlalchemy import PrimaryKeyConstraint
+
 from app import db
+
 
 class Song(db.Model):
     pk = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    # listens : maybe store in history table
     cover_image = db.Column(db.String(200), nullable=True)
+    # better name = artist
     user = db.Column(db.Integer, db.ForeignKey('user.pk'), nullable=False)
     mp3_file = db.Column(db.String(200), nullable=False)
-    likes = db.Column(db.Integer)
-    listens = db.Column(db.Integer)
     genre = db.Column(db.Integer, db.ForeignKey('genre.pk'), nullable=True)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<Song {self.name} - {self.pk}>'
+
+class UserSongRelationship(db.Model):
+    user = db.Column(db.Integer, db.ForeignKey('user.pk'), nullable=False)
+    song = db.Column(db.Integer, db.ForeignKey('song.pk'), nullable=False)
+    is_like = db.Column(db.Boolean, nullable=False)
+
+    # https://stackoverflow.com/questions/9034271/sqlalchemy-orm-how-to-declare-a-table-class-that-contains-multi-column-primary
+    __table_args__ = (
+        PrimaryKeyConstraint('user', 'song', 'is_like'), {},
+    )
+
+    @staticmethod
+    def add_entry(user, song, is_like):
+        usr = UserSongRelationship.query.filter_by(user=user, song=song).all()
+        print(usr)
+        # if there are no user then add them  
+        if len(usr) == 0:
+            db.session.add(UserSongRelationship(user=user, song=song, is_like=is_like))
+        elif len(usr) == 1 and usr.is_like != is_like:
+            # update like to dislike or viceverca
+            usr.is_like = is_like
+            db.session.add(usr)
+        else:
+            raise Exception('Cannot add multiple rows with the same primary key')
+
+
+
+
+    def __repr__(self):
+        return f'<UserSongRelationship ({self.user}, {self.song}, {self.is_like})'
 
 
 class Genre(db.Model):
