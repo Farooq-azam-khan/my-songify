@@ -35,7 +35,21 @@ def load_user(pk):
     return User.query.get(int(pk))
 
 
-# from app.users.admin_views import UserModelView
 # from flask_admin.contrib.sqla import ModelView
+# from flask_admin.form import SecureForm
+# from flask_login import current_user
 
-# admin.add_view(ModelView(ModelView, db.session))
+# class UserAdminModel(ModelView):
+#     form_base_class = SecureForm
+#     can_delete = True
+#     page_size = 50 
+#     column_editable_list = ['firstname', 'middlename', 'lastname']
+#     can_export = True
+
+#     # def is_accessible(self):
+#     #     return current_user.is_authenticated
+
+
+
+
+# admin.add_view(UserAdminModel(User, db.session))
