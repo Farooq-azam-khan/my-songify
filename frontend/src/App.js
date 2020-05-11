@@ -12,7 +12,8 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 
 import store from "./store";
-			console.log(			"tsting husky");
+
+	console.log(	'tst')
 const App = () => {
   return (
     <Provider store={store}>
