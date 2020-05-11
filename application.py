@@ -11,8 +11,8 @@ from config import Config
 
 if __name__ == '__main__':
 
-    app = create_app(Config)
-    app.run()
+    my_app = create_app(Config)
+    my_app.run()
 
 # add a context when the `flask shell` command is run
 @app.shell_context_processor
