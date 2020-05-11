@@ -13,7 +13,6 @@ import Profile from "./pages/Profile";
 
 import store from "./store";
 
-	console.log(	'tst')
 const App = () => {
   return (
     <Provider store={store}>
