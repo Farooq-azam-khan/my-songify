@@ -4,8 +4,7 @@ import Navbar from "./components/Navbar";
 import Grid from "@material-ui/core/Grid";
 
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Songs from "./pages/Songs";
