@@ -1,5 +1,7 @@
-from app import create_app 
-from app import db
+import sys
+sys.path.append('./app')
+
+from app import create_app,  db
 from app.songs.models import Song, Genre, UserSongRelationship
 from app.users.models import User
 from app.song_collection.models import (SongCollection, 
@@ -9,13 +11,15 @@ from app.song_collection.models import (SongCollection,
 
 from config import Config
 
-if __name__ == '__main__':
 
-    my_app = create_app(Config)
+
+my_app = create_app(Config)
+
+if __name__ == '__main__':
     my_app.run()
 
 # add a context when the `flask shell` command is run
-@app.shell_context_processor
+@my_app .shell_context_processor
 def make_shell_context():
 # sample_user = User(firstname='f1', lastname='ln', email='f@l.com')
 # sample_user.set_password('test')
