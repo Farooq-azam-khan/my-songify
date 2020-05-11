@@ -30,3 +30,4 @@
 - [portable version of sqlite view](https://sqlitebrowser.org/dl/)
 - [restful flask api](https://flask-restful.readthedocs.io/en/latest/quickstart.html)
 - [flask marshmallow for object serialization](https://flask-marshmallow.readthedocs.io/en/latest/)
+- [pushing to non master branch on heroku](https://devcenter.heroku.com/articles/git#deploying-code)
