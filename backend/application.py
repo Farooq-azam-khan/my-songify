@@ -9,10 +9,10 @@ from app.song_collection.models import (SongCollection,
 
 from config import Config
 
-app = create_app(Config)
+my_app = create_app(Config)
 
 # add a context when the `flask shell` command is run
-@app.shell_context_processor
+@my_app.shell_context_processor
 def make_shell_context():
 # sample_user = User(firstname='f1', lastname='ln', email='f@l.com')
 # sample_user.set_password('test')
