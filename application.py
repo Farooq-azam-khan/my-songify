@@ -9,7 +9,10 @@ from app.song_collection.models import (SongCollection,
 
 from config import Config
 
-app = create_app(Config)
+if __name__ == '__main__':
+
+    app = create_app(Config)
+    app.run()
 
 # add a context when the `flask shell` command is run
 @app.shell_context_processor
