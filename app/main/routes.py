@@ -14,11 +14,11 @@ def index():
 
 @main_blueprint.route('/react-frontend')
 def frontend_react():
-    return render_template('index.html')
+    return render_template('build/index.html')
 
 @main_blueprint.route('/manifest.json')
 def manifest():
-    return send_from_directory('main/build', 'manifest.json')
+    return send_from_directory('build', 'manifest.json')
 
 @main_blueprint.route('/favicon.ico')
 def favicon():
