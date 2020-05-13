@@ -5,15 +5,13 @@ from flask import jsonify , render_template, send_from_directory
 from flask_login import current_user 
 
 from . import main_blueprint
+
 from app import db
 from app.songs.models import Song, Genre, UserSongRelationship
 from app.users.models import User
-
-
-# restplus 
+from app.song_collection.models import SongCollection, Playlist, Album, DisplayStatus
 from flask_restful import Resource
 
-from app.songs.models import Song 
 
 class SongsRoutes(Resource):
     def get(self):
@@ -49,6 +47,20 @@ class GenreSongsGroupRoutes(Resource):
     def get(self):
         q = Genre.get_n_genres_m_songs()
         return q 
+
+class PlaylistsRoutes(Resource):
+    def get(self): 
+        pass 
+
+
+class PlaylistRoutes(Resource):
+    def get(self, playlist_id): 
+        pass 
+
+class AlbumRoutes(Resource):
+    def get(self, album_id): 
+        pass 
+        
 
 # from . import api
 def add_api_resource(api):

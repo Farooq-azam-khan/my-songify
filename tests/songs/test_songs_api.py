@@ -1,7 +1,6 @@
 import json 
 
 import pytest
-from flask_login import login_user 
 
 from app.songs.models import Song, Genre, UserSongRelationship
 from app.users.models import User
