@@ -141,7 +141,12 @@ def create_playlist2():
 
 
     # user 2
-    private_p = Playlist.create_playlist(nu2.pk, name='playlist3', cover_image='google.com', display_status=3)
+    u2p1 = Playlist.create_playlist(nu2.pk, name='playlist3', cover_image='google.com', display_status=1)
+    u2p2 = Playlist.create_playlist(nu2.pk, name='playlist4', cover_image='google.com', display_status=2)
+    u2p3 = Playlist.create_playlist(nu2.pk, name='playlist5', cover_image='google.com', display_status=3)
+
+    albumu1 = Album.create_album(user_pk=nu1.pk, name='album1', cover_image='google.com')
+
 
     newsong = Song(name='song1', user=nu2.pk, mp3_file='google.com')
     db.session.add(newsong)
@@ -152,10 +157,10 @@ def create_playlist2():
     newsong = Song(name='song3', user=nu1.pk, mp3_file='google.com')
     db.session.add(newsong)
 
-    newsong = Song(name='notinpp1', user=nu1.pk, mp3_file='google.com')
+    newsong = Song(name='song4', user=nu1.pk, mp3_file='google.com')
     db.session.add(newsong)
 
-    newsong = Song(name='notinpp2', user=nu1.pk, mp3_file='google.com')
+    newsong = Song(name='song5', user=nu1.pk, mp3_file='google.com')
     db.session.add(newsong)
     db.session.commit() 
 
@@ -163,10 +168,13 @@ def create_playlist2():
     pp.add_song(2)
     pp.add_song(3)
 
+    u2p1.add_song(4)
+    u2p2.add_song(5)
+
 
 
 def test_get_all_user_playlists(app):
-    # pytest.skip()
+    pytest.skip()
     create_playlist2() 
 
     with app.test_client() as client: 
@@ -182,8 +190,83 @@ def test_get_all_user_playlists(app):
         assert 'playlist1' in data 
         assert 'playlist2' in data 
         assert 'playlist_p' in data 
-
         assert 'playlist3' not in data 
-    
+        assert 'album1' not in data
 
-    assert 1 == 2
+def create_albumns2(): 
+    nu1 = User(firstname='f', lastname='l', email='f@l.com')
+    nu1.set_password('test')
+    db.session.add(nu1)
+    db.session.commit() 
+
+    nu2 = User(firstname='f2', lastname='l2', email='f2@l.com')
+    nu2.set_password('test')
+    db.session.add(nu2)
+    db.session.commit() 
+
+    DisplayStatus.add_default_display_status() 
+
+    # user 1
+    u1albumu1 = Album.create_album(user_pk=nu1.pk, name='album1', cover_image='google.com')
+    u1albumu2 = Album.create_album(user_pk=nu1.pk, name='album2', cover_image='google.com')
+    u1albumu3 = Album.create_album(user_pk=nu1.pk, name='album3', cover_image='google.com')
+
+    pp = Playlist.create_playlist(nu1.pk, name='playlist1', cover_image='google.com' ,display_status=3)
+    unlisted = Playlist.create_playlist(nu1.pk, name='playlist2', cover_image='google.com', display_status=2)
+    user_private = Playlist.create_playlist(nu1.pk, name='playlist_p', cover_image='google.com', display_status=1)
+
+
+    # user 2
+    u2albumu1 = Album.create_album(user_pk=nu1.pk, name='album21', cover_image='google.com')
+    u2albumu2 = Album.create_album(user_pk=nu1.pk, name='album22', cover_image='google.com')
+    u2albumu3 = Album.create_album(user_pk=nu1.pk, name='album23', cover_image='google.com')
+
+    newsong = Song(name='song1', user=nu2.pk, mp3_file='google.com')
+    db.session.add(newsong)
+
+    newsong = Song(name='song2', user=nu2.pk, mp3_file='google.com')
+    db.session.add(newsong)
+
+    newsong = Song(name='song3', user=nu1.pk, mp3_file='google.com')
+    db.session.add(newsong)
+
+    newsong = Song(name='song4', user=nu1.pk, mp3_file='google.com')
+    db.session.add(newsong)
+
+    newsong = Song(name='song5', user=nu1.pk, mp3_file='google.com')
+    db.session.add(newsong)
+    db.session.commit() 
+
+    u1albumu1.add_song(1)
+    u1albumu1.add_song(2)
+    u1albumu1.add_song(3)
+
+    u2albumu1.add_song(4)
+    u2albumu2.add_song(5)
+
+
+def test_get_all_user_albumns(app):
+    # pytest.skip()
+    create_albumns2() 
+
+    with app.test_client() as client: 
+        resp = client.get('/api/v1/artist/albumns')
+        data = resp.get_json() 
+
+        assert type(data) == dict 
+        assert 'albumn1' not in data 
+        assert 'albumn2' not in data 
+        assert 'albumn3' not in data 
+
+        assert type(data['albumn1']) == list 
+        assert type(data['albumn2']) == list 
+        assert type(data['albumn3']) == list 
+        
+        assert 'playlist1' not in data 
+        assert 'playlist2' not in data 
+        assert 'playlist_p' not in data 
+        assert 'albumn21' not in data 
+        assert 'albumn22' not in data 
+        assert 'albumn23' not in data 
+
+

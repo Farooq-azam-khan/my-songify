@@ -21,9 +21,11 @@ class SongCollection(db.Model):
         db.session.add(new_song)
         db.session.commit()
 
-    # TODO: implemenet functionality 
-    def get_user_collertion(self):
-        pass 
+    @staticmethod
+    def get_user_collection(user_pk):
+        return SongCollection.query.filter_by(user=user_pk).all() 
+
+    
 
     def get_songs(self): 
         songs_ids = [sl.song for sl in SongList.query.filter_by(collection=self.pk).all()]
@@ -63,8 +65,20 @@ class Playlist(db.Model):
         return SongCollection.query.get(self.song_collection).pk
 
     @staticmethod
-    def get_user_collertion():
-        pass 
+    def get_user_playlists(user_pk):
+        user_collections = SongCollection.get_user_collection(user_pk)
+        playlists = Playlist.query.all()
+        data = {}
+        for uc in user_collections:
+            playlist = Playlist.query.filter_by(song_collection=uc.pk).first()
+            if playlist: 
+                ppname = str(playlist.name)
+                songs = [song.get_json() for song in uc.get_songs()]
+                data[ppname] = songs 
+        return data 
+
+            
+
     @staticmethod
     def get_all_public(at_most=5):
         # database must have id 3 of plublic TODO: check for that
@@ -75,7 +89,6 @@ class Playlist(db.Model):
             # TODO: refactor later
             songs_ids = [sl.song for sl in SongList.query.filter_by(collection=pp.get_song_collection_pk()).all()]
             songs = [Song.query.get(sid) for sid in songs_ids]
-            print('songs:', songs)
             if len(songs) >= 1:
                 data[ppname] = [song.get_song_dict() for song in songs]
         return data 
@@ -139,7 +152,6 @@ class Album(db.Model):
             # songs_ids = [song for song in SongCollection.get_songs()]
             sc = SongCollection.query.get(ab.song_collection)
             songs = sc.get_songs()
-            print('songs:', songs)
             if len(songs) >= 1:
                 data[abname] = [song.get_song_dict() for song in songs]
         return data 
