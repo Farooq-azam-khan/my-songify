@@ -18,7 +18,7 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
         return jsonify({'success':True, 'message': 'You were logged out successfully'})
-    return jsonify({'success': False, 'message': 'You were never logged in'})
+    return jsonify({'success': True, 'message': 'You were never logged in'})
 
 @users_blueprint.route('/users/current_user', methods=['POST'])
 def is_user_logged_in():

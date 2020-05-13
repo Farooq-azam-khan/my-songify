@@ -1,5 +1,4 @@
-import sys
-# sys.path.append('./app')
+import random 
 
 from app import create_app,  db
 from app.songs.models import Song, Genre, UserSongRelationship
