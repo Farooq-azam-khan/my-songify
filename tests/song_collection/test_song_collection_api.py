@@ -41,7 +41,7 @@ def create__playlist():
     pp.add_song(3)
 
 def test_get_all_public_playlists(app):
-    pytest.skip()
+    # pytest.skip()
     create__playlist() 
 
     with app.test_client() as client: 
@@ -96,7 +96,7 @@ def create_albums():
 
 
 def test_get_all_albums(app): 
-    pytest.skip()
+    # pytest.skip()
     create_albums() 
 
     with app.test_client() as client: 
@@ -174,7 +174,7 @@ def create_playlist2():
 
 
 def test_get_all_user_playlists(app):
-    pytest.skip()
+    # pytest.skip()
     create_playlist2() 
 
     with app.test_client() as client: 

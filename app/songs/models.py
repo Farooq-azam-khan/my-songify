@@ -15,17 +15,38 @@ class Song(db.Model):
     genre = db.Column(db.Integer, db.ForeignKey('genre.pk'), nullable=True)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def get_song_dict(self):
+    def get_artist(self): 
         q =  User.query.get(self.user)
-        artist =  f'{q.firstname} {q.lastname}'
-        return {'name': self.name, 
+        return f'{q.firstname} {q.lastname}'
+
+
+    def get_json(self): 
+        return self.get_song_dict() 
+
+    def get_song_dict(self):
+        artist =  self.get_artist() 
+        genre = Genre.query.get(self.genre)
+
+        result = {'name': self.name, 
                 'artist':artist , 
-                'cover_image': self.cover_image, 
-                'genre': Genre.query.get(self.genre).name, 
-                'added_at': self.added_at, 
+                # 'added_at': self.added_at, 
                 'mp3_file': self.mp3_file,
                 'pk': self.pk
-        }
+            }
+        if genre: 
+            result['genre'] = genre.name 
+        
+        if self.cover_image: 
+            result['cover_image'] = self.cover_image
+
+        return result
+    
+    @staticmethod   
+    def get_100():
+        q = Song.query.limit(100).all()
+        result = [song.get_song_dict() for song in q]
+        return result
+
 
 
 
@@ -43,9 +64,14 @@ class UserSongRelationship(db.Model):
     )
 
     @staticmethod
+    def get_user_liked_songs(user_id):
+        q = UserSongRelationship.query.filter_by(user=user_id, is_like=True).all()
+        result = [Song.query.get(obj.song).get_song_dict() for obj in q]
+        return result
+
+    @staticmethod
     def add_entry(user, song, is_like):
         usr = UserSongRelationship.query.filter_by(user=user, song=song).all()
-        # print(usr)
         # if there are no user then add them  
         if len(usr) == 0:
             db.session.add(UserSongRelationship(user=user, song=song, is_like=is_like))
@@ -55,8 +81,6 @@ class UserSongRelationship(db.Model):
             db.session.add(usr)
             db.session.commit()
         else:
-            print('checking is_like is not the same')
-
             raise Exception('Cannot add multiple rows with the same primary key')
 
 
@@ -69,6 +93,23 @@ class UserSongRelationship(db.Model):
 class Genre(db.Model):
     pk = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
+
+    @staticmethod
+    def get_n_genres_m_songs(n=4, m=20):
+        # TODO: make test for when there are no songs for a specific genre
+        genres = Genre.query.limit(n).all()
+
+        data = {}
+        for genre in genres:
+            genre_name = str(genre.name)
+            songs = Song.query.filter_by(genre=genre.pk).limit(m).all()
+            if len(songs) >= 1:
+                data[genre_name] = [song.get_song_dict() for song in songs]
+
+        return data 
+    
+    def get_json(self): 
+        return {self.name: [song.get_json() for song in Song.query.filter_by(genre=self.pk).all()]}
 
     @staticmethod 
     def add_default_genres():
