@@ -88,6 +88,11 @@ class PlaylistLikeByUserRoute(Resource):
         q = Playlist.get_liked_playlists(current_user.pk) 
         return q
         
+class AlbumLikeByUserRoute(Resource):
+    def get(self):
+        q = Album.get_liked_albums(current_user.pk) 
+        print('query:', q)
+        return q
         
 
 
@@ -100,7 +105,8 @@ def add_api_resource(api):
                         AlbumsRoutes, 
                         UserCreatedPlaylistsRoute, 
                         UserCreatedAlbumRoute, 
-                        PlaylistLikeByUserRoute)
+                        PlaylistLikeByUserRoute, 
+                        AlbumLikeByUserRoute)
                         
     api.add_resource(SongsRoutes, '/api/v1/songs')
     api.add_resource(SongRoutes, '/api/v1/songs/<string:song_id>')
@@ -118,4 +124,4 @@ def add_api_resource(api):
 
     # liked 
     api.add_resource(PlaylistLikeByUserRoute, '/api/v1/user/playlists/like')
-    # api.add_resource(AlbumLikeByUserRoute, '/api/v1/user/album/like')
+    api.add_resource(AlbumLikeByUserRoute, '/api/v1/user/album/like')

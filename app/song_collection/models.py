@@ -168,6 +168,19 @@ class Album(db.Model):
         return sc.get_songs() 
 
     @staticmethod
+    def get_liked_albums(user_pk):
+        collection_ids = UserSongCollectionRelationship.get_user_liked_collection(user_pk=user_pk)
+        # print(collection_ids)
+        data = {}
+        for uc in collection_ids:
+            album = Playlist.query.filter_by(song_collection=uc.pk).first() 
+            if album:
+                aname = str(album.name)
+                songs = [song.get_json() for song in uc.get_songs()]
+                data[aname] = songs 
+        return data  
+
+    @staticmethod
     def get_albumns(at_most=4):
         albumns = Album.query.limit(at_most)
         data = {}
