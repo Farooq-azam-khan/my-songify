@@ -25,7 +25,7 @@ def create_101_songs():
 
 def test_get_api_v1_songs(app):
     create_101_songs()
-    pytest.skip("skipped: test_get_api_v1_songs")
+    # pytest.skip("skipped: test_get_api_v1_songs")
 
     client = app.test_client()
     with client: 
@@ -42,7 +42,7 @@ def user_likes_50_songs():
         UserSongRelationship.add_entry(1, i+1, True)
 
 def test_api_test_get_loggedin_user_liked_songs(app):
-    pytest.skip("skipped: test_api_test_get_loggedin_user_liked_songs")
+    # pytest.skip("skipped: test_api_test_get_loggedin_user_liked_songs")
 
     user_likes_50_songs() 
     client = app.test_client()
@@ -62,7 +62,7 @@ def test_api_test_get_loggedin_user_liked_songs(app):
             assert entry.song in data_pks
 
 def test_get_song_id(app):
-    pytest.skip("skipped: test_get_song_id")
+    # pytest.skip("skipped: test_get_song_id")
     setup_data.get_sample_data()
     client = app.test_client()
     with client: 
@@ -105,7 +105,7 @@ def create_5_genres():
 
 
 def test_get_4_genres_and_20_songs_per_genre(app):
-    pytest.skip("skipped: test_get_song_id")
+    # pytest.skip("skipped: test_get_song_id")
 
     create_5_genres() 
     client = app.test_client()
