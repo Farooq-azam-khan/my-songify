@@ -67,15 +67,19 @@ class Playlist(db.Model):
     
     @staticmethod
     def get_liked_playlists(user_pk):
+        
         collection_ids = UserSongCollectionRelationship.get_user_liked_collection(user_pk=user_pk)
-        # print(collection_ids)
+        print('collections ids', UserSongCollectionRelationship.query.all())
         data = {}
         for uc in collection_ids:
             playlist = Playlist.query.filter_by(song_collection=uc.pk).first() 
+            print('playlist:', playlist)
             if playlist:
                 ppname = str(playlist.name)
                 songs = [song.get_json() for song in uc.get_songs()]
                 data[ppname] = songs 
+
+        print(data)
         return data 
 
 
@@ -241,6 +245,7 @@ class UserSongCollectionRelationship(db.Model):
 
     @staticmethod
     def add_entry(user_pk, collection_pk, is_like):
+        # print('adding like')
         usr = UserSongCollectionRelationship.query.filter_by(user=user_pk, collection=collection_pk).all()
         # if there are no user then add them  
         if len(usr) == 0:

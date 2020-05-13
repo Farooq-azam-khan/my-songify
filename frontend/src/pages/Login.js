@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-import { connect } from "react-redux";
-import { login_user } from "../store/actions/userActions";
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import PropTypes from "prop-types";
+import { login_user } from '../store/actions/userActions';
+
+import PropTypes from 'prop-types';
 // TODO: hide and show passwords
 // import Visibility from "@material-ui/icons/Visibility";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
@@ -17,18 +19,18 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "91vh",
+    height: '91vh',
   },
   formGrid: {
-    maxWidth: "600px",
-    padding: "1rem",
+    maxWidth: '600px',
+    padding: '1rem',
   },
 }));
 
 const Login = (props) => {
   const classes = useStyles();
-  const [email, setEmail] = useState("f@l.com");
-  const [password, setPassword] = useState("test");
+  const [email, setEmail] = useState('f@l.com');
+  const [password, setPassword] = useState('test');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -43,7 +45,8 @@ const Login = (props) => {
   };
 
   if (props.user.logged_in) {
-    return <Typography variant="h2">You are Already Logged in</Typography>;
+    // return <Typography variant="h2">You are Already Logged in</Typography>;
+    return <Redirect to="/profile" />;
   }
   return (
     <form onSubmit={handleLoginSubmit}>

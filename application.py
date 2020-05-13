@@ -63,3 +63,4 @@ def create_songs_and_genres(user_id): # run function with flask shell
                         genre=i)
             db.session.add(song)
     db.session.commit()
+

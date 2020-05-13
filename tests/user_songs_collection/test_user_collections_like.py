@@ -117,10 +117,10 @@ def test_get_all_public_albumns(app):
             remember=False
         ))
 
-        resp = client.get('/api/v1/user/album/like')
+        resp = client.get('/api/v1/user/albums/like')
         data = resp.get_json() 
 
-        print('data', data)
+        # print('data', data)
         assert type(data) == dict 
         assert 'album1' in data 
         assert 'album3' in data 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -62,6 +62,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = (props) => {
+  const [my_playlists, set_my_playlists] = useState({})
+  const [like_playlists, setLikedPlaylists] = useState({})
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+
+    fetch('api/v1/user/playlists').then(resp => resp.json()).then(data => { set_my_playlists(data) })
+    fetch('api/v1/user/playlists/like').then(resp => resp.json()).then(data => {
+      console.log(data);
+      setLoading(false);
+      setLikedPlaylists(data)
+    })
+      .catch(e => {
+        console.error(e)
+      })
+
+  }, [])
+
   const classes = useStyles();
 
   if (!props.user.logged_in) {
@@ -103,16 +120,43 @@ const Profile = (props) => {
         </div>
       </Grid>
       <Grid item>
-        <Playlists title="Playlist's Name" />
+        <Typography variant="h4">Your Playlists</Typography>
+        {Object.entries(my_playlists).map(([playlist, songs], index) => {
+          return (
+            <Grid key={index} item>
+              <Playlists title={playlist} tileData={songs} />
+            </Grid>);
+        })}
       </Grid>
+
       <Grid item>
-        <Playlists title="playlist2" />
+        <Typography variant="h4">Your Album</Typography>
+        {Object.entries(my_playlists).map(([playlist, songs], index) => {
+          return (
+            <Grid key={index} item>
+              <Playlists title={playlist} tileData={songs} />
+            </Grid>);
+        })}
       </Grid>
+
       <Grid item>
-        <Playlists title="playlist3" />
+        <Typography variant="h4">Your Liked Playlists</Typography>
+        {Object.entries(my_playlists).map(([playlist, songs], index) => {
+          return (
+            <Grid key={index} item>
+              <Playlists title={playlist} tileData={songs} />
+            </Grid>);
+        })}
       </Grid>
+
       <Grid item>
-        <Playlists title="Album 1" />
+        <Typography variant="h4">Your Liked Albums</Typography>
+        {Object.entries(my_playlists).map(([playlist, songs], index) => {
+          return (
+            <Grid key={index} item>
+              <Playlists title={playlist} tileData={songs} />
+            </Grid>);
+        })}
       </Grid>
     </Grid>
   );

@@ -30,34 +30,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tileData = [
-  {
-    img:
-      "https://static.billboard.com/files/media/Nirvana-Nevermind-album-covers-billboard-1000x1000-compressed.jpg",
-    title: "son1",
-    author: "author1",
-  },
-  {
-    img:
-      "https://static.billboard.com/files/media/Nirvana-Nevermind-album-covers-billboard-1000x1000-compressed.jpg",
-    title: "son1",
-    author: "author1",
-  },
-  {
-    img:
-      "https://static.billboard.com/files/media/Nirvana-Nevermind-album-covers-billboard-1000x1000-compressed.jpg",
-    title: "son1",
-    author: "author1",
-  },
-  {
-    img:
-      "https://static.billboard.com/files/media/Nirvana-Nevermind-album-covers-billboard-1000x1000-compressed.jpg",
-    title: "son1",
-    author: "author1",
-  },
-];
-const Playlist = ({ title }) => {
+// const tileData = [
+//   {
+//     img:
+//       "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/3aba3bb0cac851057ffb1f99bad4fa57-1564002973/cardboardcutout/design-your-album-cover.jpg",
+//     title: "son1",
+//     author: "author1",
+//   },
+//   {
+//     img:
+//       "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/3aba3bb0cac851057ffb1f99bad4fa57-1564002973/cardboardcutout/design-your-album-cover.jpg",
+//     title: "son1",
+//     author: "author1",
+//   },
+//   {
+//     img:
+//       "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/3aba3bb0cac851057ffb1f99bad4fa57-1564002973/cardboardcutout/design-your-album-cover.jpg",
+//     title: "son1",
+//     author: "author1",
+//   },
+//   {
+//     img:
+//       "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/3aba3bb0cac851057ffb1f99bad4fa57-1564002973/cardboardcutout/design-your-album-cover.jpg",
+//     title: "son1",
+//     author: "author1",
+//   },
+// ];
+const Playlist = ({ title, tileData }) => {
   const classes = useStyles();
+  console.log(tileData)
 
   return (
     <div className={classes.root}>
@@ -77,16 +78,16 @@ const Playlist = ({ title }) => {
       </div>
       <GridList className={classes.gridList} cols={2.5}>
         {tileData.map((tile) => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+          <GridListTile key={tile.pk}>
+            <img src={tile.cover_image} alt={tile.name} />
             <GridListTileBar
-              title={tile.title}
+              title={tile.name}
               classes={{
                 root: classes.titleBar,
                 title: classes.title,
               }}
               actionIcon={
-                <IconButton aria-label={`star ${tile.title}`}>
+                <IconButton aria-label={`star ${tile.name}`}>
                   <StarBorderIcon className={classes.title} />
                 </IconButton>
               }
