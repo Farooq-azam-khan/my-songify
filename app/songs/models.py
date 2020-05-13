@@ -15,12 +15,16 @@ class Song(db.Model):
     genre = db.Column(db.Integer, db.ForeignKey('genre.pk'), nullable=True)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def get_artist(self): 
+        q =  User.query.get(self.user)
+        return f'{q.firstname} {q.lastname}'
+
+
     def get_json(self): 
         return self.get_song_dict() 
 
     def get_song_dict(self):
-        q =  User.query.get(self.user)
-        artist =  f'{q.firstname} {q.lastname}'
+        artist =  self.get_artist() 
         genre = Genre.query.get(self.genre)
 
         result = {'name': self.name, 

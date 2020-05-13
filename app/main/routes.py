@@ -50,7 +50,16 @@ class GenreSongsGroupRoutes(Resource):
 
 class PlaylistsRoutes(Resource):
     def get(self): 
-        pass 
+        q = Playlist.get_all_public()
+        # print('playlist query:', q)
+        return q
+
+
+class AlbumsRoutes(Resource):
+    def get(self): 
+        q = Album.get_albumns()
+        # print('Album query:', q)
+        return q
 
 
 class PlaylistRoutes(Resource):
@@ -60,13 +69,38 @@ class PlaylistRoutes(Resource):
 class AlbumRoutes(Resource):
     def get(self, album_id): 
         pass 
+
+class UserCreatedPlaylistsRoute(Resource):
+    def get(self):
+        q = Playlist.get_user_playlists(current_user.pk)
+        return q
+
+
+class UserCreatedAlbumnRoute(Resource):
+    def get(self):
+        pass 
+        
         
 
 # from . import api
 def add_api_resource(api):
-    from .routes import SongsRoutes, SongRoutes, UserSongLikesRoutes
+    from .routes import (SongsRoutes, 
+                        SongRoutes, 
+                        UserSongLikesRoutes, 
+                        PlaylistsRoutes, 
+                        AlbumsRoutes, 
+                        UserCreatedPlaylistsRoute, 
+                        UserCreatedAlbumnRoute)
     api.add_resource(SongsRoutes, '/api/v1/songs')
     api.add_resource(SongRoutes, '/api/v1/songs/<string:song_id>')
     api.add_resource(UserSongLikesRoutes, '/api/v1/user/songs/like')
     api.add_resource(GenreSongsGroupRoutes, '/api/v1/genre/songs')
     api.add_resource(GenreRoutes, '/api/v1/genre/<string:genre_id>')
+    
+    # song collection routes 
+    api.add_resource(PlaylistsRoutes, '/api/v1/playlists')
+    api.add_resource(AlbumsRoutes, '/api/v1/albumns')
+
+    # user song collection routes 
+    api.add_resource(UserCreatedPlaylistsRoute, '/api/v1/user/playlists')
+    # api.add_resource(UserCreatedAlbumnRoute, '/api/v1/albumns')
