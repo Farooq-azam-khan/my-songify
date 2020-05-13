@@ -3,6 +3,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_restplus import Api
 
 from config import Config
 
@@ -10,6 +11,7 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
+api = Api()
 
 # application factory
 def create_app(config_class=Config):
