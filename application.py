@@ -1,5 +1,5 @@
 import sys
-sys.path.append('./app')
+# sys.path.append('./app')
 
 from app import create_app,  db
 from app.songs.models import Song, Genre, UserSongRelationship

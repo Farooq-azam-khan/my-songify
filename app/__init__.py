@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_admin import Admin
 
-from app.main.admin_views import UserAdminModel, SongAdminModel, GenreAdminModel
+# from app.main.admin_views import UserAdminModel, SongAdminModel, GenreAdminModel
 
 from config import Config
 
@@ -40,6 +40,9 @@ def initalize_extensions(app):
 def add_admin_views(admin, db):
     from app.users.models import User
     from app.songs.models import Song, Genre
+
+    from app.main.admin_views import UserAdminModel, SongAdminModel, GenreAdminModel
+    
     admin.add_view(UserAdminModel(User, db.session))
     admin.add_view(SongAdminModel(Song, db.session))
     admin.add_view(GenreAdminModel(Genre, db.session))
