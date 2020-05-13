@@ -250,17 +250,17 @@ def test_get_all_user_albumns(app):
     create_albumns2() 
 
     with app.test_client() as client: 
-        resp = client.get('/api/v1/artist/albumns')
+        resp = client.get('/api/v1/artist/1/albumns')
         data = resp.get_json() 
 
         assert type(data) == dict 
-        assert 'albumn1' not in data 
-        assert 'albumn2' not in data 
-        assert 'albumn3' not in data 
+        assert 'album1' in data 
+        assert 'album2' in data 
+        assert 'album3' in data 
 
-        assert type(data['albumn1']) == list 
-        assert type(data['albumn2']) == list 
-        assert type(data['albumn3']) == list 
+        assert type(data['album1']) == list 
+        assert type(data['album2']) == list 
+        assert type(data['album3']) == list 
         
         assert 'playlist1' not in data 
         assert 'playlist2' not in data 

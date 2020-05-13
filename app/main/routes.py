@@ -76,9 +76,10 @@ class UserCreatedPlaylistsRoute(Resource):
         return q
 
 
-class UserCreatedAlbumnRoute(Resource):
-    def get(self):
-        pass 
+class UserCreatedAlbumRoute(Resource):
+    def get(self, artist_id):
+        q = Album.get_artist_albumns(artist_id)
+        return q
         
         
 
@@ -90,7 +91,8 @@ def add_api_resource(api):
                         PlaylistsRoutes, 
                         AlbumsRoutes, 
                         UserCreatedPlaylistsRoute, 
-                        UserCreatedAlbumnRoute)
+                        UserCreatedAlbumRoute)
+                        
     api.add_resource(SongsRoutes, '/api/v1/songs')
     api.add_resource(SongRoutes, '/api/v1/songs/<string:song_id>')
     api.add_resource(UserSongLikesRoutes, '/api/v1/user/songs/like')
@@ -103,4 +105,4 @@ def add_api_resource(api):
 
     # user song collection routes 
     api.add_resource(UserCreatedPlaylistsRoute, '/api/v1/user/playlists')
-    # api.add_resource(UserCreatedAlbumnRoute, '/api/v1/albumns')
+    api.add_resource(UserCreatedAlbumRoute, '/api/v1/artist/<string:artist_id>/albumns')

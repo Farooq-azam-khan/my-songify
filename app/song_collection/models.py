@@ -134,6 +134,19 @@ class Album(db.Model):
     song_collection = db.Column(db.Integer, db.ForeignKey('SongCollection.pk'), nullable=False)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    @staticmethod
+    def get_artist_albumns(artist_pk):
+        artist_collection = SongCollection.get_user_collection(artist_pk)
+        albumns = Album.query.all()
+        data = {}
+        for ac in artist_collection:
+            album = Album.query.filter_by(song_collection=ac.pk).first()
+            if album: 
+                aname = str(album.name)
+                songs = [song.get_json() for song in ac.get_songs()]
+                data[aname] = songs 
+        return data 
+
     def add_song(self, song_id):
         sc = SongCollection.query.get(self.song_collection)
         sc.add_song(song_id)
