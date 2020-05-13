@@ -64,6 +64,21 @@ class Playlist(db.Model):
     def get_song_collection_pk(self):
         return SongCollection.query.get(self.song_collection).pk
 
+    
+    @staticmethod
+    def get_liked_playlists(user_pk):
+        collection_ids = UserSongCollectionRelationship.get_user_liked_collection(user_pk=user_pk)
+        # print(collection_ids)
+        data = {}
+        for uc in collection_ids:
+            playlist = Playlist.query.filter_by(song_collection=uc.pk).first() 
+            if playlist:
+                ppname = str(playlist.name)
+                songs = [song.get_json() for song in uc.get_songs()]
+                data[ppname] = songs 
+        return data 
+
+
     @staticmethod
     def get_user_playlists(user_pk):
         user_collections = SongCollection.get_user_collection(user_pk)
@@ -76,6 +91,10 @@ class Playlist(db.Model):
                 songs = [song.get_json() for song in uc.get_songs()]
                 data[ppname] = songs 
         return data 
+
+    def like(self, user_pk):
+        UserSongCollectionRelationship.add_entry(user_pk=user_pk, 
+        collection_pk=self.song_collection, is_like=True)
 
             
 
@@ -96,22 +115,15 @@ class Playlist(db.Model):
     def add_song(self, song_id):
         sc = SongCollection.query.get(self.song_collection)
         sc.add_song(song_id)
-        # new_song = SongList(song=song_id, collection=sc.pk)
-        # db.session.add(new_song)
-        # db.session.commit()
 
 
     def get_songs(self): 
         sc = SongCollection.query.get(self.song_collection)#.pk
         return sc.get_songs()  
-        # songs = SongList.query.filter_by(collection=sc).all()
-        # return {song.to_json() for song in songs}
 
     def get_composer(self):
         sc = SongCollection.query.get(self.song_collection)
         return sc.get_composer()
-        # user = User.query.get(SongCollection.query.get(self.song_collection).user)
-        # return f'{user.firstname} {user.lastname}'
 
     @staticmethod
     def create_playlist(user_pk, name, cover_image, display_status=1):
@@ -190,14 +202,47 @@ class Album(db.Model):
 class SongList(db.Model):
     song = db.Column(db.Integer, db.ForeignKey('song.pk'), nullable=False)
     collection = db.Column(db.Integer, db.ForeignKey('SongCollection.pk'), nullable=False)
+    added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # https://stackoverflow.com/questions/9034271/sqlalchemy-orm-how-to-declare-a-table-class-that-contains-multi-column-primary
     __table_args__ = (
         PrimaryKeyConstraint('song', 'collection'), {},
     )
 
-# SongList = db.Table('SongList', 
-#                     db.Column('pk', db.Integer, primary_key=True),
-#                     db.Column('song', db.Integer, db.ForeignKey('song.pk')), 
-#                     db.Column('collection', db.Integer, db.ForeignKey('DisplayStatus.pk'))
-#                 )
+
+class UserSongCollectionRelationship(db.Model):
+    user = db.Column(db.Integer, db.ForeignKey('user.pk'), nullable=False)
+    collection = db.Column(db.Integer, db.ForeignKey('SongCollection.pk'), nullable=False)
+    is_like = db.Column(db.Boolean, nullable=False)
+    added_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+    __table_args__ = (
+        PrimaryKeyConstraint('user', 'collection', 'is_like'), {},
+    )
+
+    @staticmethod
+    def get_user_liked_collection(user_pk):
+        q = UserSongCollectionRelationship.query.filter_by(user=user_pk, is_like=True).all()
+        result = [SongCollection.query.get(obj.collection) for obj in q]
+        return result
+
+    @staticmethod
+    def add_entry(user_pk, collection_pk, is_like):
+        usr = UserSongCollectionRelationship.query.filter_by(user=user_pk, collection=collection_pk).all()
+        # if there are no user then add them  
+        if len(usr) == 0:
+            db.session.add(UserSongCollectionRelationship(user=user_pk, collection=collection_pk, is_like=is_like))
+        elif len(usr) == 1 and usr[0].is_like != is_like:
+            # update like to dislike or viceverca
+            usr[0].is_like = is_like
+            db.session.add(usr)
+            db.session.commit()
+        else:
+            raise Exception('Cannot add multiple rows with the same primary key')
+
+
+
+
+    def __repr__(self):
+        return f'<UserSongCollectionRelationship ({self.user}, {self.collection}, {self.is_like})'
+
