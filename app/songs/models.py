@@ -18,14 +18,28 @@ class Song(db.Model):
     def get_song_dict(self):
         q =  User.query.get(self.user)
         artist =  f'{q.firstname} {q.lastname}'
-        return {'name': self.name, 
+        genre = Genre.query.get(self.genre)
+
+        result = {'name': self.name, 
                 'artist':artist , 
-                'cover_image': self.cover_image, 
-                'genre': Genre.query.get(self.genre).name, 
-                'added_at': self.added_at, 
+                # 'added_at': self.added_at, 
                 'mp3_file': self.mp3_file,
                 'pk': self.pk
-        }
+            }
+        if genre: 
+            result['genre'] = genre.name 
+        
+        if self.cover_image: 
+            result['cover_image'] = self.cover_image
+
+        return result
+    
+    @staticmethod   
+    def get_100():
+        q = Song.query.limit(100).all()
+        result = [song.get_song_dict() for song in q]
+        return result
+
 
 
 
@@ -41,6 +55,12 @@ class UserSongRelationship(db.Model):
     __table_args__ = (
         PrimaryKeyConstraint('user', 'song', 'is_like'), {},
     )
+
+    @staticmethod
+    def get_user_liked_songs(user_id):
+        q = UserSongRelationship.query.filter_by(user=user_id, is_like=True).all()
+        result = [Song.query.get(obj.song).get_song_dict() for obj in q]
+        return result
 
     @staticmethod
     def add_entry(user, song, is_like):

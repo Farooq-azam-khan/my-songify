@@ -3,6 +3,7 @@ from app import db
 import json
 from flask_login import current_user
 
+
 def test_user_id(app):
     user = User(email='testing@id.com', firstname='fn', lastname='ln')
     user.set_password('password')
@@ -21,6 +22,7 @@ def test_user_id(app):
     assert query_user.check_password("not test") == False
 
     assert query_user.is_admin == False
+
 
 def create_user():
     user = User(email='testing@id.com', firstname='fn', lastname='ln')

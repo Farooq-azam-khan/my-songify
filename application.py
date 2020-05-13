@@ -10,7 +10,7 @@ from app.song_collection.models import (SongCollection,
                                         )
 
 from config import Config
-
+# from test_config import TestConfig
 
 
 my_app = create_app(Config)
