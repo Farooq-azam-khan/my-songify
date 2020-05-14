@@ -75,6 +75,8 @@ class UserSongRelationship(db.Model):
         # if there are no user then add them  
         if len(usr) == 0:
             db.session.add(UserSongRelationship(user=user, song=song, is_like=is_like))
+            
+            db.session.commit() # TODO: did not commit before (make a test for this case)
         elif len(usr) == 1 and usr[0].is_like != is_like:
             # update like to dislike or viceverca
             usr[0].is_like = is_like
