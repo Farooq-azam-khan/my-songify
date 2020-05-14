@@ -73,7 +73,6 @@ class Playlist(db.Model):
         data = {}
         for uc in collection_ids:
             playlist = Playlist.query.filter_by(song_collection=uc.pk).first() 
-            print('playlist:', playlist)
             if playlist:
                 ppname = str(playlist.name)
                 songs = [song.get_json() for song in uc.get_songs()]
@@ -85,6 +84,7 @@ class Playlist(db.Model):
 
     @staticmethod
     def get_user_playlists(user_pk):
+        # TODO: add display status as {'playlist_name': {'display_status': 'Private', 'songs':[...]}}
         user_collections = SongCollection.get_user_collection(user_pk)
         playlists = Playlist.query.all()
         data = {}
@@ -128,6 +128,10 @@ class Playlist(db.Model):
     def get_composer(self):
         sc = SongCollection.query.get(self.song_collection)
         return sc.get_composer()
+
+    @staticmethod
+    def create(user_pk, name, cover_image, display_status=1):
+        return Playlist.create_playlist(user_pk, cover_image, display_status)
 
     @staticmethod
     def create_playlist(user_pk, name, cover_image, display_status=1):
@@ -247,9 +251,14 @@ class UserSongCollectionRelationship(db.Model):
     def add_entry(user_pk, collection_pk, is_like):
         # print('adding like')
         usr = UserSongCollectionRelationship.query.filter_by(user=user_pk, collection=collection_pk).all()
+        # print('collection to add to', usr)
         # if there are no user then add them  
         if len(usr) == 0:
-            db.session.add(UserSongCollectionRelationship(user=user_pk, collection=collection_pk, is_like=is_like))
+            # print('adding', usr, collection_pk, is_like)
+            new_scr = UserSongCollectionRelationship(user=user_pk, collection=collection_pk, is_like=is_like)
+            # print('new like to collection', new_scr)
+            db.session.add(new_scr)
+            db.session.commit() # TODO: make a test for a lack of commitmet
         elif len(usr) == 1 and usr[0].is_like != is_like:
             # update like to dislike or viceverca
             usr[0].is_like = is_like
