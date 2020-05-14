@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import Button from "@material-ui/core/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { Link } from "react-router-dom";
 
@@ -35,8 +36,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TopAlbums = () => {
+  const [top6, set_top6] = useState([])
+  const [loading, set_loading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/v1/albums/6').then(resp => resp.json()).then(data => {
+      console.log(data)
+      set_top6(data)
+      set_loading(false)
+    }).catch(e => console.error(e))
+  }, [])
   const classes = useStyles();
   const preventDefault = (e) => e.preventDefault();
+
   return (
     <div className={classes.root}>
       <Typography variant="h3" align="center">
@@ -72,24 +84,12 @@ const TopAlbums = () => {
           spacing={2}
           className={classes.albumList}
         >
-          <Grid item xs={6} sm={4}>
-            <AlbumCard />
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <AlbumCard />
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <AlbumCard />
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <AlbumCard />
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <AlbumCard />
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <AlbumCard />
-          </Grid>
+          {!loading ? top6.map(alb => {
+            return (<Grid key={alb.pk} item xs={6} sm={4}>
+              <AlbumCard album={alb} />
+            </Grid>)
+          }) : (<Grid item><CircularProgress color="secondary" /></Grid>)
+          }
         </Grid>
       </Grid>
     </div>

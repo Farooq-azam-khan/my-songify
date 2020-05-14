@@ -17,7 +17,8 @@ const useStyles = makeStyles({
   },
 });
 
-const AlbumCard = () => {
+
+const AlbumCard = ({ album }) => {
   const classes = useStyles();
 
   return (
@@ -25,12 +26,12 @@ const AlbumCard = () => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
+          image={album.cover_image ? album.cover_image : "https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="subtitle1" component="h2">
-            Album Name
+            {album.name}
           </Typography>
         </CardContent>
       </CardActionArea>
