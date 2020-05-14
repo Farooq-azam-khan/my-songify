@@ -28,7 +28,8 @@ def is_user_logged_in():
             'middlename': current_user.middlename,
             'lastname': current_user.lastname, 
             'email': current_user.email, 
-            'is_admin': current_user.is_admin
+            'is_admin': current_user.is_admin, 
+            'pk': current_user.pk
         }})
     return jsonify({'success': False})
 
@@ -40,7 +41,8 @@ def login():
             'middlename': current_user.middlename,
             'lastname': current_user.lastname, 
             'email': current_user.email, 
-            'is_admin': current_user.is_admin
+            'is_admin': current_user.is_admin, 
+            'pk': current_user.pk
         }})
 
     
@@ -60,7 +62,8 @@ def login():
             'middlename': current_user.middlename,
             'lastname': current_user.lastname, 
             'email': current_user.email, 
-            'is_admin': current_user.is_admin
+            'is_admin': current_user.is_admin, 
+            'pk': current_user.pk
         }})
     return jsonify({'success': False, 'message': 'Invalid form input','errors': form.errors} )
 
