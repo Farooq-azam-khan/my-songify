@@ -10,7 +10,7 @@ from app import db
 from app.songs.models import Song, Genre, UserSongRelationship
 from app.users.models import User
 from app.song_collection.models import SongCollection, Playlist, Album, DisplayStatus
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 
 
 class SongsRoutes(Resource):
@@ -101,6 +101,69 @@ class AlbumLikeByUserRoute(Resource):
         # print('query:', q)
         return q
         
+class SongCollectionCreatePlaylistOrAlbumn(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('name', type=str, required=True, 
+                                    help='Give the name of the collection', 
+                                    location='json')
+        self.reqparse.add_argument('is_playlist', type=str, required=True, 
+                                    help='What type of collection is it?', location='json')
+        self.reqparse.add_argument('cover_image', type=str, required=True, 
+                                    help='what is you cover image?', location='json')
+        self.reqparse.add_argument('songs', type=list, required=False, 
+                                    help='what songs would you like to add?', location='json')
+
+        super(SongCollectionCreatePlaylistOrAlbumn, self).__init__()
+
+
+    # def get(self):
+    #     return {'error': 'nothing to show here'}
+    def post(self):
+        if not current_user.is_authenticated:
+            return {'error': 'login then we can talk'}
+
+        args = self.reqparse.parse_args()
+        print('args', args)
+        
+        '''
+            expected for data: 
+            {
+                'name': 'a name'
+                'is_playlist': 'Album or Playlist' 
+                'cover_image': 'url link to image'
+                'songs': '[1,2,3,4,5,6]' (list of song ids)
+            }
+        '''
+        name = args['name']
+        cover_image = args['cover_image']
+        songs = args['songs']
+        is_playlist = args['is_playlist']
+        if is_playlist.lower() == 'playlist':
+            print('creating playlist')
+            new_playlist = Playlist.create(user_pk=current_user.pk, name=name, cover_image=cover_image)
+            print('songs', songs)
+            for song in songs:
+                new_playlist.add_song(song)
+
+            return {'success': True, 'message': 'playlist created'}, 201
+
+
+        elif args['is_playlist'].lower() == 'album':
+            print('creating albumn')
+            new_album = Album.create(user_pk=current_user.pk, name=name, cover_image=cover_image)
+            for song in songs:
+                new_album.add_song(song)
+
+            return {'success': True, 'message': 'albumn created'}, 201
+        
+        return {'success': False, 'message': 'invalid form'}
+
+
+
+
+        
+            
 
 
 # from . import api
@@ -132,3 +195,5 @@ def add_api_resource(api):
     # liked 
     api.add_resource(PlaylistLikeByUserRoute, '/api/v1/user/playlists/like')
     api.add_resource(AlbumLikeByUserRoute, '/api/v1/user/albums/like')
+
+    api.add_resource(SongCollectionCreatePlaylistOrAlbumn, '/api/v1/user/song_collection/create')

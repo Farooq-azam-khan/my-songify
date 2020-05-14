@@ -129,9 +129,14 @@ class Playlist(db.Model):
         sc = SongCollection.query.get(self.song_collection)
         return sc.get_composer()
 
+    def get_cover_image(self):
+        return SongCollection.query.get(self.song_collection).cover_image
+
     @staticmethod
     def create(user_pk, name, cover_image, display_status=1):
-        return Playlist.create_playlist(user_pk, cover_image, display_status)
+        return Playlist.create_playlist(user_pk=user_pk, name=name, 
+                                        cover_image=cover_image, 
+                                        display_status=display_status)
 
     @staticmethod
     def create_playlist(user_pk, name, cover_image, display_status=1):
@@ -154,6 +159,9 @@ class Album(db.Model):
     song_collection = db.Column(db.Integer, db.ForeignKey('SongCollection.pk'), nullable=False)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def get_cover_image(self):
+        return SongCollection.query.get(self.song_collection).cover_image
+        
     @staticmethod
     def get_artist_albumns(artist_pk):
         artist_collection = SongCollection.get_user_collection(artist_pk)
@@ -217,6 +225,10 @@ class Album(db.Model):
         db.session.commit()
 
         return new_album
+
+    @staticmethod
+    def create(user_pk, name, cover_image):
+        return Album.create_album(user_pk=user_pk, name=name, cover_image=cover_image)
 
 
 # which song in an album or playlist (many to many)
