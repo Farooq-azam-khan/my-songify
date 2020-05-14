@@ -212,13 +212,11 @@ class Album(db.Model):
             aLike = len(UserSongCollectionRelationship.query.filter_by(collection=alb_song_col, is_like=True).all())
             aname = str(album.name)
             data.append({'name':aname, 'likes':aLike, 'pk': album.pk })
-        # for ac in all_like_collections:
-        #     # check 
-        #     album = Album.query.filter_by(song_collection=ac.collection).first()
-        #     if album:
-        #         aLike = len(UserSongCollectionRelationship.query.filter_by(collection=album.song_collection, is_like=True).all())
-        #         aname = str(album.name)
 
+        # if empty then return n albumns 
+        if len(data) == 0:
+            return [{'name': alb.name, 'pk': alb.pk, 'likes': 0} for alb in Album.query.all()][:n]
+            
         result = sorted(data, key = lambda i: i['likes'], reverse=True)
         return result[:n]
 
