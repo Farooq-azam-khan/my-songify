@@ -12,6 +12,8 @@ import indigo from "@material-ui/core/colors/indigo";
 import Divider from "@material-ui/core/Divider";
 
 import Playlists from "../components/Playlist";
+import SongCollectionGroup from '../components/SongCollectionGroup';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: "100vw",
@@ -64,18 +66,25 @@ const useStyles = makeStyles((theme) => ({
 const Profile = (props) => {
   const [my_playlists, set_my_playlists] = useState({})
   const [like_playlists, setLikedPlaylists] = useState({})
+  const [my_albumns, set_my_albumns] = useState({})
   const [loading, setLoading] = useState(true)
+  const [liked_albumns, set_my_liked_albumns] = useState({})
   useEffect(() => {
 
     fetch('api/v1/user/playlists').then(resp => resp.json()).then(data => { set_my_playlists(data) })
     fetch('api/v1/user/playlists/like').then(resp => resp.json()).then(data => {
-      console.log(data);
       setLoading(false);
       setLikedPlaylists(data)
+      console.log('liked playlists')
+      console.log(like_playlists)
     })
       .catch(e => {
         console.error(e)
       })
+    fetch(`api/v1/artist/${props.user.user_data.pk}/albumns`).then(resp => resp.json()).then(data => { set_my_albumns(data) })
+
+    fetch('api/v1/user/albums/like').then(resp => resp.json()).then(data => { set_my_liked_albumns(data) })
+
 
   }, [])
 
@@ -120,43 +129,15 @@ const Profile = (props) => {
         </div>
       </Grid>
       <Grid item>
-        <Typography variant="h4">Your Playlists</Typography>
-        {Object.entries(my_playlists).map(([playlist, songs], index) => {
-          return (
-            <Grid key={index} item>
-              <Playlists title={playlist} tileData={songs} />
-            </Grid>);
-        })}
+        <SongCollectionGroup title="Your Playlists" group={my_playlists} />
+      </Grid>      <Grid item>
+        <SongCollectionGroup title="Your Albumns" group={my_albumns} />
       </Grid>
-
       <Grid item>
-        <Typography variant="h4">Your Album</Typography>
-        {Object.entries(my_playlists).map(([playlist, songs], index) => {
-          return (
-            <Grid key={index} item>
-              <Playlists title={playlist} tileData={songs} />
-            </Grid>);
-        })}
+        <SongCollectionGroup title="Your Liked Playlists" group={like_playlists} />
       </Grid>
-
       <Grid item>
-        <Typography variant="h4">Your Liked Playlists</Typography>
-        {Object.entries(my_playlists).map(([playlist, songs], index) => {
-          return (
-            <Grid key={index} item>
-              <Playlists title={playlist} tileData={songs} />
-            </Grid>);
-        })}
-      </Grid>
-
-      <Grid item>
-        <Typography variant="h4">Your Liked Albums</Typography>
-        {Object.entries(my_playlists).map(([playlist, songs], index) => {
-          return (
-            <Grid key={index} item>
-              <Playlists title={playlist} tileData={songs} />
-            </Grid>);
-        })}
+        <SongCollectionGroup title="Your Liked Albumns" group={liked_albumns} />
       </Grid>
     </Grid>
   );
