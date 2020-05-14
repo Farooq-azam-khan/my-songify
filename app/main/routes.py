@@ -72,6 +72,8 @@ class AlbumRoutes(Resource):
 
 class UserCreatedPlaylistsRoute(Resource):
     def get(self):
+        if not current_user.is_authenticated:
+            return {'error': 'Not logged in'}
         q = Playlist.get_user_playlists(current_user.pk)
         return q
 
@@ -85,12 +87,16 @@ class UserCreatedAlbumRoute(Resource):
 
 class PlaylistLikeByUserRoute(Resource):
     def get(self):
+        if not current_user.is_authenticated:
+            return {'error': 'Not logged in'}
         q = Playlist.get_liked_playlists(current_user.pk) 
-        # print('query for playlist:', q, 'current_user', current_user.firstname)
         return q
+
         
 class AlbumLikeByUserRoute(Resource):
     def get(self):
+        if not current_user.is_authenticated:
+            return {'error': 'Not logged in'}
         q = Album.get_liked_albums(current_user.pk) 
         # print('query:', q)
         return q
