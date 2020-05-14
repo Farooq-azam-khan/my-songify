@@ -5,7 +5,8 @@ from app.songs.models import Song, Genre, UserSongRelationship
 from app.users.models import User
 from app.song_collection.models import (SongCollection, 
                                         Playlist, Album, 
-                                        DisplayStatus, SongList
+                                        DisplayStatus, SongList, 
+                                        UserSongCollectionRelationship
                                         )
 
 from config import Config
@@ -37,7 +38,7 @@ def make_shell_context():
 
     return {'db': db, 'User': User, 'UserSongRelationship': UserSongRelationship,
     'create_songs_and_genres':create_songs_and_genres,
-    'Song': Song, 'Genre': Genre, 
+    'Song': Song, 'Genre': Genre, 'UserSongCollectionRelationship': UserSongCollectionRelationship,
     'SongCollection':SongCollection, 'Playlist':Playlist, 'Album':Album, 
     'DisplayStatus': DisplayStatus, 'SongList': SongList}
 
