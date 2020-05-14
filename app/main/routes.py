@@ -162,7 +162,14 @@ class SongCollectionCreatePlaylistOrAlbumn(Resource):
 
 
 
-        
+class Top_N_AlbmunsRoute(Resource):
+    def get(self, top_n_albums):
+        print('getting to n alb', top_n_albums)
+        q = Album.get_top_n_albumns(int(top_n_albums))
+        return q
+
+        # return {'success': False, 'message', 'TODO'}, 404
+
             
 
 
@@ -197,3 +204,6 @@ def add_api_resource(api):
     api.add_resource(AlbumLikeByUserRoute, '/api/v1/user/albums/like')
 
     api.add_resource(SongCollectionCreatePlaylistOrAlbumn, '/api/v1/user/song_collection/create')
+
+    # top 6 albumns based on likes 
+    api.add_resource(Top_N_AlbmunsRoute, '/api/v1/albums/<string:top_n_albums>')

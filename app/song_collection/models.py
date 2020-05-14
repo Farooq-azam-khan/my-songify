@@ -161,7 +161,7 @@ class Album(db.Model):
 
     def get_cover_image(self):
         return SongCollection.query.get(self.song_collection).cover_image
-        
+
     @staticmethod
     def get_artist_albumns(artist_pk):
         artist_collection = SongCollection.get_user_collection(artist_pk)
@@ -189,12 +189,40 @@ class Album(db.Model):
         # print(collection_ids)
         data = {}
         for uc in collection_ids:
-            album = Playlist.query.filter_by(song_collection=uc.pk).first() 
+            album = Album.query.filter_by(song_collection=uc.pk).first() 
             if album:
                 aname = str(album.name)
                 songs = [song.get_json() for song in uc.get_songs()]
                 data[aname] = songs 
         return data  
+    
+    @staticmethod
+    def get_top_n_albumns(n=6):
+        all_albums = Album.query.all()
+
+        # filter like collections 
+        # all_like_collections = UserSongCollectionRelationship.query.filter_by(is_like=True).all()
+
+        # filter albumns from like collection 
+        data = []
+        # get the likes for albumn i
+        for album in Album.query.all():
+            alb_song_col = album.song_collection
+            # filter USCR with like and that albumn sc 
+            aLike = len(UserSongCollectionRelationship.query.filter_by(collection=alb_song_col, is_like=True).all())
+            aname = str(album.name)
+            data.append({'name':aname, 'likes':aLike, 'pk': album.pk })
+        # for ac in all_like_collections:
+        #     # check 
+        #     album = Album.query.filter_by(song_collection=ac.collection).first()
+        #     if album:
+        #         aLike = len(UserSongCollectionRelationship.query.filter_by(collection=album.song_collection, is_like=True).all())
+        #         aname = str(album.name)
+
+        result = sorted(data, key = lambda i: i['likes'], reverse=True)
+        return result[:n]
+
+
 
     @staticmethod
     def get_albumns(at_most=4):
@@ -214,6 +242,10 @@ class Album(db.Model):
     def get_composer(self):
         sc = SongCollection.query.get(self.song_collection)
         return sc.get_composer()
+
+    def like(self, user_pk):
+        UserSongCollectionRelationship.add_entry(user_pk=user_pk, 
+        collection_pk=self.song_collection, is_like=True)
 
     @staticmethod
     def create_album(user_pk, name, cover_image):
