@@ -24,23 +24,28 @@ export const logout_user = () => {
       });
   };
 };
+
+// TODO: maybe implement with jwt later 
 export const login_user = (email, password) => {
   return (dispatch) => {
     fetch(`${BASE_URL}/users/login`, {
       method: 'POST',
-      body: getFormData({ email, password }),
+      // headers: {
+      //   "Content-Type": "application/json"
+      // },
+      body: getFormData({ email, password })
     })
       .then((resp) => resp.json())
       .then((data) => {
         if (data.success) {
           dispatch({
             type: LOGIN_SUCCESS,
-            payload: data.user,
+            payload: data,
           });
         } else {
           dispatch({
             type: LOGIN_FAILURE,
-            payload: data.user,
+            payload: data,
           });
         }
       }).catch(e => {
