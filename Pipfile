@@ -16,6 +16,7 @@ flask-wtf = "*"
 email-validator = "*"
 flask-admin = "*"
 gunicorn = "*"
+flask_restful = "*" 
 
 [requires]
 python_version = "3.8"

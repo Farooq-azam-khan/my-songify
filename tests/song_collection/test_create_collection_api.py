@@ -16,7 +16,7 @@ def create_user():
     db.session.commit()
 
 def test_create_playlist(app):
-    pytest.skip()
+    # pytest.skip()
     create_user() 
 
     with app.test_client() as client:
@@ -56,7 +56,7 @@ def create_songs():
     db.session.commit()
 
 def test_create_playlist_with_songs(app):
-    pytest.skip()
+    # pytest.skip()
     create_user() 
     create_songs()
 
@@ -92,7 +92,7 @@ def test_create_playlist_with_songs(app):
 
 
 def test_create_album_with_songs(app):
-    pytest.skip() 
+    # pytest.skip() 
     create_user() 
     create_songs()
 
