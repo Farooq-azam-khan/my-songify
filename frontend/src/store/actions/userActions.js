@@ -1,11 +1,12 @@
 import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS } from './types';
 
 import getFormData from './../../getFormData';
+import BASE_URL from '../../base_url';
 
 export const logout_user = () => {
   return (dispatch) => {
     console.log('logout action');
-    fetch('users/logout', {
+    fetch(`${BASE_URL}/users/logout`, {
       method: 'POST',
     })
       .then((resp) => resp.json())
@@ -16,12 +17,16 @@ export const logout_user = () => {
             type: LOGOUT_SUCCESS,
           });
         }
+      }).catch(e => {
+        dispatch({
+          type: LOGOUT_SUCCESS,
+        });
       });
   };
 };
 export const login_user = (email, password) => {
   return (dispatch) => {
-    fetch('users/login', {
+    fetch(`${BASE_URL}/users/login`, {
       method: 'POST',
       body: getFormData({ email, password }),
     })
@@ -38,6 +43,10 @@ export const login_user = (email, password) => {
             payload: data.user,
           });
         }
+      }).catch(e => {
+        dispatch({
+          type: LOGIN_FAILURE,
+        });
       });
   };
 };

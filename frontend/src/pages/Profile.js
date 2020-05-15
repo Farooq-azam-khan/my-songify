@@ -9,10 +9,9 @@ import { fade, makeStyles } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import indigo from "@material-ui/core/colors/indigo";
-import Divider from "@material-ui/core/Divider";
 
-import Playlists from "../components/Playlist";
 import SongCollectionGroup from '../components/SongCollectionGroup';
+import BASE_URL from '../base_url'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,23 +66,30 @@ const Profile = (props) => {
   const [my_playlists, set_my_playlists] = useState({})
   const [like_playlists, setLikedPlaylists] = useState({})
   const [my_albumns, set_my_albumns] = useState({})
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [liked_albumns, set_my_liked_albumns] = useState({})
   useEffect(() => {
 
-    fetch('api/v1/user/playlists').then(resp => resp.json()).then(data => { set_my_playlists(data) })
-    fetch('api/v1/user/playlists/like').then(resp => resp.json()).then(data => {
-      setLoading(false);
-      setLikedPlaylists(data)
-      console.log('liked playlists')
-      console.log(like_playlists)
-    })
-      .catch(e => {
-        console.error(e)
+    if (props.user.logged_in) {
+      const user_playlist_url = `${BASE_URL}/api/v1/user/playlists`
+      console.log('url:', user_playlist_url)
+      fetch(user_playlist_url).then(resp => resp.json()).then(data => {
+        console.log('your playlists');
+        set_my_playlists(data)
       })
-    fetch(`api/v1/artist/${props.user.user_data.pk}/albumns`).then(resp => resp.json()).then(data => { set_my_albumns(data) })
+    }
+    // fetch(`${BASE_URL}/api/v1/user/playlists/like`).then(resp => resp.json()).then(data => {
+    //   // setLoading(false);
+    //   setLikedPlaylists(data)
+    //   // console.log('liked playlists')
+    //   // console.log(like_playlists)
+    // })
+    //   .catch(e => {
+    //     console.error(e)
+    //   })
+    // fetch(`${BASE_URL}/api/v1/artist/${props.user.user_data.pk}/albumns`).then(resp => resp.json()).then(data => { set_my_albumns(data) })
 
-    fetch('api/v1/user/albums/like').then(resp => resp.json()).then(data => { set_my_liked_albumns(data) })
+    // fetch(`${BASE_URL}/api/v1/user/albums/like`).then(resp => resp.json()).then(data => { set_my_liked_albumns(data) })
 
 
   }, [])
@@ -128,9 +134,10 @@ const Profile = (props) => {
           />
         </div>
       </Grid>
-      <Grid item>
+      {/* <Grid item>
         <SongCollectionGroup title="Your Playlists" group={my_playlists} />
-      </Grid>      <Grid item>
+      </Grid> */}
+      {/* <Grid item>
         <SongCollectionGroup title="Your Albumns" group={my_albumns} />
       </Grid>
       <Grid item>
@@ -138,7 +145,7 @@ const Profile = (props) => {
       </Grid>
       <Grid item>
         <SongCollectionGroup title="Your Liked Albumns" group={liked_albumns} />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

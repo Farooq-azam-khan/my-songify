@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import GenreList from "../components/Genre";
 
+import BASE_URL from '../base_url'
+
 export default class Songs extends Component {
   state = {
     hasErrors: false,
@@ -11,7 +13,7 @@ export default class Songs extends Component {
 
   componentDidMount() {
     // this.setState({ genres: { genre1: tileData } });
-    fetch("/songs/")
+    fetch(`${BASE_URL}/songs/`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

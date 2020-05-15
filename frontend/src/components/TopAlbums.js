@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 
 import AlbumCard from "./AlbumCard";
 
+import BASE_URL from '../base_url'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -40,7 +42,7 @@ const TopAlbums = () => {
   const [loading, set_loading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/v1/albums/6').then(resp => resp.json()).then(data => {
+    fetch(`${BASE_URL}/api/v1/albums/6`).then(resp => resp.json()).then(data => {
       console.log(data)
       set_top6(data)
       set_loading(false)

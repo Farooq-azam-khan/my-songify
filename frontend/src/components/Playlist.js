@@ -6,7 +6,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Playlist = ({ title, tileData }) => {
   const classes = useStyles();
-  console.log(tileData)
+  console.log('playlist data')
+  console.log({ title, tileData })
 
   return (
     <div className={classes.root}>

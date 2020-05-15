@@ -18,6 +18,9 @@ import getFormData from "../getFormData";
 // import Visibility from "@material-ui/icons/Visibility";
 // import VisibilityOff from "@material-ui/icons/VisibilityOff";
 // TODO: show required fields
+
+import BASE_URL from '../base_url'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "91vh",
@@ -85,7 +88,7 @@ const Register = (props) => {
       password,
       confirm_password,
     };
-    fetch("/users/register", { method: "POST", body: getFormData(data) })
+    fetch(`${BASE_URL}/users/register`, { method: "POST", body: getFormData(data) })
       .then((resp) => resp.json())
       .then((data) => {
         if (!data.success) {
