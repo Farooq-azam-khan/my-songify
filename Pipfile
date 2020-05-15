@@ -19,6 +19,7 @@ gunicorn = "*"
 flask-restful = "*" 
 flask-cors = "*"
 flask-jwt-extended = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.8"
