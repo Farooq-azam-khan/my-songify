@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e4caf31526d479cd6687abb827299fa4",
+    "revision": "cc1e1a4b8e9088c5325be9042462c140",
     "url": "/my-songify/index.html"
   },
   {
-    "revision": "3eba065c778274787c8a",
+    "revision": "2315a8a319914f226dbe",
     "url": "/my-songify/static/css/main.69eda509.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/my-songify/static/js/2.36926348.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3eba065c778274787c8a",
-    "url": "/my-songify/static/js/main.28ae1cc4.chunk.js"
+    "revision": "2315a8a319914f226dbe",
+    "url": "/my-songify/static/js/main.f1875490.chunk.js"
   },
   {
     "revision": "21861290dba7645a3be3",

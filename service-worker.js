@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/my-songify/precache-manifest.20401db2eecc892994654dd46d910abc.js"
+  "/my-songify/precache-manifest.1a4bb88e6a54ba9f0b533c17493d40c1.js"
 );
 
 self.addEventListener('message', (event) => {
