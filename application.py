@@ -37,7 +37,7 @@ def make_shell_context():
     # db.session.commit()
 
     return {'db': db, 'User': User, 'UserSongRelationship': UserSongRelationship,
-    'create_songs_and_genres':create_songs_and_genres,
+    'create_songs_and_genres':create_songs_and_genres, 'add_6_albumns': add_6_albumns,
     'Song': Song, 'Genre': Genre, 'UserSongCollectionRelationship': UserSongCollectionRelationship,
     'SongCollection':SongCollection, 'Playlist':Playlist, 'Album':Album, 
     'DisplayStatus': DisplayStatus, 'SongList': SongList}
@@ -64,4 +64,10 @@ def create_songs_and_genres(user_id): # run function with flask shell
                         genre=i)
             db.session.add(song)
     db.session.commit()
+
+def add_6_albumns():
+    cover_images = ['https://i2.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/all-along-watchtower.jpg?w=1024&ssl=1', 'https://i2.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/american-woman.jpg?w=1024&ssl=1', 'https://i1.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/angel-mont-1.jpg?w=1024&ssl=1', 'https://i0.wp.com/bestlifeonline.com/wp-content/uploads/2018/06/becausethenight.jpg?w=1024&ssl=1']
+
+    for i in range(6):
+        Album.create_album(1, 'album1', cover_image=random.choice(cover_images))
 
