@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/my-songify/static/css/main.69eda509.chunk.css",
+    "main.js": "/my-songify/static/js/main.28ae1cc4.chunk.js",
+    "main.js.map": "/my-songify/static/js/main.28ae1cc4.chunk.js.map",
+    "runtime-main.js": "/my-songify/static/js/runtime-main.1d7d35be.js",
+    "runtime-main.js.map": "/my-songify/static/js/runtime-main.1d7d35be.js.map",
+    "static/js/2.36926348.chunk.js": "/my-songify/static/js/2.36926348.chunk.js",
+    "static/js/2.36926348.chunk.js.map": "/my-songify/static/js/2.36926348.chunk.js.map",
+    "index.html": "/my-songify/index.html",
+    "precache-manifest.20401db2eecc892994654dd46d910abc.js": "/my-songify/precache-manifest.20401db2eecc892994654dd46d910abc.js",
+    "service-worker.js": "/my-songify/service-worker.js",
+    "static/css/main.69eda509.chunk.css.map": "/my-songify/static/css/main.69eda509.chunk.css.map",
+    "static/js/2.36926348.chunk.js.LICENSE.txt": "/my-songify/static/js/2.36926348.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1d7d35be.js",
+    "static/js/2.36926348.chunk.js",
+    "static/css/main.69eda509.chunk.css",
+    "static/js/main.28ae1cc4.chunk.js"
+  ]
+}
