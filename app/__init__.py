@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 # from flask_admin import Admin
+from flask_cors import CORS
 
 from config import Config
 
@@ -27,9 +28,12 @@ def create_app(config_class=Config):
     return app
 
 def initalize_extensions(app):
+    CORS(app)
+
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    
     # admin.init_app(app)
 
     # add_admin_views(admin, db)
