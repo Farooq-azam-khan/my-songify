@@ -10,3 +10,4 @@ class Config(object):
     WTF_CSRF_SECRET_KEY = 'a random string'
     WTF_CSRF_ENABLED = False # TODO: check if neede
     FLASK_ADMIN_SWATCH = 'cerulean'
+    JWT_SECRET_KEY = 'a-jwt-secret-key-somewhere-here'
