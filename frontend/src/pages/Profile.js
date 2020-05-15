@@ -78,18 +78,18 @@ const Profile = (props) => {
         set_my_playlists(data)
       })
     }
-    // fetch(`${BASE_URL}/api/v1/user/playlists/like`).then(resp => resp.json()).then(data => {
-    //   // setLoading(false);
-    //   setLikedPlaylists(data)
-    //   // console.log('liked playlists')
-    //   // console.log(like_playlists)
-    // })
-    //   .catch(e => {
-    //     console.error(e)
-    //   })
-    // fetch(`${BASE_URL}/api/v1/artist/${props.user.user_data.pk}/albumns`).then(resp => resp.json()).then(data => { set_my_albumns(data) })
+    fetch(`${BASE_URL}/api/v1/user/playlists/like`).then(resp => resp.json()).then(data => {
+      // setLoading(false);
+      setLikedPlaylists(data)
+      // console.log('liked playlists')
+      // console.log(like_playlists)
+    })
+      .catch(e => {
+        console.error(e)
+      })
+    fetch(`${BASE_URL}/api/v1/artist/${props.user.user_data.pk}/albumns`).then(resp => resp.json()).then(data => { set_my_albumns(data) })
 
-    // fetch(`${BASE_URL}/api/v1/user/albums/like`).then(resp => resp.json()).then(data => { set_my_liked_albumns(data) })
+    fetch(`${BASE_URL}/api/v1/user/albums/like`).then(resp => resp.json()).then(data => { set_my_liked_albumns(data) })
 
 
   }, [])
