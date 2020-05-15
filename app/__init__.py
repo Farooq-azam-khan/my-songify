@@ -6,12 +6,17 @@ from flask_migrate import Migrate
 # from flask_admin import Admin
 from flask_cors import CORS
 
+# flask jwt 
+from flask_jwt_extended import JWTManager 
+
+
 from config import Config
 
 # configuration
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
+jwt = JWTManager()
 # admin = Admin(name='my-songify', template_mode='bootstrap3')
 
 # application factory
@@ -28,13 +33,14 @@ def create_app(config_class=Config):
     return app
 
 def initalize_extensions(app):
-    CORS(app)
+    CORS(app, supports_credentials=True) #, resources={r'/api/*': {'origins': '*'}})
 
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
     
     # admin.init_app(app)
+    jwt.init_app(app)
 
     # add_admin_views(admin, db)
 
