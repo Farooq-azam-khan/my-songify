@@ -12,6 +12,12 @@ from app import db
 # routes
 @main_blueprint.route('/')
 def main():
-    response = render_template('index.html', title='home')
-    return response
+    return render_template('index.html', title='home')
 
+@main_blueprint.route('/register')
+def register():
+    return render_template('index.html', title="register")
+
+@main_blueprint.route('/login')
+def login():
+    return render_template('index.html', title="login")

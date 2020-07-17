@@ -49,7 +49,6 @@ def login():
     email = request.form.get('email')
     password = request.form.get('password')
     form = LoginForm(email=email, password=password)
-
     remember = request.form.get('remember')
     
     if form.validate():
