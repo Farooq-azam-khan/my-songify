@@ -8,7 +8,7 @@ from .models import Genre, Song, UserSongRelationship
 
 
 
-@songs_blueprint.route('/songs/')
+@songs_blueprint.route('/songs/list')
 def songs():
     genres = Genre.query.all()
     data = {}
