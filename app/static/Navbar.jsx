@@ -7,7 +7,7 @@ const MenuAlt4 = ({ className }) => {
 }
 const Navbar = () => {
 
-    return (<nav className="flex items-center justify-between sm:shadow-xl w-full sm:py-2 sm:px-3 bg-teal-900 text-white">
+    return (<nav className="flex items-center justify-between shadow-xl w-full sm:py-2 sm:px-3 bg-teal-900 text-white">
         {/* mobile screen havbar */}
         <MobileNavbar />
         {/* small screen and above navbar */}

@@ -1,7 +1,7 @@
 const { Link } = ReactRouterDOM;
 
 const Home = () => {
-    return <div className="flex flex-col bg-blue-900 w-full h-full mt-5">
+    return <div className="flex flex-col bg-blue-900 w-full h-full overflow-auto">
         <section className="w-full flex flex-col items-center justify-center bg-gray-900">
             <h1 className="text-teal-100 font-bold text-4xl text-center tracking-widest">My Songify</h1>
             <p className="max-w-xl text-white mt-10 bg-gray-800 px-10 py-3 text-center shadow-xl rounded-lg">Amet anim aliqua amet laboris culpa deserunt ad id et magna voluptate voluptate. Culpa deserunt ad culpa labore sit ea cillum ullamco. Nisi consequat do ea sunt.
