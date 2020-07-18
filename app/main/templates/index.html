@@ -2,7 +2,9 @@
 <html>
 
 <head>
-  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>my-songify | {{ title }}</title>
   <!-- tailwindcss -->
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
@@ -24,14 +26,22 @@
 <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 
 <!-- my code -->
+
 <!-- login page -->
 <script src="{{ url_for('static', filename='Login.jsx')}}" type="text/jsx"></script>
+
 <!-- register component -->
 <script src="{{ url_for('static', filename='register.jsx')}}" type="text/jsx"></script>
+
 <!-- home -->
 <script src="{{ url_for('static', filename='Home.jsx')}}" type="text/jsx"></script>
+
 <!-- songs -->
 <script src="{{ url_for('static', filename='Songs.jsx')}}" type="text/jsx"></script>
+
+<!-- Navbar -->
+<script src="{{ url_for('static', filename='Navbar.jsx')}}" type="text/jsx"></script>
+
 <!-- main app -->
 <script src="{{ url_for('static', filename='app.jsx')}}" type="text/jsx"></script>
 

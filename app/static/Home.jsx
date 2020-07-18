@@ -1,20 +1,21 @@
 const { Link } = ReactRouterDOM;
 
 const Home = () => {
-    return <div className="bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-10 py-2 bg-gray-900 mt-5">
+    return <div className="bg-gray-900 flex flex-col">
+        <section className="flex flex-col items-center justify-center px-10 py-2 bg-gray-900 mt-5">
             <h1 className="text-teal-100 font-bold text-4xl text-center tracking-widest">My Songify</h1>
             <p className="max-w-xl text-white mt-10 bg-gray-800 px-10 py-3 text-center shadow-xl rounded-lg">Amet anim aliqua amet laboris culpa deserunt ad id et magna voluptate voluptate. Culpa deserunt ad culpa labore sit ea cillum ullamco. Nisi consequat do ea sunt.
 In amet duis mollit minim reprehenderit. Ex ad sint aliquip magna. </p>
-        </div>
-        <section className="flex items-center justify-around py-32 bg-gray-900">
-            <div className="border-r-4 border-teal-500 md:w-1/3 md:px-8 md:py-2">
-                <h2 className="text-right font-bold uppercase text-white text-4xl">Keep Track<br /> of the <br />
-                    <span className="text-teal-500">Best Music</span> <br />in the <br />
+        </section>
+        <section className="flex flex-col md:flex-row items-center justify-around py-32 bg-gray-900">
+            <div className="border-0 sm:border-r-4 border-teal-500 w-full md:w-1/3 md:px-8 md:py-2">
+                <h2 className="px-3 py-2 md:py-0 md:px-0 text-center md:text-right font-bold uppercase text-white text-3xl sm:text-4xl">Keep Track
+                <br className="hidden md:block" /> of the <br className="hidden md:block" />
+                    <span className="text-teal-500">Best Music</span> <br className="hidden md:block" />in the <br className="hidden md:block" />
                     <span className="text-teal-500">Industry</span>
                 </h2>
             </div>
-            <div className="md:w-2/3 md:h-full grid grid-rows-2 grid-cols-2 gap-4 md:px-8 md:py-2">
+            <div className="w-full md:w-2/3 md:h-full grid grid-rows-2 grid-cols-2 md:gap-4 md:px-8 md:py-2">
                 <TopAlbumsCard />
                 <TopAlbumsCard />
                 <TopAlbumsCard />
@@ -26,7 +27,7 @@ In amet duis mollit minim reprehenderit. Ex ad sint aliquip magna. </p>
                 Start Your Journey
                 </h2>
             <Link to="/register"
-                className="mt-10 px-24 py-4 text-xl bg-teal-700 text-teal-100 rounded shadow-xl hover:bg-teal-800">
+                className="mt-10 px-8 sm:px-10 md:px-24 py-4 text-xl bg-teal-700 text-teal-100 rounded shadow-xl hover:bg-teal-800">
                 Register
             </Link>
         </section>
@@ -34,9 +35,9 @@ In amet duis mollit minim reprehenderit. Ex ad sint aliquip magna. </p>
             <h2 className="text-center text-teal-100 tracking-wider border-b-2 border-teal-500  pb-3 font-semibold uppercase text-white text-3xl">
                 About this Project
                 </h2>
-            <p className="mt-8 bg-gray-800 md:px-10 md:py-3  text-white rounded-lg shadow-lg">
-                This project has been created to test the insides <br />
-                of websites like Tidal and Spotify which are <br />
+            <p className="mt-5 md:mt-8 bg-gray-800 px-4 sm:px-8 md:px-10 py-3  text-white rounded-lg shadow-lg">
+                This project has been created to test the insides <br className="hidden sm:block" />
+                of websites like Tidal and Spotify which are <br className="hidden sm:block" />
                 used for listening to songs.
                 </p>
         </section>
