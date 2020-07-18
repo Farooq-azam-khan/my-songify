@@ -11,9 +11,17 @@ from app import db
 
 # routes
 @main_blueprint.route('/')
-@main_blueprint.route('/songs')
-@main_blueprint.route('/register')
-@main_blueprint.route('/login')
 def main():
     return render_template('index.html', title='home')
 
+@main_blueprint.route('/register')
+def register():
+    return render_template('index.html', title='register')
+
+@main_blueprint.route('/songs')
+def songs():
+    return render_template('index.html', title='songs')
+
+@main_blueprint.route('/login')
+def login():
+    return render_template('index.html', title='login')
