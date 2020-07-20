@@ -25,10 +25,11 @@ const Navbar = (props) => {
         </div>
         <div className="hidden sm:flex items-center justify-between space-x-3">
             {user.loggedIn ? <>
-                <button onClick={handleLogout} className="hover:bg-teal-800 px-3 py-2 rounded-lg">Logout</button>
+                <Link to="profile" className="text-gray-200 hover:text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-lg shadow-xl">Profile</Link>
+                <button onClick={handleLogout} className="hover:bg-teal-800 text-gray-500 px-3 py-2 rounded-lg">Logout</button>
             </>
                 : <>
-                    <Link to="/login" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Login</Link>
+                    <Link to="/login" className="hover:bg-teal-800 px-3 py-2  rounded-lg">Login</Link>
                     <Link to="/register" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Register</Link>
                 </>
             }

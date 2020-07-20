@@ -1,47 +1,42 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 import { useForm } from "react-hook-form";
+import { registerAction } from '../store/actions/userActions';
 
-const Register = () => {
+const Register = ({ user, registerAction }) => {
     const { register, handleSubmit, watch, errors } = useForm();
-    const [globalErrors, setGlobalErrors] = useState([]);
     const onSubmit = data => {
-        if (data['confirm-email'] !== data['email']) {
-            globalErrors.push('Emails are not Equal')
-            setGlobalErrors(globalErrors)
-        }
-        if (data['password'] !== data['confirm-password']) {
-            globalErrors.push('Passwords are not equal')
-            setGlobalErrors(globalErrors)
-        }
-        console.log(data);
+        registerAction(data);
+    }
+    if (user.loggedIn) {
+        return (<div className="px-24 py-10 bg-teal-900 rounded-lg shadow-xl">
+            <h1 className="text-white text-4xl">You are already logged in</h1>
+        </div>)
     }
 
     return (<div className="flex flex-col items-center justify-center w-full h-full">
-        {globalErrors.length > 0 && <div className="text-white bg-red-800 px-2 py-1 w-full rounded-lg">
-            {globalErrors.map((el, i) => <div key={i}>{el}</div>)}
-        </div>
-        }
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center space-y-2 mt-5 w-full h-full px-3 sm:px-10">
             <div className="flex flex-col sm:flex-row space-x-0 space-y-1 sm:space-y-0 items-center w-full sm:space-x-4 justify-between">
-                <input name="first-name" ref={register({ required: true, minLength: 3, maxLength: 64 })}
+                <input name="firstname" ref={register({ required: true, minLength: 3, maxLength: 64 })}
                     className="w-full sm:w-1/3 bg-teal-100 px-3 py-2 rounded-lg" placeholder="First Name" />
-                {errors['first-name'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
+                {errors['firstname'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
                     <p className="text-gray-900">
-                        {errors['first-name'].type === 'required' && 'You must type your first name'}
-                        {errors['first-name'].type === 'minLength' && 'Minimum length of first name must be 3 or more'}
-                        {errors['first-name'].type === 'maxLength' && 'Max first name must be 64'}
+                        {errors['firstname'].type === 'required' && 'You must type your first name'}
+                        {errors['firstname'].type === 'minLength' && 'Minimum length of first name must be 3 or more'}
+                        {errors['firstname'].type === 'maxLength' && 'Max first name must be 64'}
                     </p>
                 </div>}
-                <input name="middle-name" ref={register}
+                <input name="middlename" ref={register}
                     className="w-full sm:w-1/3 bg-teal-100 px-3 py-2 rounded-lg" placeholder="Middle Name" />
-                <input name="last-name" ref={register({ required: true, minLength: 3, maxLength: 64 })}
+                <input name="lastname" ref={register({ required: true, minLength: 3, maxLength: 64 })}
                     className="w-full sm:w-1/3 bg-teal-100 px-3 py-2 rounded-lg" placeholder="Last Name"
                 />
-                {errors['last-name'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
+                {errors['lastname'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
                     <p className="text-gray-900">
-                        {errors['last-name'].type === 'required' && 'You must type your last name'}
-                        {errors['last-name'].type === 'minLength' && 'Minimum length of last name must be 3 or more'}
-                        {errors['last-name'].type === 'maxLength' && 'Max first name must be 64'}
+                        {errors['lastname'].type === 'required' && 'You must type your last name'}
+                        {errors['lastname'].type === 'minLength' && 'Minimum length of last name must be 3 or more'}
+                        {errors['lastname'].type === 'maxLength' && 'Max first name must be 64'}
                     </p>
                 </div>}
             </div>
@@ -53,11 +48,11 @@ const Register = () => {
                         {errors['email'].type === 'required' && 'Type your email.'}
                     </p>
                 </div>}
-                <input name="confirm-email" ref={register({ required: true })}
+                <input name="confirm_email" ref={register({ required: true })}
                     className="w-full bg-teal-100 px-3 py-2 rounded-lg" type="email" placeholder="Confirm Email" />
-                {errors['confirm-email'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
+                {errors['confirm_email'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
                     <p className="text-gray-900">
-                        {errors['confirm-email'].type === 'required' && 'Retype your email.'}
+                        {errors['confirm_email'].type === 'required' && 'Retype your email.'}
                     </p>
                 </div>}
             </div>
@@ -67,9 +62,9 @@ const Register = () => {
                 {errors['password'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
                     <p className="text-gray-900">Password is required with min length of 5.</p>
                 </div>}
-                <input name="confirm-password" ref={register({ required: true, minLength: 5, maxLength: 20 })}
+                <input name="confirm_password" ref={register({ required: true, minLength: 5, maxLength: 20 })}
                     className="w-full bg-teal-100 px-3 py-2 rounded-lg" type="password" placeholder="Confirm Password" />
-                {errors['confirm-password'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
+                {errors['confirm_password'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
                     <p className="text-gray-900">Passwords must match.</p>
                 </div>}
             </div>
@@ -77,4 +72,11 @@ const Register = () => {
         </form></div>);
 }
 
-export default Register; 
+Register.propTypes = {
+    user: PropTypes.object.isRequired,
+    registerAction: PropTypes.func.isRequired
+}
+
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps, { registerAction })(Register); 

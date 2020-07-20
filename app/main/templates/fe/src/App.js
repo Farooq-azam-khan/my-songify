@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Songs from './pages/Songs';
+import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import store from "./store";
 
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Route path="/register" exact><Register /></Route>
           <Route path="/login" exact><Login /></Route>
           <Route path="/songs" exact><Songs /></Route>
+          <Route path="/profile" exact><Profile /></Route>
           <Route path="/"><Home /></Route>
         </Switch>
       </div>
