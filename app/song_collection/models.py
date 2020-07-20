@@ -42,6 +42,17 @@ class DisplayStatus(db.Model):
     status = db.Column(db.String(20), unique=True, nullable=False)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def serialize(self):
+        return {
+            'pk': self.pk, 
+            'status': self.status
+        }
+
+    @staticmethod
+    def get_all():
+        q = DisplayStatus.query.all()
+        return [item.serialize() for item in q]
+
     @staticmethod
     def add_default_display_status():
         statusi = ['private', 'unlisted', 'public']
