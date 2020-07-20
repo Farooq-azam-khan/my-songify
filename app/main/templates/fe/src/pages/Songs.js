@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Songs = () => {
     const [isLoading, setLoading] = useState(true);
@@ -34,11 +35,11 @@ const Songs = () => {
 }
 
 const SongGenre = ({ name, songs }) => {
-    return <div className="mt-24 px-2 sm:px-8 py-5 sm:rounded-lg flex flex-col items-center justify-center mx-auto bg-teal-900 shadow-xl max-w-xl ">
-        <div className="-my-8 relative z-10">
-            <span className="px-5 rounded-lg shadow-xl py-3 text-white font-semibold text-xl sm:text-2xl bg-teal-800">{name}</span>
+    return <div className="flex flex-col w-full md:max-w-4xl mx-auto items-center justify-center mt-24 sm:px-2 py-2 sm:py-5 sm:rounded-lg bg-teal-900 shadow-xl">
+        <div className="-my-6 relative z-10">
+            <span className="px-5 rounded-lg shadow-xl py-3 text-white font-semibold text-xl sm:text-2xl bg-teal-800 tracking-wider uppercase">{name}</span>
         </div>
-        <div className="flex items-center justify-around space-x-5 py-2 px-0 mt-10 h-64 w-full overflow-auto">
+        <div className="flex items-center justify-around space-x-5 py-2 px-0 mt-10 h-64 w-full overflow-x-auto overflow-y-hidden">
             {songs.map(song => <SongCard key={song.pk} {...song} />)}
         </div>
     </div>
@@ -47,7 +48,7 @@ const SongGenre = ({ name, songs }) => {
 const SongCard = ({ name, cover_image }) => {
     return <div className="flex flex-col items-center justify-around bg-teal-700 rounded-lg shadow-xl max-w-2xl text-white">
         <span className="w-32 h-32 overflow-hidden"><img className="w-full h-full object-cover" src={cover_image} /></span>
-        <span className="font-semibold text-lg text-gray-100 hover:text-teal-200 px-3 py-1">{name}</span>
+        <Link to="#" className="w-full text-center font-semibold text-lg text-gray-100 hover:text-teal-200 px-3 py-1">{name}</Link>
     </div>
 }
 
