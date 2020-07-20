@@ -9,7 +9,7 @@ const Songs = () => {
             .then((res) => res.json())
             .then(resp => {
                 if (resp.success) {
-                    setSongs(resp.data)
+                    // setSongs(resp.data)
                     setLoading(false)
                 }
             })
@@ -21,10 +21,15 @@ const Songs = () => {
                 <h1 className="text-white text-4xl">Loading...</h1>
             </div>
             :
-            <div className="flex flex-col h-full w-full pb-24 bg-gray-900 overflow-auto">
-                <h1 className="text-4xl text-teal-100 font-bold text-center">Recent Songs</h1>
-                {Object.keys(songs).map(genre => <SongGenre key={genre} name={genre} songs={songs[genre]} />)}
-            </div>
+
+            Object.keys(songs).length === 0 ? <div className="px-10 py-5 sm:px-24 sm:py-10 bg-teal-900 rounded-lg shadow-xl">
+                <h1 className="text-white text-lg sm:text-3xl md:text-4xl">No songs in database, add some</h1>
+            </div> : <div className="flex flex-col h-full w-full pb-24 bg-gray-900 overflow-auto">
+                    <h1 className="text-4xl text-teal-100 font-bold text-center">Recent Songs</h1>
+                    {Object.keys(songs).map(genre => <SongGenre key={genre} name={genre} songs={songs[genre]} />)}
+                </div>
+
+
         }
     </React.Fragment>
 }
