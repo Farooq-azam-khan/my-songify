@@ -31,3 +31,14 @@
 - [restful flask api](https://flask-restful.readthedocs.io/en/latest/quickstart.html)
 - [flask marshmallow for object serialization](https://flask-marshmallow.readthedocs.io/en/latest/)
 - [pushing to non master branch on heroku](https://devcenter.heroku.com/articles/git#deploying-code)
+
+## pushing for production
+- make sure the build file is deleted from `app/static/`
+1. run `build_and_export.sh` file located at `app/main/template/fe`
+  - the above file does the following three steps
+  1. build tailwindcss for production (by purgin classes that are not used).
+    - makesure in `tailwind.config.js` the `purge.enabled` value is set to `true`.
+    - run `npm run build:tailwind`
+  2. compile react to a production build `npm run build`.
+  3. move the build file to `app/static/` file. 
+2. update the `js` and `css` files in `app/main/template/index.html` file. 
