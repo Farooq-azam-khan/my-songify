@@ -1,7 +1,7 @@
 
 
 from flask import render_template
-
+from flask_login import current_user
 from . import main_blueprint
 
 from app import db
@@ -25,3 +25,9 @@ def songs():
 @main_blueprint.route('/login')
 def login():
     return render_template('index.html', title='login')
+
+
+@main_blueprint.route('/profile')
+def profile():
+    return render_template('index.html', title=f'{current_user.firstname} {current_user.lastname}')
+    
