@@ -18,6 +18,15 @@ class User(UserMixin, db.Model):
     @classmethod
     def find_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
+    
+    def serialize(self):
+        return {
+            'firstname': self.firstname,
+            'middlename': self.middlename, 
+            'lastname': self.lastname, 
+            'email': self.email, 
+            'is_admin': self.is_admin
+        }
 
 
     def get_id(self):
