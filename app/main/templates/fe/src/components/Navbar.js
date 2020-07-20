@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as Icons from 'heroicons-react';
 
-const Navbar = () => {
+import { logoutAction } from '../store/actions/userActions';
+
+const Navbar = (props) => {
+    const { user, logoutAction } = props;
+    console.log("props")
+    console.log(user)
+    const handleLogout = () => {
+        logoutAction();
+    }
     return (<nav className="flex items-center justify-between shadow-xl w-full h-full sm:py-2 sm:px-3 bg-teal-900 text-white">
         {/* mobile screen havbar */}
-        <MobileNavbar />
+        <MobileNavbar {...props} />
         {/* small screen and above navbar */}
         <div className="hidden sm:flex items-center justify-between space-x-3">
             <Link to="/" className="px-3 py-2 rounded-lg hover:bg-teal-800">my-songify</Link>
@@ -14,16 +24,26 @@ const Navbar = () => {
             <Link to="#" className="px-3 py-2 rounded-lg hover:bg-teal-800">Actions</Link>
         </div>
         <div className="hidden sm:flex items-center justify-between space-x-3">
-            <Link to="/login" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Login</Link>
-            <Link to="/register" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Register</Link>
+            {user.loggedIn ? <>
+                <button onClick={handleLogout} className="hover:bg-teal-800 px-3 py-2 rounded-lg">Logout</button>
+            </>
+                : <>
+                    <Link to="/login" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Login</Link>
+                    <Link to="/register" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Register</Link>
+                </>
+            }
         </div>
+
     </nav>)
 }
 
-const MobileNavbar = () => {
+const MobileNavbar = ({ user, logoutAction }) => {
 
     const [showMenuItems, setMenuItems] = useState(false);
     const handleMenuItems = () => setMenuItems(!showMenuItems);
+    const handleLogout = () => {
+        logoutAction()
+    }
     return (<div className="sm:hidden flex flex-col w-full h-full">
         <div className="flex items-center w-full justify-between shadow-lg">
             <Link to="/" className="block px-3 py-2">my-songify</Link>
@@ -32,13 +52,22 @@ const MobileNavbar = () => {
         {/* menu items */}
         {showMenuItems ? <div className="flex flex-col space-y-2 w-full bg-teal-800 py-5">
             <Link to="/#about" className="px-5 py-1 border-l-0 hover:border-l-2 border-teal-500">About</Link>
-            <Link to="/songs" className="pb-2 border-b border-teal-700 px-5 py-1 border-l-0 hover:border-l-2 border-teal-500">Songs</Link>
+            <Link to="/songs" className="pb-2 border-b  px-5 py-1 border-l-0 hover:border-l-2 border-teal-500">Songs</Link>
             <div className="flex flex-col">
-                <Link to="/login" className="rounded-lg px-5 py-1 border-l-0 hover:border-l-2 border-teal-500">Login</Link>
-                <Link to="/register" className="rounded-lg px-5 py-1 border-l-0 hover:border-l-2 border-teal-500">Register</Link>
+                {user.loggedIn ? <>
+                    <button onClick={handleLogout} className="hover:bg-teal-800 px-3 py-2 rounded-lg">Logout</button>
+
+                </> : <>
+                        <Link to="/login" className="rounded-lg px-5 py-1 border-l-0 hover:border-l-2 border-teal-500">Login</Link>
+                        <Link to="/register" className="rounded-lg px-5 py-1 border-l-0 hover:border-l-2 border-teal-500">Register</Link>
+                    </>}
             </div>
         </div> : null}
     </div>)
 }
-
-export default Navbar; 
+Navbar.propTypes = {
+    user: PropTypes.object.isRequired,
+    logoutAction: PropTypes.func.isRequired
+}
+const mapStateToProps = ({ user }) => ({ user })
+export default connect(mapStateToProps, { logoutAction })(Navbar);

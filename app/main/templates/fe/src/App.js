@@ -1,14 +1,17 @@
 import React from 'react';
+import { Provider } from "react-redux";
 import { Switch, Route } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Songs from './pages/Songs';
 import Navbar from './components/Navbar';
+import store from "./store";
 
 class App extends React.Component {
   render() {
-    return <div className="bg-gray-900">
+    return <Provider store={store}><div className="bg-gray-900">
       <Navbar />
       <div className="flex items-center justify-center w-full overflow-hidden">
         <Switch>
@@ -18,7 +21,7 @@ class App extends React.Component {
           <Route path="/"><Home /></Route>
         </Switch>
       </div>
-    </div>
+    </div></Provider>
   }
 }
 
