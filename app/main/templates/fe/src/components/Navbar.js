@@ -8,8 +8,6 @@ import { logoutAction } from '../store/actions/userActions';
 
 const Navbar = (props) => {
     const { user, logoutAction } = props;
-    console.log("props")
-    console.log(user)
     const handleLogout = () => {
         logoutAction();
     }

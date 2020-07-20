@@ -28,6 +28,10 @@ module.exports = {
       }
     },
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'checked'],
+    borderWidth: ['checked'],
+    borderColor: ['checked']
+  },
   plugins: [],
 }
