@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'heroicons-react';
 
-// const MenuAlt4 = ({ className }) => {
-//     return <svg className={className} fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-// }
 const Navbar = () => {
-
-    return (<nav className="flex items-center justify-between shadow-xl w-full sm:py-2 sm:px-3 bg-teal-900 text-white">
+    return (<nav className="flex items-center justify-between shadow-xl w-full h-full sm:py-2 sm:px-3 bg-teal-900 text-white">
         {/* mobile screen havbar */}
         <MobileNavbar />
         {/* small screen and above navbar */}

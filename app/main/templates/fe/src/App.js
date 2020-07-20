@@ -8,9 +8,9 @@ import Navbar from './components/Navbar';
 
 class App extends React.Component {
   render() {
-    return <main className="bg-gray-900 flex flex-col w-screen h-screen">
+    return <div className="bg-gray-900">
       <Navbar />
-      <div className="flex items-center justify-center w-full h-full overflow-hidden">
+      <div className="flex items-center justify-center w-full overflow-hidden">
         <Switch>
           <Route path="/register" exact><Register /></Route>
           <Route path="/login" exact><Login /></Route>
@@ -18,7 +18,7 @@ class App extends React.Component {
           <Route path="/"><Home /></Route>
         </Switch>
       </div>
-    </main>
+    </div>
   }
 }
 
