@@ -18,8 +18,8 @@ const Login = ({ user, loginAction }) => {
         loginAction(email, password)
     }
     if (user.loggedIn) {
-        return (<div className="px-24 py-10 bg-teal-900 rounded-lg shadow-xl">
-            <h1 className="text-white text-4xl">You are already logged in</h1>
+        return (<div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-900 h-full">
+            <h1 className="text-white text-4xl bg-teal-900 px-24 py-10 rounded-lg shadow-xl">You are already logged in</h1>
         </div>)
     }
 
