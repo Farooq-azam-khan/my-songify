@@ -13,7 +13,9 @@ const Profile = ({ user }) => {
     // const [userLikeAlbums, setUserLikedAlbums] = useState([]);
 
     if (!user.loggedIn) {
-        return <div><h1 className="font-bold text-orange-500 text-2xl">You must be logged in.</h1></div>
+        return <div className="fixed z-10 inset-0 flex items-center justify-center bg-gray-900 h-full">
+            <h1 className="text-white text-4xl bg-teal-900 px-24 py-10 rounded-lg shadow-xl">You need to log in</h1>
+        </div>
     }
     return (
         <main className="max-w-4xl h-full py-10">

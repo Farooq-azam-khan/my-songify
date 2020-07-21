@@ -15,16 +15,16 @@ const Register = ({ user, registerAction }) => {
         </div>)
     }
 
-    return (<div className="flex flex-col items-center justify-center w-full h-full">
+    return (<div className="fixed z-10 inset-0 flex flex-col items-center justify-center w-full h-full bg-gray-900">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center space-y-2 mt-5 w-full h-full px-3 sm:px-10">
             <div className="flex flex-col sm:flex-row space-x-0 space-y-1 sm:space-y-0 items-center w-full sm:space-x-4 justify-between">
                 <input name="firstname" ref={register({ required: true, minLength: 3, maxLength: 64 })}
                     className="w-full sm:w-1/3 bg-teal-100 px-3 py-2 rounded-lg" placeholder="First Name" />
                 {errors['firstname'] && <div className="bg-red-300 w-full px-3 py-2 rounded-lg">
                     <p className="text-gray-900">
-                        {errors['firstname'].type === 'required' && 'You must type your first name'}
-                        {errors['firstname'].type === 'minLength' && 'Minimum length of first name must be 3 or more'}
-                        {errors['firstname'].type === 'maxLength' && 'Max first name must be 64'}
+                        {errors.firstname.type === 'required' && 'You must type your first name'}
+                        {errors.firstname.type === 'minLength' && 'Minimum length of first name must be 3 or more'}
+                        {errors.firstname.type === 'maxLength' && 'Max first name must be 64'}
                     </p>
                 </div>}
                 <input name="middlename" ref={register}
