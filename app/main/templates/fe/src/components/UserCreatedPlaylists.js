@@ -102,11 +102,11 @@ const CreatePlaylistModal = ({ close, statuses, loadingStatus, logoutAction }) =
             })
     }
 
-    return (<div className="fixed z-20 inset-0 w-full h-full flex flex-col items-center justify-center ">
+    return (<div className="fixed z-20 inset-0 w-full h-full flex flex-col items-center justify-center">
         <button onClick={() => close(false)}
-            // TODO: Fetch songs
             className="cursor-default fixed w-full h-full inset-0 bg-black opacity-50" />
-        <form onSubmit={handleSubmit(onSubmit)} className=".display-playlist relative z-30 flex flex-col space-y-10 items-start justify-center p-10 shadow-xl rounded-lg bg-blue-800">
+        {/* // TODO: Fetch songs */}
+        <form onSubmit={handleSubmit(onSubmit)} className="display-playlist relative z-30 flex flex-col space-y-10 items-start justify-center p-10 shadow-xl rounded-lg bg-blue-800">
             <input name="name" ref={register({ required: true })} placeholder="Playlist Name" className="px-4 py-3 rounded-lg" />
             <input name="cover_image" ref={register} placeholder="Cover Image URL" className="px-4 py-3 w-full rounded-lg" />
             <div className="flex items-center justify-around space-x-5">
