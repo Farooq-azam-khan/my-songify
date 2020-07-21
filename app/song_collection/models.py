@@ -16,6 +16,9 @@ class SongCollection(db.Model):
     listens = db.Column(db.Integer, default=0)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def __repr__(self):
+        return f'<SongCollection {self.pk} - {self.cover_image}>'
+
     def add_song(self, song_id): 
         new_song = SongList(song=song_id, collection=self.pk)
         db.session.add(new_song)
@@ -103,8 +106,11 @@ class Playlist(db.Model):
             playlist = Playlist.query.filter_by(song_collection=uc.pk).first()
             if playlist: 
                 ppname = str(playlist.name)
+                # display_status = DisplayStatus.query.get(playlist.display_status)
                 songs = [song.get_json() for song in uc.get_songs()]
-                data[ppname] = songs 
+                data[ppname] = {'songs': songs, 
+                            # 'display_status': display_status,
+                            'cover_image': uc.cover_image}
         return data 
 
     def like(self, user_pk):

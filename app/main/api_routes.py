@@ -139,7 +139,7 @@ class SongCollectionCreatePlaylistOrAlbumn(Resource):
         '''
         name = args['name']
         cover_image = args['cover_image']
-        songs = args['songs']
+        songs = [] #args['songs']
         is_playlist = args['is_playlist']
         if is_playlist.lower() == 'playlist':
             print('creating playlist')
