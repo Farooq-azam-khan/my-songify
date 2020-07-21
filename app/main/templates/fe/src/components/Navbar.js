@@ -11,7 +11,7 @@ const Navbar = (props) => {
     const handleLogout = () => {
         logoutAction();
     }
-    return (<nav className="flex items-center justify-between shadow-xl w-full h-full sm:py-2 sm:px-3 bg-teal-900 text-white">
+    return (<nav className="relative z-20 flex items-center justify-between shadow-xl w-full h-full sm:py-2 sm:px-3 bg-teal-900 text-white">
         {/* mobile screen havbar */}
         <MobileNavbar {...props} />
         {/* small screen and above navbar */}
