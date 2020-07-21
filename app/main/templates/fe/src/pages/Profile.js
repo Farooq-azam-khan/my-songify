@@ -126,7 +126,7 @@ const CreatePlaylistModal = ({ close, statuses, loadingStatus }) => {
 }
 
 
-// needs serious refactoring
+// TODO: needs serious refactoring
 const CollectionDisplay = ({ collection, collectionTitle = "", nullMessage, isPlaylist = true, onClick, children, loadingCollection = false }) => {
     return <div className="bg-gray-800 rounded-lg shadow-lg max-w-3xl mt-10">
         {loadingCollection ? <div className="">
