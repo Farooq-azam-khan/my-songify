@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import * as Icons from 'heroicons-react';
 
 import { logoutAction } from '../store/actions/userActions';
@@ -19,9 +19,9 @@ const Navbar = (props) => {
         {/* <MobileNavbar {...props} /> */}
         {/* small screen and above navbar */}
         <div className="relative flex items-center justify-between space-x-3">
-            <Link to="/" className="px-3 py-2 rounded-lg hover:bg-teal-800">my-songify</Link>
+            <NavLink to="/" className="px-3 py-2 rounded-lg hover:bg-teal-800">my-songify</NavLink>
             <a href="/#about" className="px-3 py-2 rounded-lg hover:bg-teal-800">About</a>
-            <Link to='/songs' className="px-3 py-2 rounded-lg hover:bg-teal-800">Songs</Link>
+            <NavLink to='/songs' activeClassName="bg-teal-800 shadow-2xl" className="px-3 py-2 rounded-lg hover:bg-teal-800">Songs</NavLink>
             <div className="relative">
                 <button onClick={handleActionDropdown} className="relative inline-flex items-center justify-between px-3 py-2 rounded-lg hover:bg-teal-800"><span>Actions</span><span><Icons.ChevronDown className="w-6 h-6" /></span>
                 </button>
@@ -40,12 +40,12 @@ const Navbar = (props) => {
         </div>
         <div className="hidden sm:flex items-center justify-between space-x-3">
             {user.loggedIn ? <>
-                <Link to="profile" className="text-gray-200 hover:text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-lg shadow-xl">Profile</Link>
+                <NavLink to="profile" activeClassName="bg-teal-800 shadow-2xl" className="text-gray-200 hover:text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-lg shadow-xl">Profile</NavLink>
                 <button onClick={handleLogout} className="hover:bg-teal-800 text-gray-500 px-3 py-2 rounded-lg">Logout</button>
             </>
                 : <>
-                    <Link to="/login" className="hover:bg-teal-800 px-3 py-2  rounded-lg">Login</Link>
-                    <Link to="/register" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Register</Link>
+                    <NavLink to="/login" activeClassName="bg-teal-800 shadow-2xl" className="hover:bg-teal-800 px-3 py-2  rounded-lg">Login</NavLink>
+                    <NavLink to="/register" activeClassName="bg-teal-800 shadow-2xl" className="hover:bg-teal-800 px-3 py-2 rounded-lg">Register</NavLink>
                 </>
             }
         </div>
