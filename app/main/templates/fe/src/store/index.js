@@ -29,6 +29,8 @@ const persistedState = loadFromLocalStorage();
 const store = createStore(
     rootReducer,
     persistedState,
+    applyMiddleware(thunk)
+
     // compose(
     //     applyMiddleware(...middleware),
     //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
