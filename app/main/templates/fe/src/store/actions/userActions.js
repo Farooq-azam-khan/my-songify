@@ -28,8 +28,8 @@ export const loginAction = (email, password) => dispatch => {
 }
 
 export const registerAction = (reg_data) => dispatch => {
-    console.log('regiser action')
-    console.log({ registerdata: reg_data })
+    // console.log('regiser action')
+    // console.log({ registerdata: reg_data })
     dispatch({ type: REGISTER_SENT })
     fetch('/users/register', {
         method: 'POST',
@@ -40,7 +40,7 @@ export const registerAction = (reg_data) => dispatch => {
     })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             if (data.success) {
                 dispatch({ type: REGISTER_SUCCESS, payload: data })
             } else {
@@ -62,7 +62,7 @@ export const logoutAction = () => dispatch => {
     })
         .then(resp => resp.json())
         .then(data => {
-            console.log('logout action', data)
+            // console.log('logout action', data)
             dispatch({ type: LOGOUT_SUCCESS, payload: data })
         }).catch(err => {
             dispatch({ type: LOGOUT_FAILURE })

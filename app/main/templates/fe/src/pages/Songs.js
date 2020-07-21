@@ -62,7 +62,7 @@ const Songs = () => {
 const SongFormModalComponent = ({ close }) => {
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
-        console.log(data)
+        // console.log(data)
     }
     return (<div className="fixed inset-0 z-30 flex items-center justify-center w-full h-full">
         <button onClick={() => close(false)}
