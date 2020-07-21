@@ -123,7 +123,7 @@ class SongCollectionCreatePlaylistOrAlbumn(Resource):
     #     return {'error': 'nothing to show here'}
     def post(self):
         if not current_user.is_authenticated:
-            return {'error': 'login then we can talk'}
+            return {'sucess': False, 'is_authenticated': False, 'error': 'login then we can talk'}
 
         args = self.reqparse.parse_args()
         print('args', args)
