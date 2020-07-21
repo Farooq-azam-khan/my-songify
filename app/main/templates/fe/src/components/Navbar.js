@@ -8,18 +8,35 @@ import { logoutAction } from '../store/actions/userActions';
 
 const Navbar = (props) => {
     const { user, logoutAction } = props;
+    const [showActionDropdown, setShowActionDropdown] = useState(false);
+
+    const handleActionDropdown = () => setShowActionDropdown(!showActionDropdown);
     const handleLogout = () => {
         logoutAction();
     }
     return (<nav className="relative z-20 flex items-center justify-between shadow-xl w-full h-full sm:py-2 sm:px-3 bg-teal-900 text-white">
         {/* mobile screen havbar */}
-        <MobileNavbar {...props} />
+        {/* <MobileNavbar {...props} /> */}
         {/* small screen and above navbar */}
-        <div className="hidden sm:flex items-center justify-between space-x-3">
+        <div className="relative flex items-center justify-between space-x-3">
             <Link to="/" className="px-3 py-2 rounded-lg hover:bg-teal-800">my-songify</Link>
             <a href="/#about" className="px-3 py-2 rounded-lg hover:bg-teal-800">About</a>
             <Link to='/songs' className="px-3 py-2 rounded-lg hover:bg-teal-800">Songs</Link>
-            <Link to="#" className="px-3 py-2 rounded-lg hover:bg-teal-800">Actions</Link>
+            <div className="relative">
+                <button onClick={handleActionDropdown} className="relative inline-flex items-center justify-between px-3 py-2 rounded-lg hover:bg-teal-800"><span>Actions</span><span><Icons.ChevronDown className="w-6 h-6" /></span>
+                </button>
+                {showActionDropdown && <div className="absolute top-0 left-0 mt-12 z-30 flex flex-col space-y-2 bg-gray-800 w-64 overflow-auto rounded-lg shadow-xl py-2">
+                    <Link to="#" className="px-3 py-1 hover:bg-gray-700">
+                        Upload Song
+                </Link>
+                    <Link to="#" className="px-3 py-1 hover:bg-gray-700">
+                        Create Playlist
+                </Link>
+                    <Link to="#" className="px-3 py-1 hover:bg-gray-700">
+                        Create Album
+                </Link>
+                </div>}
+            </div>
         </div>
         <div className="hidden sm:flex items-center justify-between space-x-3">
             {user.loggedIn ? <>
@@ -32,8 +49,9 @@ const Navbar = (props) => {
                 </>
             }
         </div>
+    </nav>
 
-    </nav>)
+    )
 }
 
 const MobileNavbar = ({ user, logoutAction }) => {
