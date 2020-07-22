@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 import { logoutAction } from '../store/actions/userActions';
 
-const Songs = ({ logoutAction }) => {
+const Songs = ({ user, logoutAction }) => {
     const [isLoading, setLoading] = useState(true);
     const [songFormModal, setSongFormModal] = useState(false);
     const [songs, setSongs] = useState({});
@@ -48,14 +48,14 @@ const Songs = ({ logoutAction }) => {
                 </div>
             </> : <><div className="flex flex-col h-full w-full mt-10 pb-24 bg-gray-900 overflow-auto">
                 <div className="flex items-center justify-between px-10 w-full">
-                    <div className="w-2/3 h-full flex items-center justify-center">
+                    <div className="h-full flex items-center justify-center text-center ">
                         <h1 className="text-4xl text-teal-100 font-bold text-center">Recent Songs</h1>
                     </div>
-                    <div className="w-1/3 h-full flex items-center justify-end">
+                    {user.LoggedIn && <div className="w-1/3 h-full flex items-center justify-end">
                         <button onClick={handleSongFormModal} className="inline-flex items-center space-x-1 bg-orange-700 text-md font-semibold rounded-full shadow-md px-3 py-2 text-white">
                             <span><Icons.PlusOutline className="w-5 h-5 text-gray-300" /></span><span>Songs</span>
                         </button>
-                    </div>
+                    </div>}
                 </div>
                 {Object.keys(songs).map(genre => <SongGenre key={genre} name={genre} songs={songs[genre]} />)}
             </div></>
@@ -146,6 +146,9 @@ const SongCard = ({ name, cover_image }) => {
 }
 
 Songs.propTypes = {
+    user: PropTypes.object.isRequired,
     logoutAction: PropTypes.func.isRequired
 }
-export default connect(null, { logoutAction })(Songs); 
+
+const mapStateToProps = ({ user }) => ({ user })
+export default connect(mapStateToProps, { logoutAction })(Songs); 
