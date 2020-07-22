@@ -6,9 +6,9 @@ import * as Icons from 'heroicons-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { loginAction, logoutAction } from '../store/actions/userActions';
+import { logoutAction } from '../store/actions/userActions';
 
-const Songs = ({ loginAction }) => {
+const Songs = ({ logoutAction }) => {
     const [isLoading, setLoading] = useState(true);
     const [songFormModal, setSongFormModal] = useState(false);
     const [songs, setSongs] = useState({});
@@ -18,6 +18,7 @@ const Songs = ({ loginAction }) => {
     }
 
     useEffect(() => {
+        // todo: redux fetch new song, thus need for refresing will be obsolete
         fetch('/songs/list')
             .then((res) => res.json())
             .then(resp => {
@@ -62,11 +63,11 @@ const Songs = ({ loginAction }) => {
         }
 
         {/* song form modal */}
-        {songFormModal && <SongFormModalComponent loginAction={loginAction} close={setSongFormModal} />}
+        {songFormModal && <SongFormModalComponent logoutAction={logoutAction} close={setSongFormModal} />}
     </>
 }
 
-const SongFormModalComponent = ({ loginAction, close }) => {
+const SongFormModalComponent = ({ logoutAction, close }) => {
     const [getGenre, setGenre] = useState([])
     const [loadingGenre, setLoadingGenre] = useState(true)
     const { register, handleSubmit, errors } = useForm();
@@ -80,6 +81,7 @@ const SongFormModalComponent = ({ loginAction, close }) => {
                 setLoadingGenre(false);
             })
     }, [])
+
     const onSubmit = song_data => {
         console.log(song_data)
         fetch('/api/v1/songs/create', {
@@ -88,7 +90,8 @@ const SongFormModalComponent = ({ loginAction, close }) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(song_data)
-        }).then(resp => resp.json())
+        })
+            .then(resp => resp.json())
             .then(data => {
                 console.log(data)
                 if (data.success) {
@@ -109,7 +112,8 @@ const SongFormModalComponent = ({ loginAction, close }) => {
         >
             {loadingGenre ? <div className="text-white text-md">Loading Form</div> : <>
                 <div className="space-x-1">
-                    <input ref={register({ required: true })} name="name" type="text" placeholder="Song name" className="bg-gray-100 rounded-lg px-10 py-3" />
+                    <input ref={register({ required: true })} name="name" type="text" placeholder="Song Name"
+                        className="bg-gray-100 rounded-lg px-10 py-3" />
                     {errors.name && <div className="bg-red-200 text-gray-900 w-full px-3 py-2 rounded-lg">Name of the song is required.</div>}
                 </div>
                 <input ref={register} name="cover_image" type="text" placeholder="Song Cover Image URL" className="bg-gray-100 rounded-lg px-10 py-3" />
@@ -142,6 +146,6 @@ const SongCard = ({ name, cover_image }) => {
 }
 
 Songs.propTypes = {
-    loginAction: PropTypes.func.isRequired
+    logoutAction: PropTypes.func.isRequired
 }
-export default connect(null, { loginAction })(Songs); 
+export default connect(null, { logoutAction })(Songs); 
