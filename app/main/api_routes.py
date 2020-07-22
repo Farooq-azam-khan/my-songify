@@ -16,10 +16,45 @@ class SongsRoutes(Resource):
         q = Song.get_100()
         return q
 
+class SongsAddRoutes(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('name', type=str, required=True, 
+                                    help='Give the name of the song', 
+                                    location='json')
+
+        self.reqparse.add_argument('cover_image', type=str, required=False,
+                                    location='json')
+
+        super(SongsAddRoutes, self).__init__()
+
+    def post(self):
+        if not current_user.is_authenticated:
+            return {'success': False, 'is_authenticated': False, 'message': 'Login then we can talk'}
+
+        args = self.reqparse.parse_args()
+
+        name = args.get('name')
+        cover_image = '' #args.get('cover_image')
+        mp3_file = '' #args.get('mp3_file')
+        genre = 1 #int(args.get('genre'))
+
+        print(args)
+
+        Song.add_song(name=name, user_pk=current_user.pk, cover_image=cover_image, mp3_file=mp3_file, genre=genre)
+        return {'success': True, 'message': 'song has been added'}
+
 class DisplayRoutes(Resource):
     def get(self):
         q = DisplayStatus.get_all()
         return q
+
+class GenresRoutes(Resource): 
+    def get(self):
+        return Genre.get_all()
+
+        
+
 # class UserSongLikesRoutes(Resource):
 #     def get(self):
 #         q = UserSongRelationship.get_user_liked_songs(current_user.pk)
@@ -183,10 +218,13 @@ def add_api_resource(api):
                         UserCreatedAlbumRoute, 
                         PlaylistLikeByUserRoute, 
                         AlbumLikeByUserRoute, 
-                        SongCollectionCreatePlaylistOrAlbumn
+                        SongCollectionCreatePlaylistOrAlbumn, 
+                        GenresRoutes, 
+                        SongsAddRoutes
                         )
                         
     api.add_resource(SongsRoutes, '/api/v1/songs')
+    api.add_resource(SongsAddRoutes, '/api/v1/songs/create')
 #     api.add_resource(SongRoutes, '/api/v1/songs/<string:song_id>')
 #     api.add_resource(UserSongLikesRoutes, '/api/v1/user/songs/like')
 #     api.add_resource(GenreSongsGroupRoutes, '/api/v1/genre/songs')
@@ -207,6 +245,8 @@ def add_api_resource(api):
     api.add_resource(DisplayRoutes, '/api/v1/display-status')
 
     api.add_resource(SongCollectionCreatePlaylistOrAlbumn, '/api/v1/user/song_collection/create')
+
+    api.add_resource(GenresRoutes, '/api/v1/genere/all')
 
 #     # top 6 albumns based on likes 
 #     api.add_resource(Top_N_AlbmunsRoute, '/api/v1/albums/<string:top_n_albums>')
