@@ -10,7 +10,7 @@ import { loginAction, logoutAction } from '../store/actions/userActions';
 
 const Songs = ({ loginAction }) => {
     const [isLoading, setLoading] = useState(true);
-    const [songFormModal, setSongFormModal] = useState(true);
+    const [songFormModal, setSongFormModal] = useState(false);
     const [songs, setSongs] = useState({});
 
     const handleSongFormModal = () => {
@@ -137,7 +137,7 @@ const SongGenre = ({ name, songs }) => {
 const SongCard = ({ name, cover_image }) => {
     return <div className="flex flex-col items-center justify-around bg-indigo-700 rounded-lg shadow-xl max-w-2xl text-white">
         <span className="w-32 h-32 overflow-hidden"><img className="w-full h-full object-cover" src={cover_image} /></span>
-        <Link to="#" className="w-full text-center font-semibold text-lg text-gray-100 hover:text-gray-200 px-3 py-1">{name}</Link>
+        <Link to="#" className="text-center font-semibold text-lg truncate text-gray-100 hover:text-gray-200 px-3 py-1">{name}</Link>
     </div>
 }
 
