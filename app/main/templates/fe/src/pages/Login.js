@@ -29,7 +29,7 @@ const Login = ({ user, loginAction }) => {
     }
 
     return (<div className="fixed z-10 inset-0 flex flex-col items-center justify-center w-full h-full bg-gray-900">
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center space-y-2 mt-5 w-full h-full px-3 sm:px-10">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center max-w-xl mx-auto  space-y-2 mt-5 w-full h-full px-3 sm:px-10">
             <div className="flex flex-col sm:flex-row space-x-0 space-y-1 sm:space-y-0 items-center w-full sm:space-x-4 justify-between">
                 <input value={email} onChange={handleEmail} className="w-full bg-teal-100 px-3 py-2 rounded-lg" type="email" placeholder="Email" />
             </div>
