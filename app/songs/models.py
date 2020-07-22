@@ -15,6 +15,17 @@ class Song(db.Model):
     genre = db.Column(db.Integer, db.ForeignKey('genre.pk'), nullable=True)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    @staticmethod
+    def add_song(name, user_pk, cover_image="", mp3_file="", genre=1):
+        if cover_image == "":
+            cover_image = 'https://images.theconversation.com/files/258026/original/file-20190208-174861-nms2kt.jpg'
+        if mp3_file == "":
+            mp3_file = 'http://www.orangefreesounds.com/wp-content/uploads/2020/06/Beautiful-cinematic-piano-background-music.mp3'
+
+        song = Song(name=name, user=user_pk, cover_image=cover_image, mp3_file=mp3_file, genre=genre)
+        db.session.add(song)
+        db.session.commit()
+
     def get_artist(self): 
         q =  User.query.get(self.user)
         return f'{q.firstname} {q.lastname}'
@@ -95,6 +106,14 @@ class UserSongRelationship(db.Model):
 class Genre(db.Model):
     pk = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
+
+    def serialize(self):
+        return {"pk": self.pk, "name": self.name}
+
+    @staticmethod
+    def get_all(): 
+        genres = Genre.query.all()
+        return [genre.serialize() for genre in genres]
 
     @staticmethod
     def get_n_genres_m_songs(n=4, m=20):
