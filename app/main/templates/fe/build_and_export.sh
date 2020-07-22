@@ -4,8 +4,6 @@ echo "Creating purgedcss file"
 sed -i "s/enabled: false/enabled: true/g" tailwind.config.js
 npm run build:tailwind
 
-
-
 # build react code 
 npm run build
 
