@@ -26,6 +26,12 @@ class SongsAddRoutes(Resource):
         self.reqparse.add_argument('cover_image', type=str, required=False,
                                     location='json')
 
+        self.reqparse.add_argument('mp3_file', type=str, required=False,
+                                    location='json')
+                                    
+        self.reqparse.add_argument('genre', type=int, required=False,
+                                    location='json')
+
         super(SongsAddRoutes, self).__init__()
 
     def post(self):
@@ -35,11 +41,11 @@ class SongsAddRoutes(Resource):
         args = self.reqparse.parse_args()
 
         name = args.get('name')
-        cover_image = '' #args.get('cover_image')
-        mp3_file = '' #args.get('mp3_file')
-        genre = 1 #int(args.get('genre'))
+        cover_image = args.get('cover_image')
+        mp3_file = args.get('mp3_file')
+        genre = int(args.get('genre'))
 
-        print(args)
+        # print(args)
 
         Song.add_song(name=name, user_pk=current_user.pk, cover_image=cover_image, mp3_file=mp3_file, genre=genre)
         return {'success': True, 'message': 'song has been added'}
@@ -225,18 +231,9 @@ def add_api_resource(api):
                         
     api.add_resource(SongsRoutes, '/api/v1/songs')
     api.add_resource(SongsAddRoutes, '/api/v1/songs/create')
-#     api.add_resource(SongRoutes, '/api/v1/songs/<string:song_id>')
-#     api.add_resource(UserSongLikesRoutes, '/api/v1/user/songs/like')
-#     api.add_resource(GenreSongsGroupRoutes, '/api/v1/genre/songs')
-#     api.add_resource(GenreRoutes, '/api/v1/genre/<string:genre_id>')
-    
-#     # song collection routes 
-#     api.add_resource(PlaylistsRoutes, '/api/v1/playlists')
-#     api.add_resource(AlbumsRoutes, '/api/v1/albumns')
 
     # user song collection routes 
     api.add_resource(UserCreatedPlaylistsRoute, '/api/v1/user/playlists')
-    # api.add_resource(UserCreatedAlbumRoute, '/api/v1/artist/<string:artist_id>/albumns')
 
     # liked 
     api.add_resource(PlaylistLikeByUserRoute, '/api/v1/user/playlists/like')
