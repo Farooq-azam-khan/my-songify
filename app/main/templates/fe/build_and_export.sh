@@ -27,6 +27,7 @@ sed -i -r "s/main.*.chunk.js/${jsChunkMainFile}/g" ../index.html
 
 # move build folder
 echo "Moving file"
+rm -r ../../../static/build
 mv build ../../../static/
 
 
