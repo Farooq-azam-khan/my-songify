@@ -5,6 +5,7 @@
 - the database relationship has been created with [lucid charts](https://www.lucidchart.com/invitations/accept/6d2a65f2-4727-43d7-926f-83f41a4d722b)
 - [trello board](https://trello.com/b/2fcmBsSB/my-songify) is used to keep track of new feature to be added
 
+
 ## Software
 
 - backend with _Flask_,
@@ -17,19 +18,21 @@
   - testing with _jest_
 - git/github is used for code management
 
-## Migrating the Database
+### Port to new Software
+- backend with __FAST API__
+  - ORM: _sqlalchemy_
+  - postgres for production db
+  - sqlite3 (in memory) for testing
+  - make sure to use fastapi cors so that there is a backend server and a frontend server 
+- __Elm__ for frontend language
+- __TailwindCSS__ for css framework 
+- __elm-test__ 
 
-1. create the migration directory: `flask db init`
-2. create the migration tables: `flask db migrate -m "message"`
-3. update the migration tables: `flask db upgrade`
 
 ## Points of Reserach and external articles
 
 - look into elasticsearch for python
-- [react router with material ui](https://medium.com/@unionproject88/react-material-ui-drawer-with-routes-8e27c91b6119)
 - [portable version of sqlite view](https://sqlitebrowser.org/dl/)
-- [restful flask api](https://flask-restful.readthedocs.io/en/latest/quickstart.html)
-- [flask marshmallow for object serialization](https://flask-marshmallow.readthedocs.io/en/latest/)
 - [pushing to non master branch on heroku](https://devcenter.heroku.com/articles/git#deploying-code)
 
 ## pushing for production
